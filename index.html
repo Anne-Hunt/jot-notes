@@ -7,7 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@200..700&display=swap"
+    rel="stylesheet">
   <link rel="icon" href="https://bcw.blob.core.windows.net/public/img/9977764104160066">
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/7.0.96/css/materialdesignicons.min.css"
@@ -22,10 +23,32 @@
   <header>
     <nav class="navbar sticky-top px-4 shadow">
       <div class="container-fluid">
+        <!-- start offcanvas for List -->
+        <button class="navbar-toggler btn btn-transparent border border-light text-light shadow" type="button"
+          data-bs-toggle="offcanvas" data-bs-target="#staticBackdropList" aria-controls="staticBackdropList"
+          id="jot-list-btn">
+        </button>
+        <div class="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="staticBackdropList"
+          aria-labelledby="staticBackdropLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title text-light" id="staticBackdropLabel">Open A Jot</h5>
+            <button type="button" class="btn-close text-light" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <div class="p-5 text-light">
+              <!-- The List -->
+              <h2>All Jots <span id="note-count" class="smalltext"></span></h2>
+              <div id="jot-list" class="col text-light">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Logo -->
         <a class="navbar-brand" href="#">
           <h1 class="ml-2 text-light"><i class="mdi mdi-pen-plus"></i> Jot Notes</h1>
         </a>
-        <!-- offcanvas -->
+        <!-- offcanvas for form -->
         <button class="navbar-toggler btn btn-transparent border border-light text-light shadow" type="button"
           data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
           Create New Jot
@@ -64,24 +87,12 @@
   </header>
 
   <main class="container-fluid p-5">
-    <!-- Heading below navbar -->
-    <section class="row text-light">
-      <h2>All Jots <span id="note-count" class="smalltext"></span></h2>
-    </section>
 
+    <!-- The Active View -->
     <section class="row">
-
-      <!-- The List -->
-      <div id="jot-list" class="col-3 text-light">
+      <div id="active-jot" class="col">
       </div>
-
-      <!-- The Active View -->
-      <div id="active-jot" class="col-9">
-
-      </div>
-
     </section>
-
 
   </main>
 
@@ -90,7 +101,7 @@
       <div class="col-2 p-3">
         <button type="button" class="btn text-light" data-bs-toggle="button" id="autosave">Autosave</button>
       </div>
-      <div class="col-10 p-3">
+      <div class="col-10 p-3 text-end">
         <p><small>by Anne Hunt</small></p>
       </div>
     </section>

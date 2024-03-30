@@ -53,11 +53,17 @@ export class Jot {
                   </div>
             </div>
             <textarea onblur="app.JotController.updateJot()" type="text" name="body" id="body"
-                class="w-100 viewable shadow rounded">${this.body}</textarea>
+                class="w-100 viewable shadow rounded p-2">${this.body}</textarea>
         </div>
     </section>
 </div>
 `
+  }
+
+  static get jotListBtnTemplate() {
+    return `
+    View Your ${AppState.noteCount} Jots
+    `
   }
 
   static get noteCountTemplate() {

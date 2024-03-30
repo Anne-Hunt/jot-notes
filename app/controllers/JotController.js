@@ -11,13 +11,7 @@ export class JotController {
     AppState.on('activeJot', this.drawActiveJot)
     jotService.loadJots()
     this.drawNoteCount()
-  }
-
-  drawNoteCount() {
-    jotService.noteCount()
-    let noteCountElem = document.getElementById('note-count')
-    let noteCountContent = Jot.noteCountTemplate
-    noteCountElem.innerHTML = noteCountContent
+    this.drawJotListBtn()
   }
 
   createJot() {
@@ -50,6 +44,24 @@ export class JotController {
     }
   }
 
+  setActiveJot(id) {
+    // console.log('setting active in controller', id)
+    jotService.setActiveJot(id)
+  }
+
+  drawNoteCount() {
+    jotService.noteCount()
+    let noteCountElem = document.getElementById('note-count')
+    let noteCountContent = Jot.noteCountTemplate
+    noteCountElem.innerHTML = noteCountContent
+  }
+
+  drawJotListBtn() {
+    let jotListBtnElem = document.getElementById('jot-list-btn')
+    let jotListBtnContent = Jot.jotListBtnTemplate
+    jotListBtnElem.innerHTML = jotListBtnContent
+  }
+
   drawJotList() {
     // console.log('accessing jotlist draw')
     let jotList = AppState.jots
@@ -57,11 +69,6 @@ export class JotController {
     jotList.forEach(jot => JotListContent += jot.ListTemplate)
     let jotListELem = document.getElementById('jot-list')
     jotListELem.innerHTML = JotListContent
-  }
-
-  setActiveJot(id) {
-    // console.log('setting active in controller', id)
-    jotService.setActiveJot(id)
   }
 
   drawActiveJot(id) {
