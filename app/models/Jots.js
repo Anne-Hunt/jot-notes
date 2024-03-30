@@ -25,8 +25,8 @@ export class Jot {
 
   get ListTemplate() {
     return `    
-    <div onclick="app.JotController.setActiveJot('${this.id}')">
-      <span>${this.name}</span><span style="color: ${this.color}"><i class="mdi mdi-file"></i></span>
+    <div onclick="app.JotController.setActiveJot('${this.id}')" class="ps-2">
+      <span>${this.name}</span><span style="color: ${this.color}"> <i class="mdi mdi-fountain-pen-tip"></i></span>
     </div>
 `
   }
@@ -36,13 +36,11 @@ export class Jot {
     <div class="container-fluid">
     <section class="row">
         <div class="col-md-4 col-12 text-light">
-            <h3>${this.name}</h3>
-            <p>created:
-                <span class="smalltext">${this.CreatedDate}</span>
-            </p>
-            <p>last saved:
-                <span class="smalltext">${this.EditedDate}</span>
-            </p>
+            <h1>${this.name}</h1>
+            <p class="lh-sm mb-0">created:</p>
+            <span class="smalltext">${this.CreatedDate}</span>
+            <p class="lh-sm mb-0">last saved:</p>
+            <span class="smalltext">${this.EditedDate}</span>
         </div>
         <div class="col-md-8 col-12">
             <div class="row align-items-center justify-content-between text-light">
@@ -51,11 +49,11 @@ export class Jot {
               </div>
               <div class="col-2">
                 <button class="btn btn-transparent text-light fs-1 text-center" style="width: 2em"
-                    onclick="app.JotController.deleteJot('${this.id}')"><i class="mdi mdi-delete-circle"></i></button>
+                    onclick="app.JotController.deleteJot('${this.id}')"><i class="mdi mdi-delete-circle" style="color: ${this.color}"></i></button>
                   </div>
             </div>
             <textarea onblur="app.JotController.updateJot()" type="text" name="body" id="body"
-                class="w-100 viewable">${this.body}</textarea>
+                class="w-100 viewable shadow rounded">${this.body}</textarea>
         </div>
     </section>
 </div>

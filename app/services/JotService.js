@@ -22,9 +22,10 @@ class JotService {
 
   setActiveJot(id) {
     let activeJot = AppState.jots.find(jot => jot.id == id)
+    activeJot.editedAt = new Date()
     // console.log('jot is found')
-    AppState.activeJot = activeJot
     this.saveJots()
+    AppState.activeJot = activeJot
     // console.log('jot is active', activeJot)
   }
 
