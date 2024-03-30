@@ -15,6 +15,11 @@ export class Jot {
     this.editedAt = data.editedAt == undefined ? new Date() : new Date(data.editedAt)
   }
 
+  //** @param {{id, name, body, tags, color}} data */
+
+  activeJot = {
+  }
+
   get CreatedDate() {
     return this.createdAt.toLocaleString()
   }
@@ -40,20 +45,56 @@ export class Jot {
             <p class="lh-sm mb-0">created:</p>
             <span class="smalltext">${this.CreatedDate}</span>
             <p class="lh-sm mb-0">last saved:</p>
-            <span class="smalltext">${this.EditedDate}</span>
+            <span class="smalltext">${this.EditedDate}</span><br>
+            <p class="d-inline-flex gap-1">
+                <button class="btn offcanvasbtn text-light shadow" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseEditForm" aria-expanded="false" aria-controls="collapseEditForm">
+                    <i class="mdi mdi-delta"> Jot</i>
+                </button>
+            </p>
+            <div class="collapse shadow" id="collapseEditForm">
+                <div class="card card-body change">
+                    <form onsubmit="app.JotController.updateJotName(nameChanger.value)" class="d-flex align-items-center justify-content-between">
+                        <label for="nameChanger">Rename </label>
+                        <input class="form-input rounded mb-0" type="text" name="nameChanger" id="nameChanger"
+                            minlength="3" maxlength="15" placeholder="${this.name}" required>
+                        <button type="submit" class="btn btn-transparent text-light p-0"><h2 class="m-0 p-0"><i class="mdi mdi-arrow-left-bold-circle"></i></h2>
+                        </button>
+                    </form>
+
+                    <form onsubmit="app.JotController.updateJotColor(colorChanger.value)" class="d-flex align-items-center justify-content-between">
+                        <label for="colorChanger">Color</label>
+                        <select class="form-select mb-0 w-50" name="colorChanger" id="jotColorPicker"
+                            aria-label="default select example" required>
+                            <option selected>Choose a color</option>
+                            <option value="#FF4136">Red</option>
+                            <option value="#FF851B">Orange</option>
+                            <option value="#FFDC00">Yellow</option>
+                            <option value="#2ECC40">Green</option>
+                            <option value="#0074D9">Blue</option>
+                            <option value="#4b0082">Indigo</option>
+                            <option value="#B10DC9">Violet</option>
+                        </select>
+                        <button type="submit" class="btn btn-transparent text-light align-middle p-0"><h2 class="m-0 p-0"><i class="mdi mdi-arrow-left-bold-circle"></h2></i>
+                        </button>
+                    </form>
+
+                </div>
+            </div>
         </div>
         <div class="col-md-8 col-12">
             <div class="row align-items-center justify-content-between text-light">
-              <div class="col-8"
-                <label for="body" class="form-label text-light"><h1>Edit your Jot</h1></label>
-              </div>
-              <div class="col-2">
-                <button class="btn btn-transparent text-light fs-1 text-center" style="width: 2em"
-                    onclick="app.JotController.deleteJot('${this.id}')"><i class="mdi mdi-delete-circle" style="color: ${this.color}"></i></button>
-                  </div>
+                <div class="col-8" <label for="body" class="form-label text-light">
+                    <h1>Edit Your Jot</h1></label>
+                </div>
+                <div class="col-2">
+                    <button class="btn btn-transparent text-light fs-1 text-center" style="width: 2em"
+                        onclick="app.JotController.deleteJot('${this.id}')"><i class="mdi mdi-delete-circle"
+                            ></i></button>
+                </div>
             </div>
             <textarea onblur="app.JotController.updateJot()" type="text" name="body" id="body"
-                class="w-100 viewable shadow rounded p-2">${this.body}</textarea>
+                class="w-100 viewable shadow rounded p-2" style="border: solid 5px ${this.color}">${this.body}</textarea>
         </div>
     </section>
 </div>

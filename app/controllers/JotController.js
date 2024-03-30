@@ -12,6 +12,7 @@ export class JotController {
     jotService.loadJots()
     this.drawNoteCount()
     this.drawJotListBtn()
+    this.drawActiveJot()
   }
 
   createJot() {
@@ -21,6 +22,8 @@ export class JotController {
     let jotData = getFormData(form)
     // console.log('data processed in service', jotData)
     jotService.createJot(jotData)
+    this.drawJotListBtn()
+    this.drawNoteCount()
     // @ts-ignore
     form.reset()
   }
@@ -35,13 +38,47 @@ export class JotController {
     jotService.updateJot(bodyContent)
   }
 
-  autoSaveToggle() {
-    let autosaveBtn = document.getElementById('autosave')
-    if (autosaveBtn.ariaPressed == 'true') {
-      setInterval(this.updateJot, 10000)
-    } else {
-      clearInterval(10000)
-    }
+  autoUpdateJot() {
+    const textBodyElem = document.getElementById('body')
+    // console.log('controller updating jot data')
+    // @ts-ignore
+    const bodyContent = textBodyElem.value
+    // console.log('sending textbody to service', bodyContent)
+    jotService.updateJot(bodyContent)
+    console.log(bodyContent)
+  }
+
+  updateJotColor(colorchangervalue) {
+    event.preventDefault()
+    // const jotColorPickerElem = event.target
+    // @ts-ignore
+    const jotColorContent = colorchangervalue
+    jotService.updateJotColor(jotColorContent)
+    this.drawActiveJot()
+  }
+
+  updateJotName(namechangervalue) {
+    event.preventDefault()
+    // const nameChangerElem = event.target
+    // @ts-ignore
+    const nameChangerContent = namechangervalue
+    jotService.updateJotName(nameChangerContent)
+    this.drawActiveJot()
+
+  }
+
+  updateJotTags(jotTags) {
+
+  }
+
+  autoSaveOn() {
+    jotService.autoSaveOn()
+    console.log('on')
+  }
+
+  autoSaveOff() {
+    jotService.autoSaveOff()
+    console.log('off')
   }
 
   setActiveJot(id) {

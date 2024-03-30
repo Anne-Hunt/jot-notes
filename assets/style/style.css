@@ -38,12 +38,25 @@ footer {
     background-image: url('/assets/img/beige-paper.png');
 }
 
+.deletebtn {
+    fill: var(--c-red);
+}
+
+.change {
+    background-color: var(--c-primary);
+    font-size: medium;
+}
+
 .offcanvas {
     background-color: var(--c-secondary);
 }
 
 .offcanvasbtn {
     background-color: var(--c-indigo);
+}
+
+.offcanvasclose {
+    color: var(--c-indigo);
 }
 
 .smalltext {

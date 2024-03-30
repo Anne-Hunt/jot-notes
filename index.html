@@ -32,7 +32,8 @@
           aria-labelledby="staticBackdropLabel">
           <div class="offcanvas-header">
             <h5 class="offcanvas-title text-light" id="staticBackdropLabel">Open A Jot</h5>
-            <button type="button" class="btn-close text-light" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <button type="button" class="btn-close text-light offcanvasclose" data-bs-dismiss="offcanvas"
+              aria-label="Close"></button>
           </div>
           <div class="offcanvas-body">
             <div class="p-5 text-light">
@@ -57,7 +58,8 @@
           aria-labelledby="staticBackdropLabel">
           <div class="offcanvas-header">
             <h5 class="offcanvas-title text-light" id="staticBackdropLabel">Add Your Jot</h5>
-            <button type="button" class="btn-close text-light" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <button type="button" class="btn-close text-light offcanvasclose" data-bs-dismiss="offcanvas"
+              aria-label="Close"></button>
           </div>
           <div class="offcanvas-body">
             <div class="p-5 text-light">
@@ -97,12 +99,35 @@
   </main>
 
   <footer class="container-fluid">
-    <section class="row text-center text-light">
-      <div class="col-2 p-3">
-        <button type="button" class="btn text-light" data-bs-toggle="button" id="autosave">Autosave</button>
+    <section class="row text-center text-light align-items-center">
+      <div class="col-3 p-3">
+        <div class="btn-group dropup">
+          <button type="button" id="autosave" class="btn offcanvasbtn text-light dropdown-toggle"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Autosave
+          </button>
+          <ul class="dropdown-menu p-2">
+            <li onclick="app.JotController.autoSaveOn()">Turn On</li>
+            <li onclick="app.JotController.autoSaveOff()">Turn Off</li>
+          </ul>
+        </div>
       </div>
-      <div class="col-10 p-3 text-end">
-        <p><small>by Anne Hunt</small></p>
+      <div class="col-3 p-3">
+        <div class="btn-group dropup">
+          <button type="button" id="theme-selection" class="btn offcanvasbtn text-light dropdown-toggle"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Change Theme
+          </button>
+          <ul class="dropdown-menu p-2">
+            <li>Monochrome</li>
+            <li>Purple</li>
+            <li>Green</li>
+            <li>Blue</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-6 p-3 text-end">
+        <p class="m-0"><small>by Anne Hunt</small></p>
       </div>
     </section>
   </footer>

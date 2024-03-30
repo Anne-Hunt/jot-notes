@@ -5,8 +5,21 @@ import { getFormData } from "../utils/FormHandler.js";
 import { saveState, loadState } from "../utils/Store.js";
 
 class JotService {
+  autoSaveOn() {
+    if (AppState.intervalID != null) {
+      // @ts-ignore
+      AppState.intervalID = setInterval(JotController.autoUpdateJot, 10000)
+    }
+  }
+
+  autoSaveOff() {
+    AppState.intervalID = clearInterval(AppState.intervalID)
+    AppState.intervalID = null
+  }
+
+
   noteCount() {
-    AppState.noteCount += AppState.jots.length
+    AppState.noteCount = AppState.jots.length
     // console.log(AppState.noteCount)
   }
 
@@ -18,6 +31,7 @@ class JotService {
     // console.log('created a jot', jotData)
     this.saveJots()
     this.setActiveJot(createdJot.id)
+    this.noteCount()
   }
 
   setActiveJot(id) {
@@ -37,6 +51,20 @@ class JotService {
     // console.log('body is saved')
   }
 
+  updateJotName(nameChangerContent) {
+    let activeJot = AppState.activeJot
+    activeJot.name = nameChangerContent
+    console.log('jot name updated', activeJot)
+    this.saveJots()
+  }
+
+  updateJotColor(jotcolor) {
+    let activeJot = AppState.activeJot
+    activeJot.color = jotcolor
+    console.log('jot color updated', activeJot)
+    this.saveJots()
+  }
+
   deleteJot(activeId) {
     const indexedJot = AppState.jots.findIndex(jot => jot.id == activeId)
     AppState.jots.splice(indexedJot, 1)
@@ -47,11 +75,14 @@ class JotService {
 
   saveJots() {
     saveState('jots', AppState.jots)
+    saveState('activeJot', AppState.activeJot)
   }
 
   loadJots() {
     const jotsLocal = loadState('jots', [Jot])
     AppState.jots = jotsLocal
+    // const activeLocal = loadState('activeJot', AppState.activeJot)
+    // AppState.activeJot = activeLocal
   }
 }
 
