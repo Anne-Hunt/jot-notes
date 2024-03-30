@@ -1,0 +1,20 @@
+<div class="container-fluid">
+    <section class="row">
+        <div class="col-md-3 col-12 text-light">
+            <h3>${this.name}</h3>
+            <p>created:
+                <span>${this.CreatedDate}</span>
+            </p>
+            <p>last saved:
+                <span>${this.EditedDate}</span>
+            </p>
+        </div>
+        <div class="col-md-9 col-12">
+            <label for="body" class="form-label text-light">Edit your Jot</label>
+            <button class="btn btn-transparent text-light fs-1" onclick="app.JotController.deleteJot('${this.id}')"><i
+                    class="mdi mdi-delete-circle"></i></button>
+            <textarea onblur="app.JotController.updateJot()" type="text" name="body" id="body"
+                class="w-100 viewable">${this.body}</textarea>
+        </div>
+    </section>
+</div>

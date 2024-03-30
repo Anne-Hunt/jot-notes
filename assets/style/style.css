@@ -24,6 +24,8 @@
 
 body {
     background-color: var(--c-primary);
+    font-family: "Bebas Neue", sans-serif;
+    font-size: x-large;
 }
 
 nav {
@@ -32,4 +34,24 @@ nav {
 
 view {
     background-color: var(--c-tertiary);
+}
+
+.offcanvas {
+    background-color: var(--c-secondary);
+}
+
+.offcanvasbtn {
+    background-color: var(--c-indigo);
+}
+
+.smalltext {
+    font-size: medium;
+}
+
+.xlargetext {
+    font-size: x-large;
+}
+
+.viewable {
+    min-height: 50dvh;
 }

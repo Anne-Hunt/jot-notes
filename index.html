@@ -5,6 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
   <link rel="icon" href="https://bcw.blob.core.windows.net/public/img/9977764104160066">
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/7.0.96/css/materialdesignicons.min.css"
@@ -16,85 +19,72 @@
 </head>
 
 <body>
-  <!-- SECTION -->
   <header>
-    <nav class="navbar navbar-expand text-light px-5 shadow">
-      <a class="navbar-brand text-light" href="#">
-        <i class="mdi mdi-pen-plus"></i>
-        <span class="ml-2">Jot Notes</span>
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <!-- NAVLINKS -->
-          <!--<a href="#/List" class="nav-link text-light">List</a>
-          <a href="#/Create" class="nav-link text-light">Create</a>
-          <a href="#/Edit" class="nav-link text-light">Edit</a>-->
+    <nav class="navbar sticky-top px-4">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <h1 class="ml-2 text-light"><i class="mdi mdi-pen-plus"></i>Jot Notes</h1>
+        </a>
+        <!-- offcanvas -->
+        <button class="navbar-toggler text-light" type="button" data-bs-toggle="offcanvas"
+          data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
+          Create New Jot
+        </button>
+        <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop"
+          aria-labelledby="staticBackdropLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title text-light" id="staticBackdropLabel">Add Your Jot</h5>
+            <button type="button" class="btn-close text-light" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <div class="p-5 text-light">
+              <form onsubmit="app.JotController.createJot()">
+                <label for="name">Name your Jot</label>
+                <input class="form-input rounded mb-3" type="text" name="name" id="name" minlength="3" maxlength="15">
+                <label for="color">Assign your Jot a color</label>
+                <select class="form-select mb-3" name="color" id="color" aria-label="default select example">
+                  <option selected>Choose a color theme</option>
+                  <option value="#FF4136">Red</option>
+                  <option value="#FF851B">Orange</option>
+                  <option value="#FFDC00">Yellow</option>
+                  <option value="#2ECC40">Green</option>
+                  <option value="#0074D9">Blue</option>
+                  <option value="#4b0082">Indigo</option>
+                  <option value="#B10DC9">Violet</option>
+                </select>
+                <label for="tag">Tag your Jot</label>
+                <input class="form-input rounded mb-3" type="text" name="tag" id="tag">
+                <button type="submit" class="btn offcanvasbtn text-light">Create</button>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="flex-grow-1 justify-content-end align-items-center d-flex" id="authstate"></div>
     </nav>
   </header>
 
-  <!-- SECTION -->
-  <main class="container-fluid p-3">
+  <main class="container-fluid p-5">
+    <!-- Heading below navbar -->
+    <section class="row text-light">
+      <h2>All Jots <span id="note-count" class="smalltext"></span></h2>
+    </section>
+
     <section class="row">
-      <h1>All Jots</h1>
-      <h3 id="note-count"></h3>
+
+      <!-- The List -->
       <div id="jot-list" class="col-2 text-light">
+      </div>
+
+      <!-- The Active View -->
+      <div id="active-jot" class="col-10">
 
       </div>
-    </section>
-    <section id="router-view">
-      <!-- primary viewport -->
-    </section>
-
-    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop"
-      aria-controls="staticBackdrop">
-      Create New Jot
-    </button>
-
-    <div class="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop"
-      aria-labelledby="staticBackdropLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="staticBackdropLabel">Add Your Jot</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
-        <div>
-          <form onsubmit="app.JotController.createJot()">
-            <label for="name">Name your Jot</label>
-            <input class="form-input mb-3" type="text" name="name" id="name" minlength="3" maxlength="15">
-            <label for="color">Assign your Jot a color</label>
-            <select class="form-select mb-3" name="color" id="color" aria-label="default select example">
-              <option selected>Choose a color theme</option>
-              <option value="#FF4136">Red</option>
-              <option value="#FF851B">Orange</option>
-              <option value="#FFDC00">Yellow</option>
-              <option value="#2ECC40">Green</option>
-              <option value="#0074D9">Blue</option>
-              <option value="#4b0082">Indigo</option>
-              <option value="#B10DC9">Violet</option>
-            </select>
-            <label for="tag">Tag your Jot</label>
-            <input class="form-input mb-3" type="text" name="tag" id="tag">
-            <button type="submit" class="btn btn-danger">Create</button>
-          </form>
-        </div>
-      </div>
-    </div>
-
-
-    <section id="active-jot">
 
     </section>
+
 
   </main>
 
-  <!-- SECTION -->
   <footer class="container-fluid">
     <section class="row text-center text-light">
       <p><small>by Anne Hunt</small></p>
