@@ -41,6 +41,15 @@ export class JotController {
     jotService.updateJot(bodyContent)
   }
 
+  autoSaveToggle() {
+    let autosaveBtn = document.getElementById('autosave')
+    if (autosaveBtn.ariaPressed == 'true') {
+      setInterval(this.updateJot, 10000)
+    } else {
+      clearInterval(10000)
+    }
+  }
+
   drawJotList() {
     // console.log('accessing jotlist draw')
     let jotList = AppState.jots

@@ -24,6 +24,7 @@
 
 body {
     background-color: var(--c-primary);
+    background-image: url('/assets/img/beige-paper.png');
     font-family: "Bebas Neue", sans-serif;
     font-size: x-large;
 }
@@ -32,8 +33,9 @@ nav {
     background-color: var(--c-secondary);
 }
 
-view {
-    background-color: var(--c-tertiary);
+footer {
+    background-color: var(--c-indigo);
+    background-image: url('/assets/img/beige-paper.png');
 }
 
 .offcanvas {
