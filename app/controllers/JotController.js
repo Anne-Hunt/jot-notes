@@ -8,7 +8,7 @@ export class JotController {
   constructor() {
     // console.log('JotController has awakened')
     AppState.on('jots', this.drawJotList, this.drawNoteCount)
-    AppState.on('activeJot', this.drawActiveJot)
+    AppState.on('activeJot', this.drawActiveJot, this.drawNotebookChangerOptions)
     AppState.on('wordCount', this.drawActiveJot)
     AppState.on('notebooks', this.drawNotebookList, this.drawNotebookCount)
     jotService.loadAll()
@@ -19,6 +19,7 @@ export class JotController {
     this.drawNotebookList()
     this.drawJotList()
     this.drawNotebookFormOptions()
+    this.drawActiveNotebook()
   }
 
   createJot() {
@@ -80,6 +81,7 @@ export class JotController {
     const notebookChangerContent = value
     jotService.updateJotNotebook(notebookChangerContent)
     this.drawActiveJot()
+    this.drawActiveNotebook()
   }
 
   setActiveJot(id) {
@@ -112,7 +114,7 @@ export class JotController {
   drawActiveJot(id) {
     // console.log('controller sending', id)
     let activeJotContent = ''
-    let activeJotELem = document.getElementById('active-window')
+    let activeJotELem = document.getElementById('active-jot')
     if (AppState.activeJot != null) {
       let activeJot = AppState.activeJot
       let activeJotContent = activeJot.JotActiveTemplate
@@ -188,7 +190,7 @@ export class JotController {
   drawActiveNotebook(id) {
     console.log('controller sending notebook', id)
     let activeNotebookContent = ''
-    let activeNotebookELem = document.getElementById('active-window')
+    let activeNotebookELem = document.getElementById('active-notebook')
 
     if (AppState.notebookJotListContent != null) {
       activeNotebookContent = AppState.notebookJotListContent

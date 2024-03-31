@@ -122,6 +122,7 @@ class JotService {
     let notebookChangerContent = ''
     AppState.notebooks.forEach(notebook => notebookChangerContent += notebook.NotebookSelectOption)
     AppState.notebookChangerOptionList = notebookChangerContent
+    this.saveAll()
   }
 
   deleteNotebook(notebookId) {
@@ -148,6 +149,7 @@ class JotService {
     saveState('jots', AppState.jots)
     saveState('notebooks', AppState.notebooks)
     saveState('activeJot', AppState.activeJot)
+    saveState('activeNotebook', AppState.activeNotebook)
   }
 
   loadAll() {
@@ -155,8 +157,10 @@ class JotService {
     AppState.jots = jotsLocal
     const notebooksLocal = loadState('notebooks', [Notebook])
     AppState.notebooks = notebooksLocal
-    const activeLocal = loadState('activeJot', AppState.activeJot)
+    const activeLocal = loadState('activeJot', [Jot])
     AppState.activeJot = activeLocal
+    const activeNLocal = loadState('activeNotebook', [Notebook])
+    AppState.activeNotebook = activeNLocal
   }
 }
 
