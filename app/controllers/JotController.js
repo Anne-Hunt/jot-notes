@@ -9,6 +9,7 @@ export class JotController {
     // console.log('JotController has awakened')
     AppState.on('jots', this.drawJotList, this.drawNoteCount)
     AppState.on('activeJot', this.drawActiveJot)
+    AppState.on('wordCount', this.drawActiveJot)
     jotService.loadJots()
     this.drawNoteCount()
     this.drawJotListBtn()
@@ -19,6 +20,7 @@ export class JotController {
     event.preventDefault()
     // console.log('controller accessing formdata')
     const form = event.target
+    console.log(FormData)
     let jotData = getFormData(form)
     // console.log('data processed in service', jotData)
     jotService.createJot(jotData)
@@ -89,13 +91,13 @@ export class JotController {
   drawNoteCount() {
     jotService.noteCount()
     let noteCountElem = document.getElementById('note-count')
-    let noteCountContent = Jot.noteCountTemplate
+    let noteCountContent = Jot.NoteCountTemplate
     noteCountElem.innerHTML = noteCountContent
   }
 
   drawJotListBtn() {
     let jotListBtnElem = document.getElementById('jot-list-btn')
-    let jotListBtnContent = Jot.jotListBtnTemplate
+    let jotListBtnContent = Jot.JotListBtnTemplate
     jotListBtnElem.innerHTML = jotListBtnContent
   }
 

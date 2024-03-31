@@ -3,7 +3,7 @@ import { AppState } from "../AppState.js"
 
 export class Jot {
 
-  //** @param {{id, name, body, tags, color}} data */
+  //** @param {{id, name, body, tags, color, notebook}} data */
 
   constructor(data) {
     this.id = generateId()
@@ -13,6 +13,7 @@ export class Jot {
     this.color = data.color
     this.createdAt = data.createdAt == undefined ? new Date() : new Date(data.createdAt)
     this.editedAt = data.editedAt == undefined ? new Date() : new Date(data.editedAt)
+    this.notebook = data.notebook || ''
   }
 
   //** @param {{id, name, body, tags, color}} data */
@@ -41,11 +42,12 @@ export class Jot {
     <div class="container-fluid">
     <section class="row">
         <div class="col-md-4 col-12 text-light">
-            <h1>${this.name}</h1>
-            <p class="lh-sm mb-0">created:</p>
-            <span class="smalltext">${this.CreatedDate}</span>
-            <p class="lh-sm mb-0">last saved:</p>
-            <span class="smalltext">${this.EditedDate}</span><br>
+            <h1 class="mt-3">${this.name}</h1>
+            <p class="lh-sm mb-0 smalltext">created: ${this.CreatedDate}</p>
+            <p class="lh-sm mb-0 smalltext">last saved: ${this.EditedDate}</p>
+            <p class="lh-sm mb-0 smalltext">Word Count: ${AppState.wordCount}</p>
+            <p class="lh-sm mb-0 smalltext">Character Count: ${AppState.characterCount}</p> 
+            <p class="lh-sm mb-0 smalltext">Tags: ${this.tags}</p>            
             <p class="d-inline-flex gap-1">
                 <button class="btn offcanvasbtn text-light shadow" type="button" data-bs-toggle="collapse"
                     data-bs-target="#collapseEditForm" aria-expanded="false" aria-controls="collapseEditForm">
@@ -85,7 +87,7 @@ export class Jot {
         <div class="col-md-8 col-12">
             <div class="row align-items-center justify-content-between text-light">
                 <div class="col-8" <label for="body" class="form-label text-light">
-                    <h1>Edit Your Jot</h1></label>
+                    <h2>Edit Your Jot</h2></label>
                 </div>
                 <div class="col-2">
                     <button class="btn btn-transparent text-light fs-1 text-center" style="width: 2em"
@@ -101,13 +103,13 @@ export class Jot {
 `
   }
 
-  static get jotListBtnTemplate() {
+  static get JotListBtnTemplate() {
     return `
     View Your ${AppState.noteCount} Jots
     `
   }
 
-  static get noteCountTemplate() {
+  static get NoteCountTemplate() {
     return `
       ${AppState.noteCount}
     `

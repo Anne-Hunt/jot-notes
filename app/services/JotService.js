@@ -5,23 +5,6 @@ import { getFormData } from "../utils/FormHandler.js";
 import { saveState, loadState } from "../utils/Store.js";
 
 class JotService {
-  autoSaveOn() {
-    if (AppState.intervalID != null) {
-      // @ts-ignore
-      AppState.intervalID = setInterval(JotController.autoUpdateJot, 10000)
-    }
-  }
-
-  autoSaveOff() {
-    AppState.intervalID = clearInterval(AppState.intervalID)
-    AppState.intervalID = null
-  }
-
-
-  noteCount() {
-    AppState.noteCount = AppState.jots.length
-    // console.log(AppState.noteCount)
-  }
 
   createJot(jotData) {
     // console.log('service passing data')
@@ -40,6 +23,8 @@ class JotService {
     // console.log('jot is found')
     this.saveJots()
     AppState.activeJot = activeJot
+    this.characterCount()
+    this.wordCount()
     // console.log('jot is active', activeJot)
   }
 
@@ -65,12 +50,43 @@ class JotService {
     this.saveJots()
   }
 
+  noteCount() {
+    AppState.noteCount = AppState.jots.length
+    // console.log(AppState.noteCount)
+  }
+
+  characterCount() {
+    let countable = AppState.activeJot.body
+    let count = countable.split('')
+    AppState.characterCount = count.length
+    console.log('count', countable, count, count.length)
+  }
+
+  wordCount() {
+    let countable = AppState.activeJot.body
+    let count = countable.split(' ')
+    AppState.wordCount = count.length
+    console.log('count', countable, count, count.length)
+  }
+
   deleteJot(activeId) {
     const indexedJot = AppState.jots.findIndex(jot => jot.id == activeId)
     AppState.jots.splice(indexedJot, 1)
     // console.log('deleted', activeId)
     AppState.activeJot = null
     this.saveJots()
+  }
+
+  autoSaveOn() {
+    if (AppState.intervalID != null) {
+      // @ts-ignore
+      AppState.intervalID = setInterval(JotController.autoUpdateJot, 10000)
+    }
+  }
+
+  autoSaveOff() {
+    AppState.intervalID = clearInterval(AppState.intervalID)
+    AppState.intervalID = null
   }
 
   saveJots() {

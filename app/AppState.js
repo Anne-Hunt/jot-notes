@@ -16,6 +16,10 @@ class ObservableAppState extends EventEmitter {
 
   noteCount = 0
 
+  characterCount = 0
+
+  wordCount = 0
+
 }
 
 export const AppState = createObservableProxy(new ObservableAppState())
