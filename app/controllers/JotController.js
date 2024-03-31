@@ -1,6 +1,6 @@
 import { AppState } from "../AppState.js"
 import { jotService } from "../services/JotService.js"
-import { Jot } from "../models/Jots.js"
+import { Jot, Notebook } from "../models/Jots.js"
 import { getFormData } from "../utils/FormHandler.js"
 import { Pop } from "../utils/Pop.js"
 
@@ -10,10 +10,16 @@ export class JotController {
     AppState.on('jots', this.drawJotList, this.drawNoteCount)
     AppState.on('activeJot', this.drawActiveJot)
     AppState.on('wordCount', this.drawActiveJot)
+    AppState.on('notebooks', this.drawNotebookList, this.drawNotebookCount)
+    AppState.on('activeNotebook', this.drawActiveNotebook)
     jotService.loadAll()
     this.drawNoteCount()
+    this.drawNotebookCount()
     this.drawJotListBtn()
     this.drawActiveJot()
+    this.drawNotebookList()
+    this.drawJotList()
+    this.drawNotebookFormOptions()
   }
 
   createJot() {
@@ -66,26 +72,15 @@ export class JotController {
     const nameChangerContent = namechangervalue
     jotService.updateJotName(nameChangerContent)
     this.drawActiveJot()
-
   }
 
-  updateJotNotebook(jotNotebook) {
-
-  }
-
-  createNotebook() {
+  updateJotNotebook(notebookchangervalue) {
     event.preventDefault()
-    // console.log('controller accessing formdata')
-    const form = event.target
-    console.log(FormData)
-    let notebookData = getFormData(form)
-    // console.log('data processed in service', jotData)
-    jotService.createNotebook(notebookData)
-    this.drawNotebookList()
-    this.drawJotListBtn()
-    this.drawNoteCount()
+    // const nameChangerElem = event.target
     // @ts-ignore
-    form.reset()
+    const notebookChangerContent = notebookchangervalue
+    jotService.updateJotNotebook(notebookChangerContent)
+    this.drawActiveJot()
   }
 
   setActiveJot(id) {
@@ -93,20 +88,10 @@ export class JotController {
     jotService.setActiveJot(id)
   }
 
-  drawNotebookList() {
-    // console.log('accessing notebook draw')
-    let notebooks = AppState.notebooks
-    let NotebookListContent = ''
-    notebooks.forEach(notebook => NotebookListContent += notebook.NotebookListTemplate)
-    let notebookELem = document.getElementById('notebook-list')
-    notebookELem.innerHTML = NotebookListContent
-  }
-
-
   drawNoteCount() {
     jotService.noteCount()
     let noteCountElem = document.getElementById('note-count')
-    let noteCountContent = Jot.NoteCountTemplate
+    let noteCountContent = Jot.JotNoteCountTemplate
     noteCountElem.innerHTML = noteCountContent
   }
 
@@ -120,7 +105,7 @@ export class JotController {
     // console.log('accessing jotlist draw')
     let jotList = AppState.jots
     let JotListContent = ''
-    jotList.forEach(jot => JotListContent += jot.ListTemplate)
+    jotList.forEach(jot => JotListContent += jot.JotListTemplate)
     let jotListELem = document.getElementById('jot-list')
     jotListELem.innerHTML = JotListContent
   }
@@ -131,21 +116,11 @@ export class JotController {
     let activeJotELem = document.getElementById('active-jot')
     if (AppState.activeJot != null) {
       let activeJot = AppState.activeJot
-      let activeJotContent = activeJot.ActiveTemplate
+      let activeJotContent = activeJot.JotActiveTemplate
       activeJotELem.innerHTML = activeJotContent
     } else {
       activeJotELem.innerHTML = activeJotContent
     }
-  }
-
-  autoSaveOn() {
-    jotService.autoSaveOn()
-    console.log('on')
-  }
-
-  autoSaveOff() {
-    jotService.autoSaveOff()
-    console.log('off')
   }
 
   deleteJot(jotId) {
@@ -157,6 +132,98 @@ export class JotController {
     } else {
       return
     }
+  }
+
+  createNotebook() {
+    event.preventDefault()
+    // console.log('controller accessing formdata')
+    const form = event.target
+    console.log(FormData)
+    let notebookData = getFormData(form)
+    // console.log('data processed in service', jotData)
+    jotService.createNotebook(notebookData)
+    this.drawNotebookList()
+    this.drawJotListBtn()
+    this.drawNotebookCount()
+    this.drawNotebookChangerOptions()
+    this.drawNotebookFormOptions()
+    // @ts-ignore
+    form.reset()
+  }
+
+  setActiveNotebook(id) {
+    console.log('setting active in controller', id)
+    jotService.setActiveNotebook(id)
+  }
+
+  drawNotebookChangerOptions() {
+    let optionsChangerElem = document.getElementById('notebookChanger')
+    optionsChangerElem.innerHTML = AppState.notebookChangerOptionList
+  }
+
+  drawNotebookFormOptions() {
+    let notebooks = AppState.notebooks
+    let optionsContent = ''
+    notebooks.forEach(notebook => optionsContent += notebook.NotebookSelectOption)
+    let optionsChangerElem = document.getElementById('notebookSelect')
+    optionsChangerElem.innerHTML = optionsContent
+  }
+
+  drawNotebookList() {
+    // console.log('accessing notebook draw')
+    let notebooks = AppState.notebooks
+    let NotebookListContent = ''
+    notebooks.forEach(notebook => NotebookListContent += notebook.NotebookListTemplate)
+    let notebookELem = document.getElementById('notebook-list')
+    notebookELem.innerHTML = NotebookListContent
+  }
+
+  drawNotebookCount() {
+    jotService.notebookCount()
+    let notebookCountElem = document.getElementById('notebook-count')
+    let notebookCountContent = Notebook.NotebookCount
+    notebookCountElem.innerHTML = notebookCountContent
+  }
+
+  drawActiveNotebook(id) {
+    // console.log('controller sending notebook', id)
+    // jotService.setActiveNotebook(id)
+    let activeNotebookContent = ''
+    let activeNotebookELem = document.getElementById('id')
+    if (AppState.activeNotebook != null) {
+      let activeNotebook = AppState.activeNotebook
+      let activeNotebookContent = activeNotebook.ActiveTemplate
+      console.log('assigned', activeNotebook.ActiveNotebookTemplate)
+      activeNotebook.jots.forEach(jot => activeNotebookContent += jot.ListTemplate)
+      console.log(activeNotebookContent)
+      activeNotebookELem.innerHTML = activeNotebookContent
+    } else {
+      activeNotebookELem.innerHTML = activeNotebookContent
+    }
+  }
+
+  deleteNotebook(notebookId) {
+    // console.log('ask to be sure - could be bad')
+    window.confirm("Do you really want to permanently delete this Notebook? It may damage the jots inside.")
+    if (true) {
+      jotService.deleteNotebook(notebookId)
+      this.drawNoteCount()
+      this.drawNotebookCount()
+      this.drawNotebookChangerOptions()
+      this.drawNotebookFormOptions()
+    } else {
+      return
+    }
+  }
+
+  autoSaveOn() {
+    jotService.autoSaveOn()
+    console.log('on')
+  }
+
+  autoSaveOff() {
+    jotService.autoSaveOff()
+    console.log('off')
   }
 }
 

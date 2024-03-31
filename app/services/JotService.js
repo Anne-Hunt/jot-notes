@@ -1,19 +1,9 @@
 import { AppState } from "../AppState.js";
 import { JotController } from "../controllers/JotController.js";
 import { Jot, Notebook } from "../models/Jots.js";
-import { getFormData } from "../utils/FormHandler.js";
 import { saveState, loadState } from "../utils/Store.js";
 
 class JotService {
-  createNotebook(notebookData) {
-    // console.log('service passing data')
-    let createdNotebook = new Notebook(notebookData)
-    // console.log('serviced data', jotData)
-    AppState.notebooks.push(createdNotebook)
-    // console.log('created a jot', jotData)
-    this.saveAll()
-    this.noteCount()
-  }
 
   createJot(jotData) {
     // console.log('service passing data')
@@ -34,6 +24,7 @@ class JotService {
     AppState.activeJot = activeJot
     this.characterCount()
     this.wordCount()
+    this.createNotebookChanger()
     // console.log('jot is active', activeJot)
   }
 
@@ -56,6 +47,13 @@ class JotService {
     let activeJot = AppState.activeJot
     activeJot.color = jotcolor
     console.log('jot color updated', activeJot)
+    this.saveAll()
+  }
+
+  updateJotNotebook(notebook) {
+    let activeJot = AppState.activeJot
+    activeJot.notebook = notebook
+    console.log('jot notebook updated', activeJot)
     this.saveAll()
   }
 
@@ -83,6 +81,46 @@ class JotService {
     AppState.jots.splice(indexedJot, 1)
     // console.log('deleted', activeId)
     AppState.activeJot = null
+    this.saveAll()
+  }
+
+  createNotebook(notebookData) {
+    // console.log('service passing data')
+    let createdNotebook = new Notebook(notebookData)
+    // console.log('serviced data', jotData)
+    AppState.notebooks.push(createdNotebook)
+    // console.log('created a jot', jotData)
+    this.saveAll()
+    this.noteCount()
+  }
+
+  setActiveNotebook(id) {
+    let activeNotebook = AppState.notebooks.find(notebook => notebook.id == id)
+    console.log('found notebook', activeNotebook)
+    AppState.activeNotebook = activeNotebook
+    let activeNotebookJots = AppState.jots.filter(jot => jot.notebook == activeNotebook)
+    console.log('found jots', activeNotebookJots)
+    AppState.activeNotebook.push(activeNotebookJots)
+    console.log(AppState.activeNotebook)
+    this.saveAll()
+  }
+
+  notebookCount() {
+    AppState.notebooklistcount = AppState.notebooks.length
+    console.log(AppState.notebooklistcount)
+  }
+
+  createNotebookChanger() {
+    let notebookChangerContent = ''
+    AppState.notebooks.forEach(notebook => notebookChangerContent += notebook.NotebookSelectOption)
+    AppState.notebookChangerOptionList = notebookChangerContent
+  }
+
+  deleteNotebook(notebookId) {
+    const indexedJot = AppState.notebooks.findIndex(notebook => notebook.id == notebookId)
+    AppState.notebooks.splice(indexedJot, 1)
+    // console.log('deleted', activeId)
+    AppState.activeNotebook = null
     this.saveAll()
   }
 

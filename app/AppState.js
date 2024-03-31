@@ -13,6 +13,8 @@ class ObservableAppState extends EventEmitter {
 
   notebooklistcount = 0
 
+  notebookChangerOptionList = ''
+
   activeNotebook = null
 
   activeJot = null
