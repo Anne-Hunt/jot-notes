@@ -1,6 +1,25 @@
 import { generateId } from "../utils/GenerateId.js"
 import { AppState } from "../AppState.js"
 
+export class Notebook {
+
+  //**@param {{name, color, purpose}} */
+  constructor(data) {
+    this.id = generateId()
+    this.name = data.name
+    this.color = data.color
+    this.topic = data.topic
+  }
+
+  get NotebookTemplate() {
+    return `
+    test
+    `
+  }
+
+}
+
+
 export class Jot {
 
   //** @param {{id, name, body, tags, color, notebook}} data */

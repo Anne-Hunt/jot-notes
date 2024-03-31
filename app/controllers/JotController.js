@@ -10,7 +10,7 @@ export class JotController {
     AppState.on('jots', this.drawJotList, this.drawNoteCount)
     AppState.on('activeJot', this.drawActiveJot)
     AppState.on('wordCount', this.drawActiveJot)
-    jotService.loadJots()
+    jotService.loadAll()
     this.drawNoteCount()
     this.drawJotListBtn()
     this.drawActiveJot()
@@ -69,24 +69,39 @@ export class JotController {
 
   }
 
-  updateJotTags(jotTags) {
+  updateJotNotebook(jotNotebook) {
 
   }
 
-  autoSaveOn() {
-    jotService.autoSaveOn()
-    console.log('on')
-  }
-
-  autoSaveOff() {
-    jotService.autoSaveOff()
-    console.log('off')
+  createNotebook() {
+    event.preventDefault()
+    // console.log('controller accessing formdata')
+    const form = event.target
+    console.log(FormData)
+    let notebookData = getFormData(form)
+    // console.log('data processed in service', jotData)
+    jotService.createNotebook(notebookData)
+    this.drawNotebookList()
+    this.drawJotListBtn()
+    this.drawNoteCount()
+    // @ts-ignore
+    form.reset()
   }
 
   setActiveJot(id) {
     // console.log('setting active in controller', id)
     jotService.setActiveJot(id)
   }
+
+  drawNotebookList() {
+    // console.log('accessing notebook draw')
+    let notebooks = AppState.notebooks
+    let NotebookListContent = ''
+    notebooks.forEach(notebook => NotebookListContent += notebook.NotebookTemplate)
+    let notebookELem = document.getElementById('notebook-list')
+    notebookELem.innerHTML = NotebookListContent
+  }
+
 
   drawNoteCount() {
     jotService.noteCount()
@@ -121,6 +136,16 @@ export class JotController {
     } else {
       activeJotELem.innerHTML = activeJotContent
     }
+  }
+
+  autoSaveOn() {
+    jotService.autoSaveOn()
+    console.log('on')
+  }
+
+  autoSaveOff() {
+    jotService.autoSaveOff()
+    console.log('off')
   }
 
   deleteJot(jotId) {

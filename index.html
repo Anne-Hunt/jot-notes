@@ -50,7 +50,45 @@
           <h1 class="ml-2 text-light"><i class="mdi mdi-pen-plus"></i> Jot Notes</h1>
         </a>
 
-        <!-- offcanvas for form -->
+        <!-- offcanvas for create Notebook -->
+        <button class="navbar-toggler btn btn-transparent border border-light text-light shadow" type="button"
+          data-bs-toggle="offcanvas" data-bs-target="#staticBackdropNotebook" aria-controls="staticBackdrop">
+          Create Notebook
+        </button>
+        <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="staticBackdropNotebook"
+          aria-labelledby="staticBackdropLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title text-light" id="staticBackdropLabel">Add Your Notebook</h5>
+            <button type="button" class="btn-close text-light offcanvasclose" data-bs-dismiss="offcanvas"
+              aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <div class="p-5 text-light">
+              <form id="create-notebook" onsubmit="app.JotController.createNotebook()">
+                <label for="name">Name Your Notebook</label>
+                <input class="form-input rounded mb-3" type="text" name="name" id="notebook-name-input" minlength="3"
+                  maxlength="15">
+                <label for="color">Assign Notebook A Color</label>
+                <select class="form-select mb-3" name="color" id="notebook-color-input"
+                  aria-label="default select example">
+                  <option selected>Choose a color</option>
+                  <option value="#9E3340">Red</option>
+                  <option value="#9E339C">Orange</option>
+                  <option value="#44339E">Yellow</option>
+                  <option value="#337D9E">Green</option>
+                  <option value="#339E63">Blue</option>
+                  <option value="#5F9E33">Indigo</option>
+                  <option value="#9E8133">Violet</option>
+                </select>
+                <label for="Topic">Assign Topic</label>
+                <input class="form-input rounded mb-3" type="text" name="topic" id="topic-input">
+                <button type="submit" class="btn offcanvasbtn text-light">Create</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- offcanvas for create Jot -->
         <button class="navbar-toggler btn btn-transparent border border-light text-light shadow" type="button"
           data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
           Create New Jot
@@ -66,10 +104,11 @@
             <div class="p-5 text-light">
               <form onsubmit="app.JotController.createJot()">
                 <label for="name">Name your Jot</label>
-                <input class="form-input rounded mb-3" type="text" name="name" id="name" minlength="3" maxlength="15">
+                <input class="form-input rounded mb-3" type="text" name="name" id="name-input" minlength="3"
+                  maxlength="15">
                 <label for="color">Assign your Jot a color</label>
-                <select class="form-select mb-3" name="color" id="color" aria-label="default select example">
-                  <option selected>Choose a color theme</option>
+                <select class="form-select mb-3" name="color" id="jot-color-input" aria-label="default select example">
+                  <option selected>Choose a color</option>
                   <option value="#FF4136">Red</option>
                   <option value="#FF851B">Orange</option>
                   <option value="#FFDC00">Yellow</option>
@@ -79,7 +118,7 @@
                   <option value="#B10DC9">Violet</option>
                 </select>
                 <label for="tag">Tag your Jot</label>
-                <input class="form-input rounded mb-3" type="text" name="tag" id="tag">
+                <input class="form-input rounded mb-3" type="text" name="tag" id="tag-input">
                 <button type="submit" class="btn offcanvasbtn text-light">Create</button>
               </form>
             </div>

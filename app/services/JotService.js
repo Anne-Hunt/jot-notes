@@ -1,10 +1,19 @@
 import { AppState } from "../AppState.js";
 import { JotController } from "../controllers/JotController.js";
-import { Jot } from "../models/Jots.js";
+import { Jot, Notebook } from "../models/Jots.js";
 import { getFormData } from "../utils/FormHandler.js";
 import { saveState, loadState } from "../utils/Store.js";
 
 class JotService {
+  createNotebook(notebookData) {
+    // console.log('service passing data')
+    let createdNotebook = new Notebook(notebookData)
+    // console.log('serviced data', jotData)
+    AppState.notebooks.push(createdNotebook)
+    // console.log('created a jot', jotData)
+    this.saveAll()
+    this.noteCount()
+  }
 
   createJot(jotData) {
     // console.log('service passing data')
@@ -12,7 +21,7 @@ class JotService {
     // console.log('serviced data', jotData)
     AppState.jots.push(createdJot)
     // console.log('created a jot', jotData)
-    this.saveJots()
+    this.saveAll()
     this.setActiveJot(createdJot.id)
     this.noteCount()
   }
@@ -21,7 +30,7 @@ class JotService {
     let activeJot = AppState.jots.find(jot => jot.id == id)
     activeJot.editedAt = new Date()
     // console.log('jot is found')
-    this.saveJots()
+    this.saveAll()
     AppState.activeJot = activeJot
     this.characterCount()
     this.wordCount()
@@ -32,7 +41,7 @@ class JotService {
     let activeJot = AppState.activeJot
     // console.log('jot is found for editing')
     activeJot.body = jotBody
-    this.saveJots()
+    this.saveAll()
     // console.log('body is saved')
   }
 
@@ -40,14 +49,14 @@ class JotService {
     let activeJot = AppState.activeJot
     activeJot.name = nameChangerContent
     console.log('jot name updated', activeJot)
-    this.saveJots()
+    this.saveAll()
   }
 
   updateJotColor(jotcolor) {
     let activeJot = AppState.activeJot
     activeJot.color = jotcolor
     console.log('jot color updated', activeJot)
-    this.saveJots()
+    this.saveAll()
   }
 
   noteCount() {
@@ -74,7 +83,7 @@ class JotService {
     AppState.jots.splice(indexedJot, 1)
     // console.log('deleted', activeId)
     AppState.activeJot = null
-    this.saveJots()
+    this.saveAll()
   }
 
   autoSaveOn() {
@@ -89,14 +98,17 @@ class JotService {
     AppState.intervalID = null
   }
 
-  saveJots() {
+  saveAll() {
     saveState('jots', AppState.jots)
     saveState('activeJot', AppState.activeJot)
+    saveState('notebooks', AppState.notebooks)
   }
 
-  loadJots() {
+  loadAll() {
     const jotsLocal = loadState('jots', [Jot])
     AppState.jots = jotsLocal
+    const notebooksLocal = loadState('notebooks', [Notebook])
+    AppState.notebooks = notebooksLocal
     // const activeLocal = loadState('activeJot', AppState.activeJot)
     // AppState.activeJot = activeLocal
   }

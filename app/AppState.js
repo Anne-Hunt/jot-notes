@@ -8,7 +8,10 @@ class ObservableAppState extends EventEmitter {
   /**@type {import('./models/Jots.js').Jot[]} */
   jots = []
 
-  //** @param {{id, name, body, tags, color, createdAt, editedAt}} data */
+  /**@type {import('./models/Jots.js').Notebook[]} */
+  notebooks = []
+
+  notebooklistcount = 0
 
   activeJot = null
 
