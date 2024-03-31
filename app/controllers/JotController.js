@@ -97,7 +97,7 @@ export class JotController {
     // console.log('accessing notebook draw')
     let notebooks = AppState.notebooks
     let NotebookListContent = ''
-    notebooks.forEach(notebook => NotebookListContent += notebook.NotebookTemplate)
+    notebooks.forEach(notebook => NotebookListContent += notebook.NotebookListTemplate)
     let notebookELem = document.getElementById('notebook-list')
     notebookELem.innerHTML = NotebookListContent
   }

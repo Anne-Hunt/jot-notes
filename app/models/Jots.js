@@ -11,9 +11,11 @@ export class Notebook {
     this.topic = data.topic
   }
 
-  get NotebookTemplate() {
+  get NotebookListTemplate() {
     return `
-    test
+    <div onclick="app.JotController.setActiveNotebook('${this.id}')" class="ps-2">
+      <span>${this.name}</span><span style="color: ${this.color}"> <i class="mdi mdi-notebook"></i></span>
+    </div>
     `
   }
 

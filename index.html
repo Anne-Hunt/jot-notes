@@ -28,19 +28,36 @@
           data-bs-toggle="offcanvas" data-bs-target="#staticBackdropList" aria-controls="staticBackdropList"
           id="jot-list-btn">
         </button>
+
+
         <div class="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="staticBackdropList"
           aria-labelledby="staticBackdropLabel">
           <div class="offcanvas-header">
-            <h5 class="offcanvas-title text-light" id="staticBackdropLabel">Open A Jot</h5>
+            <h5 class="offcanvas-title text-light" id="staticBackdropLabel">Open A Jot or Notebook</h5>
             <button type="button" class="btn-close text-light offcanvasclose" data-bs-dismiss="offcanvas"
               aria-label="Close"></button>
           </div>
+
           <div class="offcanvas-body">
-            <div class="p-5 text-light">
-              <!-- The List -->
-              <h2>All Jots <span id="note-count" class="smalltext"></span></h2>
-              <div id="jot-list" class="col text-light">
-              </div>
+            <p class="d-inline-flex gap-1">
+              <a class="text-light" data-bs-toggle="collapse" href="#collapseNotebooks" role="button"
+                aria-expanded="false" aria-controls="collapseNotebooks">
+                <h2>All Notebooks <span id="notebook-count" class="smalltext"></span></h2>
+              </a>
+            </p>
+            <div class="collapse" id="collapseNotebooks">
+              <div class="text-light" id="notebook-list"></div>>
+            </div>
+
+            <!-- The List -->
+            <p class="d-inline-flex gap-1">
+              <a class="text-light" data-bs-toggle="collapse" href="#collapseJots" role="button" aria-expanded="false"
+                aria-controls="collapseJots">
+                <h2>All Jots <span id="note-count" class="smalltext"></span></h2>
+              </a>
+            </p>
+            <div class="collapse" id="collapseJots">
+              <div class="text-light" id="jot-list"></div>
             </div>
           </div>
         </div>
