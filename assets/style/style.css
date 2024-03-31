@@ -20,6 +20,13 @@
     --c-primary: #8254ad;
     --c-secondary: #603e80;
     --c-tertiary: #ad68ed;
+    --c-red-muted: #FF4136;
+    --c-orange-muted: #FF851B;
+    --c-yellow-muted: #FFDC00;
+    --c-green-muted: #2ECC40;
+    --c-blue-muted: #0074D9;
+    --c-indigo-muted: #4b0082;
+    --c-violet-muted: #B10DC9;
 }
 
 body {
