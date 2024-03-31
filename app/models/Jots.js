@@ -19,6 +19,12 @@ export class Notebook {
     `
   }
 
+  static get NoteBookCountTemplate() {
+    return `
+      ${AppState.notebooklistcount}
+    `
+  }
+
 }
 
 

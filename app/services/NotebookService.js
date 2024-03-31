@@ -100,8 +100,8 @@ class JotService {
 
   saveAll() {
     saveState('jots', AppState.jots)
-    saveState('notebooks', AppState.notebooks)
     saveState('activeJot', AppState.activeJot)
+    saveState('notebooks', AppState.notebooks)
   }
 
   loadAll() {

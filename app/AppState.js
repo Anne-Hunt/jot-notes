@@ -13,6 +13,8 @@ class ObservableAppState extends EventEmitter {
 
   notebooklistcount = 0
 
+  activeNotebook = null
+
   activeJot = null
 
   intervalID = null
