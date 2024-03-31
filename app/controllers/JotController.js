@@ -73,11 +73,11 @@ export class JotController {
     this.drawActiveJot()
   }
 
-  updateJotNotebook(notebookchangervalue) {
+  updateJotNotebook(value) {
     event.preventDefault()
     // const nameChangerElem = event.target
     // @ts-ignore
-    const notebookChangerContent = notebookchangervalue
+    const notebookChangerContent = value
     jotService.updateJotNotebook(notebookChangerContent)
     this.drawActiveJot()
   }
@@ -153,10 +153,11 @@ export class JotController {
   setActiveNotebook(id) {
     console.log('setting active in controller', id)
     jotService.setActiveNotebook(id)
+    this.drawActiveNotebook(id)
   }
 
   drawNotebookChangerOptions() {
-    let optionsChangerElem = document.getElementById('notebookChanger')
+    let optionsChangerElem = document.getElementById('notebook-changer')
     optionsChangerElem.innerHTML = AppState.notebookChangerOptionList
   }
 
@@ -164,7 +165,7 @@ export class JotController {
     let notebooks = AppState.notebooks
     let optionsContent = ''
     notebooks.forEach(notebook => optionsContent += notebook.NotebookSelectOption)
-    let optionsChangerElem = document.getElementById('notebookSelect')
+    let optionsChangerElem = document.getElementById('notebook-select')
     optionsChangerElem.innerHTML = optionsContent
   }
 
@@ -188,9 +189,9 @@ export class JotController {
     console.log('controller sending notebook', id)
     let activeNotebookContent = ''
     let activeNotebookELem = document.getElementById('active-window')
-    if (AppState.activeNotebook != null) {
-      activeNotebookContent = AppState.notebookListContent
-      console.log(activeNotebookContent)
+
+    if (AppState.notebookJotListContent != null) {
+      activeNotebookContent = AppState.notebookJotListContent
       activeNotebookELem.innerHTML = activeNotebookContent
     } else {
       activeNotebookELem.innerHTML = activeNotebookContent

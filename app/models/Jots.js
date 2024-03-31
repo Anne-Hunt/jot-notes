@@ -60,16 +60,16 @@ export class Jot {
     <div class="card card-body change">
 
     <form onsubmit="app.JotController.updateJotName(nameChanger.value)" class="d-flex align-items-center justify-content-between">
-    <label for="nameChanger">Rename </label>
-    <input class="form-input rounded mb-0" type="text" name="nameChanger" id="nameChanger"
+    <label for="name">Rename </label>
+    <input class="form-input rounded mb-0" type="text" name="name" id="nameChanger"
     minlength="3" maxlength="15" placeholder="${this.name}" required>
     <button type="submit" class="btn btn-transparent text-light p-0"><h2 class="m-0 p-0"><i class="mdi mdi-arrow-left-bold-circle"></i></h2>
     </button>
     </form>
     
     <form onsubmit="app.JotController.updateJotColor(colorChanger.value)" class="d-flex align-items-center justify-content-between mb-2">
-    <label for="colorChanger">Color</label>
-    <select class="form-select mb-0 w-50" name="colorChanger" id="jotColorPicker"
+    <label for="jot-color-changer">Color</label>
+    <select class="form-select mb-0 w-50" name="color" id="jot-color-changer"
     aria-label="default select example" required>
     <option selected>Choose a color</option>
     <option value="#FF4136">Red</option>
@@ -84,9 +84,9 @@ export class Jot {
     </button>
     </form>
 
-    <form onsubmit="app.JotController.updateJotNotebook(notebookChanger.value)" class="d-flex align-items-center justify-content-between">
-    <label for="notebook">Notebook</label>
-    <select id="notebookChanger" class="form-select mb-0 w-50" name="notebook" id="jotNotebookPicker" area-label="select" required" required>
+    <form onsubmit="app.JotController.updateJotNotebook(notebook.value)" class="d-flex align-items-center justify-content-between">
+    <label for="notebook-changer">Notebook</label>
+    <select id="notebook-changer" class="form-select mb-0 w-50" name="notebook" area-label="select" required" required>
     </select>
     <button type="submit" class="btn btn-transparent text-light align-middle p-0"><h2 class="m-0 p-0"><i class="mdi mdi-arrow-left-bold-circle"></h2></i>
     </button>
@@ -97,7 +97,7 @@ export class Jot {
     </div>
     <div class="col-md-8 col-12">
     <div class="row align-items-center justify-content-between text-light">
-    <div class="col-8" <label for="body" class="form-label text-light">
+    <div class="col-8" <label for="body-area" class="form-label text-light">
     <h2>Edit Your Jot</h2></label>
     </div>
     <div class="col-2">
@@ -106,7 +106,7 @@ export class Jot {
     ></i></button>
     </div>
     </div>
-    <textarea onblur="app.JotController.updateJot()" type="text" name="body" id="body"
+    <textarea onblur="app.JotController.updateJot()" type="text" name="body" id="body-area"
     class="w-100 viewable shadow rounded p-2" style="border: solid 5px ${this.color}">${this.body}</textarea>
     </div>
     </section>
@@ -151,6 +151,12 @@ export class Notebook {
       </div>
       <div id="${this.id}"></div>
       `
+  }
+
+  get ActiveNotebookTemplate() {
+    return `
+    ${this.name}, ${this.id}
+    `
   }
 
   get NotebookSelectOption() {

@@ -99,28 +99,18 @@ class JotService {
     let activeNotebook = AppState.notebooks.find(notebook => notebook.id == id)
     AppState.activeNotebook = activeNotebook
     console.log('found notebook', activeNotebook, AppState.activeNotebook)
-    this.setActiveNotebookList(activeNotebook)
+    this.setActiveNotebookList(id)
     this.saveAll()
   }
 
-  setActiveNotebookList(activeNotebook) {
-    console.log(AppState.activeNotebook.id, activeNotebook)
-    // for (let i = 0; i < AppState.jots.length; i++) {
-    //   console.log('entering for loop', AppState.jots[i])
-    // }
+  setActiveNotebookList(id) {
+    console.log(AppState.activeNotebook.id, id)
+    console.log(AppState.jots)
 
-    console.log(AppState.jots, AppState.activeNotebook)
-    let filtered = AppState.jots.filter(jot => jot.notebook == AppState.activeNotebook.id)
-    console.log(filtered)
-
-    //   if (AppState.jots[i].notebook == activeNotebook.id) {
-    //     console.log('entering if', AppState.jots[i])
-    //     AppState.notebookJotList.push(AppState.jots[i])
-    //     console.log(AppState.notebookJotList)
-    //     AppState.notebookListContent += AppState.jots[i].JotListTemplate
-    //     console.log(AppState.notebookListContent)
-    //   }
-    // }
+    AppState.notebookJotList = AppState.jots.filter(jot => jot.notebook == AppState.activeNotebook.id)
+    console.log(AppState.notebookJotList)
+    AppState.notebookJotList.forEach(jot => AppState.notebookJotListContent += jot.JotListTemplate)
+    this.saveAll()
   }
 
   notebookCount() {
