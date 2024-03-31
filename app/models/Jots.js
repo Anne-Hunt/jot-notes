@@ -85,8 +85,8 @@ export class Jot {
     </form>
 
     <form onsubmit="app.JotController.updateJotNotebook(notebookChanger.value)" class="d-flex align-items-center justify-content-between">
-    <label for="notebookSelect">Notebook</label>
-    <select id="notebookChanger" class="form-select mb-0 w-50" name="notebookChanger" id="jotNotebookPicker" area-label="select" required" required>
+    <label for="notebook">Notebook</label>
+    <select id="notebookChanger" class="form-select mb-0 w-50" name="notebook" id="jotNotebookPicker" area-label="select" required" required>
     </select>
     <button type="submit" class="btn btn-transparent text-light align-middle p-0"><h2 class="m-0 p-0"><i class="mdi mdi-arrow-left-bold-circle"></h2></i>
     </button>
@@ -111,6 +111,12 @@ export class Jot {
     </div>
     </section>
     </div>
+    `
+  }
+
+  get NotebookJotListTemplate() {
+    return `    
+    ${this.JotListTemplate}
     `
   }
 
@@ -149,16 +155,9 @@ export class Notebook {
 
   get NotebookSelectOption() {
     return `
-    <option value="'${this.id}'">${this.name}</option>
+    <option value="${this.id}">${this.name}</option>
     `
   }
-
-  // get ActiveNotebookTemplate() {
-  //   return `<div onclick="app.JotController.setActiveJot('${Jot.id}')" class="ps-2">
-  //     <span>${Jot.name}</span><span style="color: ${Jot.color}"> <i class="mdi mdi-fountain-pen-tip"></i></span>
-  //   </div>
-  //     `
-  // }
 
   static get NotebookCount() {
     return `

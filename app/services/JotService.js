@@ -10,7 +10,7 @@ class JotService {
     let createdJot = new Jot(jotData)
     // console.log('serviced data', jotData)
     AppState.jots.push(createdJot)
-    // console.log('created a jot', jotData)
+    console.log('created a jot', jotData)
     this.saveAll()
     this.setActiveJot(createdJot.id)
     this.noteCount()
@@ -95,14 +95,32 @@ class JotService {
   }
 
   setActiveNotebook(id) {
+    AppState.notebookListContent = ''
     let activeNotebook = AppState.notebooks.find(notebook => notebook.id == id)
-    console.log('found notebook', activeNotebook)
     AppState.activeNotebook = activeNotebook
-    let activeNotebookJots = AppState.jots.filter(jot => jot.notebook == activeNotebook)
-    console.log('found jots', activeNotebookJots)
-    AppState.activeNotebook.push(activeNotebookJots)
-    console.log(AppState.activeNotebook)
+    console.log('found notebook', activeNotebook, AppState.activeNotebook)
+    this.setActiveNotebookList(activeNotebook)
     this.saveAll()
+  }
+
+  setActiveNotebookList(activeNotebook) {
+    console.log(AppState.activeNotebook.id, activeNotebook)
+    // for (let i = 0; i < AppState.jots.length; i++) {
+    //   console.log('entering for loop', AppState.jots[i])
+    // }
+
+    console.log(AppState.jots, AppState.activeNotebook)
+    let filtered = AppState.jots.filter(jot => jot.notebook == AppState.activeNotebook.id)
+    console.log(filtered)
+
+    //   if (AppState.jots[i].notebook == activeNotebook.id) {
+    //     console.log('entering if', AppState.jots[i])
+    //     AppState.notebookJotList.push(AppState.jots[i])
+    //     console.log(AppState.notebookJotList)
+    //     AppState.notebookListContent += AppState.jots[i].JotListTemplate
+    //     console.log(AppState.notebookListContent)
+    //   }
+    // }
   }
 
   notebookCount() {
@@ -147,8 +165,8 @@ class JotService {
     AppState.jots = jotsLocal
     const notebooksLocal = loadState('notebooks', [Notebook])
     AppState.notebooks = notebooksLocal
-    // const activeLocal = loadState('activeJot', AppState.activeJot)
-    // AppState.activeJot = activeLocal
+    const activeLocal = loadState('activeJot', AppState.activeJot)
+    AppState.activeJot = activeLocal
   }
 }
 

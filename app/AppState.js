@@ -11,9 +11,14 @@ class ObservableAppState extends EventEmitter {
   /**@type {import('./models/Jots.js').Notebook[]} */
   notebooks = []
 
+  /**@type {import('./models/Jots.js').Jot[]} */
+  notebookJotList = []
+
   notebooklistcount = 0
 
   notebookChangerOptionList = ''
+
+  notebookListContent = ''
 
   activeNotebook = null
 

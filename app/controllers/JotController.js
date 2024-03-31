@@ -11,7 +11,6 @@ export class JotController {
     AppState.on('activeJot', this.drawActiveJot)
     AppState.on('wordCount', this.drawActiveJot)
     AppState.on('notebooks', this.drawNotebookList, this.drawNotebookCount)
-    AppState.on('activeNotebook', this.drawActiveNotebook)
     jotService.loadAll()
     this.drawNoteCount()
     this.drawNotebookCount()
@@ -113,7 +112,7 @@ export class JotController {
   drawActiveJot(id) {
     // console.log('controller sending', id)
     let activeJotContent = ''
-    let activeJotELem = document.getElementById('active-jot')
+    let activeJotELem = document.getElementById('active-window')
     if (AppState.activeJot != null) {
       let activeJot = AppState.activeJot
       let activeJotContent = activeJot.JotActiveTemplate
@@ -186,15 +185,11 @@ export class JotController {
   }
 
   drawActiveNotebook(id) {
-    // console.log('controller sending notebook', id)
-    // jotService.setActiveNotebook(id)
+    console.log('controller sending notebook', id)
     let activeNotebookContent = ''
-    let activeNotebookELem = document.getElementById('id')
+    let activeNotebookELem = document.getElementById('active-window')
     if (AppState.activeNotebook != null) {
-      let activeNotebook = AppState.activeNotebook
-      let activeNotebookContent = activeNotebook.ActiveTemplate
-      console.log('assigned', activeNotebook.ActiveNotebookTemplate)
-      activeNotebook.jots.forEach(jot => activeNotebookContent += jot.ListTemplate)
+      activeNotebookContent = AppState.notebookListContent
       console.log(activeNotebookContent)
       activeNotebookELem.innerHTML = activeNotebookContent
     } else {
