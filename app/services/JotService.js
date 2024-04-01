@@ -7,6 +7,10 @@ class JotService {
   sortByNotebooks() {
     for (let i = 0; i < AppState.notebooks.length; i++) {
       let notebookId = AppState.notebooks[i].id
+      let jotlist = AppState.jots.filter(jot => jot.notebook == notebookId)
+      console.log('jotlist', jotlist)
+      AppState.notebookJotList
+
     }
   }
 

@@ -11,6 +11,7 @@ export class JotController {
     AppState.on('activeJot', this.drawActiveJot, this.drawNotebookChangerOptions)
     AppState.on('wordCount', this.drawActiveJot)
     AppState.on('notebooks', this.drawNotebookList, this.drawNotebookCount)
+    AppState.on('notebooks', this.drawActiveNotebook)
     jotService.loadAll()
     this.drawNoteCount()
     this.drawNotebookCount()
@@ -211,7 +212,9 @@ export class JotController {
   }
 
   sortedByNotebooks() {
+    console.log('controller sending to service')
     jotService.sortByNotebooks()
+    console.log('controller received from service')
   }
 
   autoSaveOn() {
