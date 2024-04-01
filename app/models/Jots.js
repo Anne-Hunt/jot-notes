@@ -48,8 +48,7 @@ export class Jot {
     <p class="lh-sm mb-0 smalltext">created: ${this.CreatedDate}</p>
     <p class="lh-sm mb-0 smalltext">last saved: ${this.EditedDate}</p>
     <p class="lh-sm mb-0 smalltext">Word Count: ${AppState.wordCount}</p>
-    <p class="lh-sm mb-0 smalltext">Character Count: ${AppState.characterCount}</p> 
-    <p class="lh-sm mb-0 smalltext">Tags: ${this.tags}</p>            
+    <p class="lh-sm mb-0 smalltext">Character Count: ${AppState.characterCount}</p>           
     <p class="d-inline-flex gap-1">
     <button class="btn offcanvasbtn text-light shadow" type="button" data-bs-toggle="collapse"
     data-bs-target="#collapseEditForm" aria-expanded="false" aria-controls="collapseEditForm" onclick="app.JotController.drawNotebookChangerOptions()">

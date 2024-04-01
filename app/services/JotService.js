@@ -4,6 +4,11 @@ import { Jot, Notebook } from "../models/Jots.js";
 import { saveState, loadState } from "../utils/Store.js";
 
 class JotService {
+  sortByNotebooks() {
+    for (let i = 0; i < AppState.notebooks.length; i++) {
+      let notebookId = AppState.notebooks[i].id
+    }
+  }
 
   createJot(jotData) {
     // console.log('service passing data')

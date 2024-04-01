@@ -214,6 +214,10 @@ export class JotController {
     }
   }
 
+  sortedByNotebooks() {
+    jotService.sortByNotebooks()
+  }
+
   autoSaveOn() {
     jotService.autoSaveOn()
     console.log('on')
