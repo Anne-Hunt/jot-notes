@@ -125,14 +125,13 @@ export class JotController {
   }
 
   deleteJot(jotId) {
-    // console.log('ask to be sure')
-    window.confirm("Do you really want to permanently delete this Jot?")
-    if (true) {
-      jotService.deleteJot(jotId)
-      this.drawNoteCount()
-    } else {
+    const deleteThis = window.confirm("Do you want to permanently remove this Jot?")
+    console.log('delete option engaged');
+    if (deleteThis == false) {
       return
     }
+    console.log('permanent deletion');
+    jotService.deleteJot()
   }
 
   createNotebook() {
@@ -202,16 +201,13 @@ export class JotController {
 
   deleteNotebook(notebookId) {
     // console.log('ask to be sure - could be bad')
-    window.confirm("Do you really want to permanently delete this Notebook? It may damage the jots inside.")
-    if (true) {
-      jotService.deleteNotebook(notebookId)
-      this.drawNoteCount()
-      this.drawNotebookCount()
-      this.drawNotebookChangerOptions()
-      this.drawNotebookFormOptions()
-    } else {
+    const deleteThis = window.confirm("Do you want to permanently remove this Notebook? It could mess up your Jots.")
+    console.log('delete option engaged');
+    if (deleteThis == false) {
       return
     }
+    console.log('permanent deletion');
+    jotService.deleteNotebook()
   }
 
   sortedByNotebooks() {

@@ -145,10 +145,10 @@ export class Notebook {
 
   get NotebookListTemplate() {
     return `
-      <div onclick="app.JotController.setActiveNotebook('${this.id}')" class="ps-2">
-        <span>${this.name}</span><span style="color: ${this.color}"> <i class="mdi mdi-notebook"></i></span>
-      </div>
-      <div id="${this.id}"></div>
+      <div onclick="app.JotController.setActiveNotebook('${this.id}')" class="row w-100 ps-2 align-items-center justify-content-between"><div class="col-8">
+        <span onclick="app.JotController.setActiveNotebook('${this.id}')">${this.name} <i class="mdi mdi-notebook" style="color: ${this.color}"></i></span></div><div class="col-4"><button class="btn btn-transparent text-light fs-4 text-end"
+      onclick="app.JotController.deleteNotebook('${this.id}')"><i class="mdi mdi-delete-circle"
+      ></i></button></div></div>
       `
   }
 
