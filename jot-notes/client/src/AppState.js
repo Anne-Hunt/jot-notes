@@ -2,7 +2,6 @@ import { reactive } from 'vue'
 import { Jot } from './models/Jot.js'
 import { Notebook } from './models/Notebook.js'
 
-// NOTE AppState is a reactive object to contain app level data
 export const AppState = reactive({
   /**@type {import('@bcwdev/auth0provider-client').Identity} */
   identity: null,
@@ -10,33 +9,31 @@ export const AppState = reactive({
   account: null,
 
   /**@type {Jot[]} */
-  jots =[],
+  jots: [],
 
   /**@type {Notebook[]} */
-  notebooks =[],
+  notebooks: [],
 
   /**@type {Jot[]} */
-  notebookJotList =[],
+  notebookJotList: [],
 
-  notebookJotListContent = '',
+  notebookJotListContent: '',
 
-  notebooklistcount = 0,
+  notebooklistcount: 0,
 
-  notebookChangerOptionList = '',
+  notebookChangerOptionList: '',
 
-  notebookListContent = '',
+  notebookListContent: '',
 
-  activeNotebook = null,
+  activeNotebook: null,
 
-  activeJot = null,
+  activeJot: null,
 
-  intervalID = null,
+  intervalID: null,
 
-  noteCount = 0,
+  noteCount: 0,
 
-  characterCount = 0,
+  characterCount: 0,
 
-  wordCount = 0
-
-}
+  wordCount: 0
 })
