@@ -8,7 +8,7 @@ export const EventSchema = new Schema({
     createdAt: { type: Date, required: true },
     editedAt: { type: Date, required: true },
     creatorId: { type: Schema.ObjectId, required: true, ref: 'Account' },
-    notebook: { type: [Schema.ObjectId], ref: 'Notebook' }
+    notebookIds: { type: [Schema.ObjectId], ref: 'Notebook' }
 }, {
     timestamps: true, toJSON: { virtuals: true }
 })
@@ -20,8 +20,8 @@ EventSchema.virtual('creator', {
     justOne: true
 })
 
-EventSchema.virtual('notebook', {
-    localField: 'notebook',
+EventSchema.virtual('notebooks', {
+    localField: 'notebookIds',
     ref: 'Notebook',
     foreignField: '_id',
     count: true

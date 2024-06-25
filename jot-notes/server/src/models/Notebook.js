@@ -9,7 +9,7 @@ export const EventSchema = new Schema({
     createdAt: { type: Date, required: true },
     editedAt: { type: Date, required: true },
     creatorId: { type: Schema.ObjectId, required: true, ref: 'Account' },
-    jot: { type: [Schema.ObjectId], ref: 'Jot' }
+    jotIds: { type: [Schema.ObjectId], ref: 'Jot' }
 }, {
     timestamps: true, toJSON: { virtuals: true }
 })
@@ -21,8 +21,8 @@ EventSchema.virtual('creator', {
     justOne: true
 })
 
-EventSchema.virtual('jot', {
-    localField: 'jot',
+EventSchema.virtual('jots', {
+    localField: 'jotIds',
     ref: 'Jot',
     foreignField: '_id',
     count: true

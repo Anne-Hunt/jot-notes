@@ -9,10 +9,13 @@ export class Notebook {
         this.id = generateId()
         this.name = data.name
         this.body = data.body || ''
-        this.tags = data.tags
+        this.coverImg = data.coverImg
         this.color = data.color
+        this.tags = data.tags
+        this.private = data.private
         this.createdAt = data.createdAt == undefined ? new Date() : new Date(data.createdAt)
         this.editedAt = data.editedAt == undefined ? new Date() : new Date(data.editedAt)
-        this.private = data.private
+        this.creator = data.creator
+        this.jots = data.jots
     }
 }
