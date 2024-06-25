@@ -13,9 +13,11 @@ export class Notebook {
         this.color = data.color
         this.tags = data.tags
         this.private = data.private
+        this.creatorId = data.creatorId
+        this.creator = data.creator
+        this.jotsId = data.jotsId
+        this.jots = data.jots
         this.createdAt = data.createdAt == undefined ? new Date() : new Date(data.createdAt)
         this.editedAt = data.editedAt == undefined ? new Date() : new Date(data.editedAt)
-        this.creator = data.creator
-        this.jots = data.jots
     }
 }
