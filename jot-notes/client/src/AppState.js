@@ -35,5 +35,7 @@ export const AppState = reactive({
 
   characterCount: 0,
 
-  wordCount: 0
+  wordCount: 0,
+
+  activeProfile: null
 })

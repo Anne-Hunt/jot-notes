@@ -1,6 +1,9 @@
 
 
 class JotService {
+    getPublicJots(userId) {
+        throw new Error('Method not implemented.');
+    }
 
 
 }
