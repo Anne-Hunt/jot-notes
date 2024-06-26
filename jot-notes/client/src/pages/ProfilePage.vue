@@ -2,8 +2,6 @@
 import { computed, onMounted } from 'vue';
 import { AppState } from '../AppState.js';
 import { logger } from '../utils/Logger.js';
-import { notebookService } from '../services/NotebookService.js';
-import { jotService } from '../services/JotService.js';
 import Pop from '../utils/Pop.js';
 import JotListItem from '../components/JotListItem.vue';
 import { profileService } from '../services/ProfileService.js';

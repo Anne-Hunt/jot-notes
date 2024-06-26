@@ -23,19 +23,19 @@ const routes = [
     beforeEnter: authGuard
   },
   {
-    path: '/profile',
+    path: '/profile/:profileId',
     name: 'Profile',
     component: loadPage('ProfilePage'),
     beforeEnter: authSettled
   },
   {
-    path: '/notebook',
+    path: '/notebook/:notebookId',
     name: 'Notebook',
     component: loadPage('NotebookPage'),
     beforeEnter: authSettled
   },
   {
-    path: '/jot',
+    path: '/jot/:jotId',
     name: 'Jot',
     component: loadPage('JotPage'),
     beforeEnter: authSettled
