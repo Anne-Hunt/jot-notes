@@ -1,22 +1,57 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { AppState } from '../AppState.js';
+import { logger } from '../utils/Logger.js';
+import Pop from '../utils/Pop.js';
+import JotListItem from '../components/JotListItem.vue';
+import { useRoute } from 'vue-router';
+import { accountService } from '../services/AccountService.js';
 
 const account = computed(() => AppState.account)
+const jots = computed(()=> AppState.jots)
+const notebooks = computed(()=> AppState.notebooks)
+const route = useRoute()
 
+async function getContent(){
+    try {
+      await accountService.getAccountJots()
+      await accountService.getAccountNotebooks()
+    } catch (error) {
+        logger.log('Unable to getContent')
+        Pop.error('Unable to load any of your creations!', 'error')
+    }
+}
+
+onMounted(()=>
+getContent())
 </script>
 
 <template>
-  <div class="about text-center">
-    <div v-if="account">
-      <h1>Welcome {{ account.name }}</h1>
-      <img class="rounded" :src="account.picture" alt="" />
-      <p>{{ account.email }}</p>
-    </div>
-    <div v-else>
-      <h1>Loading... <i class="mdi mdi-loading mdi-spin"></i></h1>
-    </div>
-  </div>
+    <section class="row">
+        <div class="col-12 about text-center">
+            <div v-if="account">
+                <h1>Welcome back, {{ account.name }}</h1>
+                <img class="rounded" :src="account.picture" alt="" />
+                <div class="row">
+                    <div class="col-6">
+                        <h2>Jots</h2>
+                        <div v-for="jot in jots" :key="jot.id">
+                        <JotListItem :jot="jot"></JotListItem>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <h2>Notebooks</h2>
+                        <div v-for="notebook in notebooks" :key="notebook.id">
+                        <NotebookListItem :notebook="notebook"></NotebookListItem>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div v-else class="col-12">
+                <h1>Loading... <i class="mdi mdi-loading mdi-spin"></i></h1>
+            </div>
+        </div>
+    </section>
 </template>
 
 <style scoped lang="scss">

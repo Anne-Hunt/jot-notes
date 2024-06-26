@@ -1,17 +1,48 @@
 <script setup>
+import { computed, onMounted } from 'vue';
+import Pop from '../utils/Pop.js';
+import { logger } from '../utils/Logger.js';
+import { AppState } from '../AppState.js';
+import { jotService } from '../services/JotService.js';
+import { notebookService } from '../services/NotebookService.js';
 
+
+const jots = computed(()=> AppState.jots)
+const notebooks = computed(()=> AppState.notebooks)
+
+async function getContent(){
+try {
+  await jotService.getPublicJots()
+  await notebookService.getPublicNotebooks()
+}
+catch (error){
+  Pop.toast("Unable to access content, sorry!", 'error');
+  logger.log("unable to load public content", error)
+}
+}
+
+onMounted(()=> 
+getContent())
 </script>
 
 <template>
-  <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-    <div class="home-card p-5 card align-items-center shadow rounded elevation-3">
-      <img src="https://bcw.blob.core.windows.net/public/img/8600856373152463" alt="CodeWorks Logo"
-        class="rounded-circle">
-      <h1 class="my-5 bg-dark text-white p-3 rounded text-center">
-        Vue 3 Starter
-      </h1>
-    </div>
+  <section class="row">
+    
+  </section>
+<section class="row">
+  <div class="col p-2">
+    <h2>Public Notebooks</h2>
+    <div v-for="notebook in notebooks" :key="notebook.id">
+                        <NotebookListItem :notebook="notebook"></NotebookListItem>
+                        </div>
   </div>
+  <div class="col">
+    <h2>Public Jots</h2>
+    <div v-for="jot in jots" :key="jot.id">
+                        <JotListItem :jot="jot"></JotListItem>
+                        </div>
+  </div>
+</section>
 </template>
 
 <style scoped lang="scss">

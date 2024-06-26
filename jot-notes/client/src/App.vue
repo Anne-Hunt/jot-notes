@@ -9,7 +9,7 @@ import Navbar from './components/Navbar.vue'
   <header>
     <Navbar />
   </header>
-  <main>
+  <main class="container-fluid">
     <router-view />
   </main>
   <footer class="bg-dark text-light">
