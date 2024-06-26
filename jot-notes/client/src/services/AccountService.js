@@ -1,5 +1,6 @@
 import { AppState } from '../AppState'
 import { Account } from '../models/Account.js'
+import { Jot } from '../models/Jot.js'
 import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
 
@@ -11,6 +12,12 @@ class AccountService {
     } catch (err) {
       logger.error('HAVE YOU STARTED YOUR SERVER YET???', err)
     }
+  }
+
+  async getAccountJots() {
+    const response = await api.get('account/jots')
+    const userjots = response.data.map(jots => new Jot(jots))
+    AppState.jots = userjots
   }
 }
 
