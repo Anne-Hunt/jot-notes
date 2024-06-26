@@ -6,17 +6,20 @@ import { notebookService } from '../services/NotebookService.js';
 import { jotService } from '../services/JotService.js';
 import Pop from '../utils/Pop.js';
 import JotListItem from '../components/JotListItem.vue';
+import { profileService } from '../services/ProfileService.js';
+import { useRoute } from 'vue-router';
 
 const profile = computed(() => AppState.activeProfile)
 const account = computed(() => AppState.account)
 const jots = computed(()=> AppState.jots)
 const notebooks = computed(()=> AppState.notebooks)
+const route = useRoute()
 
 async function getContent(){
     try {
-        const userId = AppState.account.id
-        await notebookService.getPublicNotebooks(userId)
-        await jotService.getPublicJots(userId)
+        const profileId = route.params.profileId
+        await profileService.getProfileNotebooks(profileId)
+        await profileService.getProfileJots(profileId)
     } catch (error) {
         logger.log('Unable to getContent')
         Pop.error('Unable to load any public creations!', 'error')
