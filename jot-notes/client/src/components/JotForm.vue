@@ -19,7 +19,7 @@ let jotdata = ref({
 
 async function createJot(){
 try {
-    jotdata.value.creatorId = AppState.account.id
+    // jotdata.value.creatorId = account.value.id
     await jotService.createJot(jotdata)
 }
 catch (error){
