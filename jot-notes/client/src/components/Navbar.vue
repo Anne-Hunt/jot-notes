@@ -35,6 +35,12 @@ function toggleTheme() {
             About
           </router-link>
         </li>
+        <li>
+          <span class="btn text-light lighten-30 selectable text-uppercase" data-bs-toggle="offcanvas" data-bs-target="#offcanvasForms" aria-controls="offcanvasScrolling">
+            Create
+          </span>
+          
+        </li>
       </ul>
       <!-- LOGIN COMPONENT HERE -->
       <div>
@@ -46,6 +52,7 @@ function toggleTheme() {
       <Login />
     </div>
   </nav>
+  <OffCanvas></OffCanvas>
 </template>
 
 <style scoped>
