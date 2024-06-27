@@ -7,9 +7,20 @@ export class JotController extends BaseController {
         super('api/jots')
         this.router
             .get('', this.getPublicJots)
+            .get('/:jotId', this.getJot)
             .post('', this.createJot)
             .put('/:jotId', this.updateJot)
             .delete('/:jotId', this.trashJot)
+    }
+    async getJot(request, response, next) {
+        try {
+            const accountId = request.userInfo.id
+            const jotId = request.params.jotId
+            const jot = await jotService.getJot(jotId, accountId)
+            response.send(jot)
+        } catch (error) {
+            next(error)
+        }
     }
     async createJot(request, response, next) {
         try {

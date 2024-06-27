@@ -7,11 +7,21 @@ export class NotebookController extends BaseController {
         super('api/notebooks')
         this.router
             .get('', this.getPublicNotebooks)
+            .get('/:notebookId', this.getNotebook)
             .post('', this.createNotebook)
             .put('/:notebookId', this.updateNotebook)
             .delete('/:notebookId', this.trashNotebook)
     }
-
+    async getNotebook(request, response, next) {
+        try {
+            const accountId = request.userInfo.id
+            const notebookId = request.params.notebookId
+            const notebook = await notebookService.getNotebook(notebookId, accountId)
+            response.send(notebook)
+        } catch (error) {
+            next(error)
+        }
+    }
     async getPublicNotebooks(request, response, next) {
         try {
             const jot = await notebookService.getPublicNotebooks()
