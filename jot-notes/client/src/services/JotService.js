@@ -16,6 +16,19 @@ class JotService {
         AppState.jots.splice(index, 1)
         AppState.jots.push(jotresponse)
     }
+
+    async createJot(jotdata){
+        jotdata.creatorId = AppState.account.id
+        const response = await api.post('api/jots', jotdata)
+        const jotresponse = new Jot(response.data)
+        AppState.jots.push(jotresponse)
+    }
+
+    async trashJot(jotId){
+        await api.delete(`api/jots/${jotId}`)
+        const trash = AppState.jots.findIndex(jot => jotId = jot.id)
+        AppState.jots.splice(trash, 1)
+    }
 }
 
 export const jotService = new JotService()

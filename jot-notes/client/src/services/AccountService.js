@@ -15,6 +15,11 @@ class AccountService {
     }
   }
 
+  async editAccount(accountData){
+    const response = await api.put('/account', accountData)
+    AppState.account = new Account(response.data)
+  }
+
   async getAccountJots() {
     const response = await api.get('account/jots')
     const userjots = response.data.map(jots => new Jot(jots))
