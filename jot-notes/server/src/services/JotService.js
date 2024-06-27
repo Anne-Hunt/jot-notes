@@ -30,11 +30,27 @@ class JotService {
         if (!jots) throw new Error('Cannot find public jots')
         return jots
     }
-    async updateJot(body, jotId) {
-        throw new Error("Method not implemented.");
+    async updateJot(accountId, jotdata, jotId) {
+        const jotupdate = await dbContext.Jot.findById(jotId)
+        if (!jotupdate) throw new Error('Did not find jot to update')
+        if (jotupdate.creatorId != accountId) throw new Error('You cannot updated what is not yours')
+        jotupdate.name = jotdata.name ?? jotupdate.name
+        jotupdate.body = jotdata.body ?? jotupdate.body
+        jotupdate.tags = jotdata.tags ?? jotupdate.tags
+        jotupdate.color = jotdata.color ?? jotupdate.color
+        jotupdate.private = jotdata.private ?? jotupdate.private
+        jotupdate.editedAt = jotdata.editedAt ?? jotupdate.editedAt
+        jotupdate.notebookIds = jotdata.notebookIds ?? jotupdate.notebookIds
+        jotupdate.populate('creator notebooks')
+        await jotupdate.save()
+        return jotupdate
     }
-    async trashJot(jotId) {
-        throw new Error("Method not implemented.");
+    async trashJot(jotId, accountId) {
+        const trash = await dbContext.Jot.findById(jotId)
+        if (!trash) throw new Error('Unable to find jot to delete')
+        if (trash.creatorId != accountId) throw new Forbidden('You cannot delete what is not yours')
+        await trash.deleteOne()
+        return `Your jot ${trash.name} is deleted`
     }
 
 }

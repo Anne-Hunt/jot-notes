@@ -50,7 +50,8 @@ export class JotController extends BaseController {
     async trashJot(request, response, next) {
         try {
             const jotId = request.params.jotId
-            const jot = await jotService.trashJot(jotId)
+            const accountId = request.userInfo.id
+            const jot = await jotService.trashJot(jotId, accountId)
             response.send(jot)
         } catch (error) {
             next(error)
