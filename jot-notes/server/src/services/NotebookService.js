@@ -2,18 +2,25 @@ import { dbContext } from "../db/DbContext.js";
 
 
 class NotebookService {
+
+    async getNotebook(notebookId) {
+        const notebook = await dbContext.Notebook.findById(notebookId)
+        if (!notebook) throw new Error('Notebook not found')
+        notebook.populate('creator jots')
+        return notebook
+    }
     async getPublicNotebooks() {
-        const notebooks = await dbContext.Notebook.find({ private: false }).populate('creator')
+        const notebooks = await dbContext.Notebook.find({ private: false }).populate('creator jots')
         if (!notebooks) throw new Error('No public notebooks found')
         return notebooks
     }
     async getUserNotebooks(accountId) {
-        const notebooks = await dbContext.Notebook.find({ creatorId: accountId }).populate('creator')
+        const notebooks = await dbContext.Notebook.find({ creatorId: accountId }).populate('creator jots')
         if (!notebooks) throw new Error('Create your first notebook')
         return notebooks
     }
     async getProfileNotebooks(profileId) {
-        const notebooks = await dbContext.Notebook.find({ creatorId: profileId, private: false }).populate('creator')
+        const notebooks = await dbContext.Notebook.find({ creatorId: profileId, private: false }).populate('creator jots')
         if (!notebooks) throw new Error('No public notebooks found for this user')
         return notebooks
     }
