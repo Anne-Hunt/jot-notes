@@ -31,8 +31,9 @@ export class NotebookController extends BaseController {
 
     async updateNotebook(request, response, next) {
         try {
+            const accountId = request.userInfo.id
             const notebookId = request.params.notebookId
-            const jot = await notebookService.updateNotebook(request.body, notebookId)
+            const jot = await notebookService.updateNotebook(accountId, request.body, notebookId)
             response.send(jot)
         } catch (error) {
             next(error)
@@ -40,8 +41,9 @@ export class NotebookController extends BaseController {
     }
     async trashNotebook(request, response, next) {
         try {
+            const accountId = request.userInfo.id
             const notebookId = request.params.notebookId
-            const jot = await notebookService.trashNotebook(notebookId)
+            const jot = await notebookService.trashNotebook(notebookId, accountId)
             response.send(jot)
         } catch (error) {
             next(error)

@@ -1,5 +1,5 @@
 import { Schema, VirtualType } from "mongoose";
-export const EventSchema = new Schema({
+export const NotebookSchema = new Schema({
     name: { type: String, required: true, minLength: 3, maxLength: 50 },
     body: { type: String, required: true, minLength: 15, maxLength: 100000 },
     coverImg: { type: String },
@@ -14,14 +14,14 @@ export const EventSchema = new Schema({
     timestamps: true, toJSON: { virtuals: true }
 })
 
-EventSchema.virtual('creator', {
+NotebookSchema.virtual('creator', {
     localField: 'creatorId',
     ref: 'Account',
     foreignField: '_id',
     justOne: true
 })
 
-EventSchema.virtual('jots', {
+NotebookSchema.virtual('jots', {
     localField: 'jotIds',
     ref: 'Jot',
     foreignField: '_id',
