@@ -1,3 +1,5 @@
+import { jotService } from '../services/JotService.js'
+import { notebookService } from '../services/NotebookService.js'
 import { profileService } from '../services/ProfileService.js'
 import BaseController from '../utils/BaseController'
 
@@ -7,6 +9,26 @@ export class ProfilesController extends BaseController {
     this.router
       .get('', this.getProfiles)
       .get('/:id', this.getProfile)
+      .get('/:profileId/jots', this.getProfileJots)
+      .get('/:profileId/notebooks', this.getProfileNotebooks)
+  }
+  async getProfileNotebooks(request, response, next) {
+    try {
+      const profileId = request.params.profileId
+      const notebooks = await notebookService.getProfileNotebooks(profileId)
+      response.send(notebooks)
+    } catch (error) {
+      next(error)
+    }
+  }
+  async getProfileJots(request, response, next) {
+    try {
+      const profileId = request.params.profileId
+      const jots = await jotService.getProfileJots(profileId)
+      response.send(jots)
+    } catch (error) {
+      next(error)
+    }
   }
 
   async getProfiles(req, res, next) {
