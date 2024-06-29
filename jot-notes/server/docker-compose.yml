@@ -6,4 +6,4 @@ services:
     env_file:
       - jot-notes-env
     ports:
-      - "3000:3000"
+      - "3003:3003"
