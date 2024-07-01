@@ -35,6 +35,7 @@ img{
     object-fit: cover;
     object-position: center;
     max-height: 10dvh;
+    max-width: 100px;
 }
 
 .size{
