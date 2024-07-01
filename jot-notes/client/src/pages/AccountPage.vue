@@ -35,6 +35,7 @@ onMounted(()=>{
                 <div class="row bg-primary py-0 m-0 justify-content-center pb-2">
                     <h1>Welcome back, {{ account.name }}</h1>
                     <img class="rounded-circle border border-5 border-light" :src="account.picture" alt="" />
+                    <i class="mdi mdi-dots-horizontal fs-1"></i>
                 </div>
                 <div class="row">
                     <div class="col-6">
@@ -56,6 +57,7 @@ onMounted(()=>{
             </div>
         </div>
     </section>
+    <Modal><AccountEditForm/></Modal>
 </template>
 
 <style scoped lang="scss">

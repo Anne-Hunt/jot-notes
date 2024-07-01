@@ -9,7 +9,7 @@ defineProps({notebook: Notebook})
 
 <template>
 <div>
-    <RouterLink :to="{name: 'Notebook', params: {profileId: `${notebook.id}`}}">
+    <RouterLink :to="{name: 'Notebook', params: {notebookId: `${notebook.id}`}}">
         <h3><i v-if="notebook.private == true" class="mdi mdi-lock"></i>
             {{ notebook.name }}
         </h3>

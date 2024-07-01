@@ -14,9 +14,8 @@ export class JotController extends BaseController {
     }
     async getJot(request, response, next) {
         try {
-            const accountId = request.userInfo.id
             const jotId = request.params.jotId
-            const jot = await jotService.getJot(jotId, accountId)
+            const jot = await jotService.getJot(jotId)
             response.send(jot)
         } catch (error) {
             next(error)

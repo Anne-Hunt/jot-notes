@@ -3,10 +3,9 @@ import { Forbidden } from "../utils/Errors.js";
 
 
 class JotService {
-    async getJot(jotId, accountId) {
+    async getJot(jotId) {
         const jot = await dbContext.Jot.findById(jotId)
         if (!jot) throw new Error('Unable to find jot')
-        if (jot.private = true && jot.creatorId != accountId) throw new Forbidden('You cannot access private data that is not yours')
         jot.populate('creator notebooks')
         return jot
     }
