@@ -1,27 +1,26 @@
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
+import { AppState } from '../AppState.js';
+import { notebookService } from '../services/NotebookService.js';
 import Pop from '../utils/Pop.js';
 import { logger } from '../utils/Logger.js';
-import { jotService } from '../services/JotService.js';
-import { computed } from 'vue';
-import { AppState } from '../AppState.js';
 
 const account = computed(()=>AppState.account)
 
-let jotdata = ref({
+let notebookData = ref({
     name: '',
     body: '',
+    coverImg: '',
     color: '',
     tags: [],
     private: false,
     creatorId: ''
 })
 
-async function createJot(){
-try {
-    // jotdata.value.creatorId = account.value.id
-    const dateNow = Date()
-    await jotService.createJot(jotdata.value, dateNow)
+async function createNotebook(){
+    try {
+    notebookData.value.creatorId = AppState.account.id
+    await notebookService.createNotebook(notebookData)
 }
 catch (error){
   Pop.toast("Unable to create Jot at this time", 'error');
@@ -33,20 +32,25 @@ catch (error){
 
 <template>
     <div class="container-fluid">
-        <form @submit.prevent="createJot()">
+
+        <form @submit.prevent="createNotebook()">
             <div class="form-floating mb-2">
-                <textarea class="form-control" v-model="jotdata.name" placeholder="Jot Name" id="name"></textarea>
+                <textarea class="form-control" placeholder="Notebook Name" id="name"></textarea>
                 <label for="name">Name</label>
             </div>
             <div class="form-floating mb-2">
-                <textarea class="form-control" v-model="jotdata.body" placeholder="body" id="body"></textarea>
-                <label for="body">Jot Text</label>
+                <textarea class="form-control" placeholder="body" id="body"></textarea>
+                <label for="body">Notebook Description</label>
             </div>
             <div class="form-floating mb-2">
-                <textarea class="form-control" v-model="jotdata.tags" placeholder="Separate tags with commas" id="tags"></textarea>
+                <textarea class="form-control" placeholder="URL for Cover Image" id="coverimg"></textarea>
+                <label for="coverimg">Cover Image</label>
+            </div>
+            <div class="form-floating mb-2">
+                <textarea class="form-control" placeholder="Separate tags with commas" id="tags"></textarea>
                 <label for="tags">Tags</label>
             </div>
-            <select v-model="jotdata.color" class="form-select mb-2" aria-label="Default select example">
+            <select class="form-select mb-2" aria-label="Default select example">
                 <option selected>Select a Color</option>
                 <option value="#85144b">Maroon</option>
                 <option value="#FF4136">Red</option>
@@ -63,9 +67,9 @@ catch (error){
                 <option value="#B10DC9">Purple</option>
                 <option value="#F012BE">Fuschia</option>
             </select>
-            <div class="row align-items-center justify-content-evenly p-2">
+            <div class="row align-content-center justify-content-evenly p-2">
                 <div class="col-6 form-check mb-2">
-                    <input class="form-check-input" v-model="jotdata.private" type="checkbox" value="true" id="privatecheck">
+                    <input class="form-check-input" type="checkbox" value="true" id="privatecheck">
                     <label class="form-check-label" for="privatecheck">
                         Private?
                     </label>

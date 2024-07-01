@@ -22,8 +22,10 @@ class JotService {
         AppState.jots.push(jotresponse)
     }
 
-    async createJot(jotdata){
+    async createJot(jotdata, dateNow){
         jotdata.creatorId = AppState.account.id
+        jotdata.createdAt = dateNow
+        jotdata.editedAt = dateNow
         const response = await api.post('api/jots', jotdata)
         const jotresponse = new Jot(response.data)
         AppState.jots.push(jotresponse)

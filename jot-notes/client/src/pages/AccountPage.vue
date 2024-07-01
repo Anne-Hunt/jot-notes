@@ -32,7 +32,7 @@ onMounted(()=>{
     <section class="row">
         <div class="col-12 about text-center">
             <div v-if="account">
-                <div class="row bg-primary">
+                <div class="row bg-primary py-0 m-0 justify-content-center pb-2">
                     <h1>Welcome back, {{ account.name }}</h1>
                     <img class="rounded-circle border border-5 border-light" :src="account.picture" alt="" />
                 </div>
@@ -60,6 +60,9 @@ onMounted(()=>{
 
 <style scoped lang="scss">
 img {
-  max-width: 100px;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  object-position: center;
 }
 </style>
