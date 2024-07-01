@@ -8,9 +8,9 @@ defineProps({jot: Jot})
 
 
 <template>
-<div>
+<div class="rounded mb-1 shadow p-2" :style="{backgroundColor: `${jot.color}`}">
     <RouterLink :to="{name: 'Jot', params: {jotId: `${jot.id}`}}">
-        <h3>
+        <h3 class="text-light">
             <i v-if="jot.private == true" class="mdi mdi-lock"></i>
             {{ jot.name }}
         </h3>

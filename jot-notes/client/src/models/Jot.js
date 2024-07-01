@@ -1,13 +1,12 @@
-import { generateId } from "../utils/GenerateId.js"
 
 export class Jot {
 
     //** @param {{id, name, body, tags, color, notebook}} data */
 
     constructor(data) {
-        this.id = generateId()
+        this.id = data.id
         this.name = data.name
-        this.body = data.body || ''
+        this.body = data.body
         this.tags = data.tags
         this.color = data.color
         this.private = data.private
