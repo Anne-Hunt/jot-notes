@@ -14,7 +14,7 @@ defineProps({jot: Jot})
             <div class="col-1"></div>
             <div class="col-11">
 
-                <h3 class="text-light fontfix">
+                <h3 class="text-light fontfix text-truncate">
                     <i v-if="jot.private == true" class="mdi mdi-lock fontfix"></i>
                     {{ jot.name }}
                 </h3>

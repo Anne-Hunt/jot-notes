@@ -16,8 +16,9 @@ defineProps({notebook: Notebook})
                 <div class="col-3 rounded-start">
                     <img class="object-fit-cover rounded-start" :src="notebook.coverImg" alt="">
                 </div>
-                <div class="col-9">
-                    <h3 class="fontfix text-light"><i v-if="notebook.private == true" class="mdi mdi-lock fontfix"></i>
+                <div class="col-1"></div>
+                <div class="col-8">
+                    <h3 class="fontfix text-light text-truncate"><i v-if="notebook.private == true" class="mdi mdi-lock fontfix"></i>
                         {{ notebook.name }}
                     </h3>
                 </div>
