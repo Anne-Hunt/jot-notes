@@ -9,6 +9,7 @@ import { notebookService } from '../services/NotebookService.js';
 
 const jots = computed(()=> AppState.jots)
 const notebooks = computed(()=> AppState.notebooks)
+const activeNotebook = computed(()=>AppState.activeNotebook)
 
 async function getContent(){
 try {
@@ -27,7 +28,7 @@ getContent())
 
 <template>
   <section class="row">
-    
+
   </section>
 <section class="row">
   <div class="col p-2">

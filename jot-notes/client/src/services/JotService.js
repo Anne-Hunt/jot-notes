@@ -4,6 +4,11 @@ import { api } from "./AxiosService.js";
 
 
 class JotService {
+    async setActiveJot(jotId) {
+        const response = await api.get(`api/jots/${jotId}`)
+        const jotresponse = new Jot(response.data)
+        AppState.activeJot = jotresponse
+    }
     async getPublicJots() {
       const response = await api.get('api/jots')
       const jotresponse = response.data.map(jotdata => new Jot(jotdata))
