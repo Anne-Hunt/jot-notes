@@ -32,12 +32,13 @@ onMounted(()=>{
     <section class="row">
         <div class="col-12 about text-center">
             <div v-if="account">
-                <div class="row bg-primary py-0 m-0 justify-content-center pb-2">
-                    <h1>Welcome back, {{ account.name }}</h1>
-                    <img class="rounded-circle border border-5 border-light" :src="account.picture" alt="" />
-                    <i class="mdi mdi-dots-horizontal fs-1"></i>
+                <div class="row bg-info m-0 justify-content-center py-2 rounded-bottom shadow">
+                    <h1 class="text-light fontfix">Welcome back, {{ account.name }}</h1>
+                    <img class="rounded-circle border border-5 border-light p-0 shadow" :src="account.picture" alt="" />
+                    <i class="mdi mdi-dots-horizontal fs-1 btn text-light text-end fontfix" data-bs-toggle="modal"
+                    data-bs-target="#modalId"></i>
                 </div>
-                <div class="row">
+                <div class="row pt-3">
                     <div class="col-6">
                         <h2>Jots</h2>
                         <div v-for="jot in jots" :key="jot.id">
@@ -66,5 +67,9 @@ img {
   height: 100px;
   object-fit: cover;
   object-position: center;
+}
+
+.fontfix{
+  text-shadow: 1px 1px 4px black;
 }
 </style>

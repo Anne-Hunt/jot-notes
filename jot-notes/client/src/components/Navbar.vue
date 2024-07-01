@@ -18,10 +18,10 @@ function toggleTheme() {
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-sm navbar-dark bg-primary px-5">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-primary px-5 shadow">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
-        <i class="mdi mdi-pen fs-1"></i>
+        <i class="mdi mdi-pen fs-1 fontfix"></i>
       </div>
     </router-link>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -32,12 +32,12 @@ function toggleTheme() {
       <ul class="navbar-nav me-auto">
         <li>
           <router-link :to="{ name: 'About' }" class="btn text-light lighten-30 selectable text-uppercase">
-            About
+            <strong>About</strong>
           </router-link>
         </li>
         <li>
           <span class="btn text-light lighten-30 selectable text-uppercase" data-bs-toggle="offcanvas" data-bs-target="#offcanvasForms" aria-controls="offcanvasScrolling">
-            Create
+            <strong>Create</strong>
           </span>
           
         </li>
@@ -46,7 +46,7 @@ function toggleTheme() {
       <div>
         <button class="btn text-light fs-2" @click="toggleTheme"
           :title="`Enable ${theme == 'light' ? 'dark' : 'light'} theme.`">
-          <i class="mdi" :class="theme == 'light' ? 'mdi-lightbulb' : 'mdi-lightbulb-outline'"></i>
+          <i class="mdi" :class="theme == 'light' ? 'mdi-lightbulb fontfix' : 'mdi-lightbulb-outline fontfix'"></i>
         </button>
       </div>
       <Login />
@@ -74,5 +74,9 @@ a:hover {
   nav {
     height: 64px;
   }
+}
+
+.fontfix{
+  text-shadow: 1px 1px 4px black;
 }
 </style>

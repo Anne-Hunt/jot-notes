@@ -29,8 +29,8 @@ getContent())
   <section class="row">
 
   </section>
-<section class="row">
-  <div class="col p-2">
+<section class="row pt-3">
+  <div class="col">
     <h2>Public Notebooks</h2>
     <div v-for="notebook in notebooks" :key="notebook.id">
                         <NotebookListItem :notebook="notebook"></NotebookListItem>
