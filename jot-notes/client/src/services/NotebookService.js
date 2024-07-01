@@ -17,8 +17,10 @@ class NotebookService {
           AppState.notebooks.push(book)
       }
   
-      async createNotebook(bookdata){
+      async createNotebook(bookdata, dateNow){
           bookdata.creatorId = AppState.account.id
+          bookdata.createdAt = dateNow
+          bookdata.editedAt = dateNow
           const response = await api.post('api/notebooks', bookdata)
           const book = new Notebook(response.data)
           AppState.notebooks.push(book)

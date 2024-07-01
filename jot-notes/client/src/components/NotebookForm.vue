@@ -19,12 +19,13 @@ let notebookData = ref({
 
 async function createNotebook(){
     try {
-    notebookData.value.creatorId = AppState.account.id
-    await notebookService.createNotebook(notebookData)
+    const dateNow = Date()
+    notebookData.value.creatorId = account.value.id
+    await notebookService.createNotebook(notebookData.value, dateNow)
 }
 catch (error){
-  Pop.toast("Unable to create Jot at this time", 'error');
-  logger.log("unable to create jot", error)
+  Pop.toast("Unable to create Notebook at this time", 'error');
+  logger.log("unable to create notebook", error)
 }
 }
 </script>
@@ -35,22 +36,22 @@ catch (error){
 
         <form @submit.prevent="createNotebook()">
             <div class="form-floating mb-2">
-                <textarea class="form-control" placeholder="Notebook Name" id="name"></textarea>
+                <textarea class="form-control" v-model="notebookData.name" placeholder="Notebook Name" id="name"></textarea>
                 <label for="name">Name</label>
             </div>
             <div class="form-floating mb-2">
-                <textarea class="form-control" placeholder="body" id="body"></textarea>
+                <textarea class="form-control" v-model="notebookData.body" placeholder="body" id="body"></textarea>
                 <label for="body">Notebook Description</label>
             </div>
             <div class="form-floating mb-2">
-                <textarea class="form-control" placeholder="URL for Cover Image" id="coverimg"></textarea>
+                <textarea class="form-control" v-model="notebookData.coverImg" placeholder="URL for Cover Image" id="coverimg"></textarea>
                 <label for="coverimg">Cover Image</label>
             </div>
             <div class="form-floating mb-2">
-                <textarea class="form-control" placeholder="Separate tags with commas" id="tags"></textarea>
+                <textarea class="form-control" v-model="notebookData.tags" placeholder="Separate tags with commas" id="tags"></textarea>
                 <label for="tags">Tags</label>
             </div>
-            <select class="form-select mb-2" aria-label="Default select example">
+            <select class="form-select mb-2" v-model="notebookData.color" aria-label="Default select example">
                 <option selected>Select a Color</option>
                 <option value="#85144b">Maroon</option>
                 <option value="#FF4136">Red</option>
@@ -69,13 +70,13 @@ catch (error){
             </select>
             <div class="row align-content-center justify-content-evenly p-2">
                 <div class="col-6 form-check mb-2">
-                    <input class="form-check-input" type="checkbox" value="true" id="privatecheck">
+                    <input class="form-check-input" v-model="notebookData.private" type="checkbox" value="true" id="privatecheck">
                     <label class="form-check-label" for="privatecheck">
                         Private?
                     </label>
                 </div>
                 <div class="col-6">
-                    <button class="btn btn-warning text-end" type="submit">SUBMIT</button>
+                    <button class="btn btn-warning text-end" type="submit" data-bs-dismiss="offcanvas" aria-label="Close">SUBMIT</button>
                 </div>
             </div>
         </form>
