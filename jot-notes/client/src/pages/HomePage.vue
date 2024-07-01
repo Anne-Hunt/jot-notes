@@ -9,7 +9,6 @@ import { notebookService } from '../services/NotebookService.js';
 
 const jots = computed(()=> AppState.jots)
 const notebooks = computed(()=> AppState.notebooks)
-const activeNotebook = computed(()=>AppState.activeNotebook)
 
 async function getContent(){
 try {

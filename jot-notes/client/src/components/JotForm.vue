@@ -5,12 +5,15 @@ import { logger } from '../utils/Logger.js';
 import { jotService } from '../services/JotService.js';
 import { computed } from 'vue';
 import { AppState } from '../AppState.js';
+import { useRouter } from 'vue-router';
 
 const account = computed(()=>AppState.account)
+const jotId = computed(()=> AppState.activeJot.id)
+const router = useRouter()
 
 let jotdata = ref({
     name: '',
-    body: '',
+    body: "Start your jot here",
     color: '',
     tags: [],
     private: false,
@@ -22,6 +25,7 @@ try {
     // jotdata.value.creatorId = account.value.id
     const dateNow = Date()
     await jotService.createJot(jotdata.value, dateNow)
+    router.push({name: 'Jot', params: {jotId: AppState.activeJot.id}})
 }
 catch (error){
   Pop.toast("Unable to create Jot at this time", 'error');
@@ -38,10 +42,10 @@ catch (error){
                 <textarea class="form-control" v-model="jotdata.name" placeholder="Jot Name" id="name"></textarea>
                 <label for="name">Name</label>
             </div>
-            <div class="form-floating mb-2">
+            <!-- <div class="form-floating mb-2">
                 <textarea class="form-control" v-model="jotdata.body" placeholder="body" id="body"></textarea>
                 <label for="body">Jot Text</label>
-            </div>
+            </div> -->
             <div class="form-floating mb-2">
                 <textarea class="form-control" v-model="jotdata.tags" placeholder="Separate tags with commas" id="tags"></textarea>
                 <label for="tags">Tags</label>
