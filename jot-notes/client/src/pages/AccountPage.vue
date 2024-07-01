@@ -22,16 +22,20 @@ async function getContent(){
     }
 }
 
-onMounted(()=>
-getContent())
+onMounted(()=>{
+    getContent()
+})
+
 </script>
 
 <template>
-    <section class="row bg-primary">
+    <section class="row">
         <div class="col-12 about text-center">
             <div v-if="account">
-                <h1>Welcome back, {{ account.name }}</h1>
-                <img class="rounded-circle border border-5 border-light" :src="account.picture" alt="" />
+                <div class="row bg-primary">
+                    <h1>Welcome back, {{ account.name }}</h1>
+                    <img class="rounded-circle border border-5 border-light" :src="account.picture" alt="" />
+                </div>
                 <div class="row">
                     <div class="col-6">
                         <h2>Jots</h2>
