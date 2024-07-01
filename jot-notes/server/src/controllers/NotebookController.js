@@ -1,3 +1,4 @@
+import { jotService } from "../services/JotService.js";
 import { notebookService } from "../services/NotebookService.js";
 import BaseController from "../utils/BaseController.js";
 
@@ -8,6 +9,7 @@ export class NotebookController extends BaseController {
         this.router
             .get('', this.getPublicNotebooks)
             .get('/:notebookId', this.getNotebook)
+            .get('/:notebookId/jots', this.getNotebookJots)
             .post('', this.createNotebook)
             .put('/:notebookId', this.updateNotebook)
             .delete('/:notebookId', this.trashNotebook)
@@ -24,8 +26,18 @@ export class NotebookController extends BaseController {
     }
     async getPublicNotebooks(request, response, next) {
         try {
-            const jot = await notebookService.getPublicNotebooks()
-            response.send(jot)
+            const notebooks = await notebookService.getPublicNotebooks()
+            response.send(notebooks)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    async getNotebookJots(request, response, next) {
+        try {
+            const notebookId = request.params.notebookId
+            const jots = await jotService.getJotsByNotebook(notebookId)
+            response.send(jots)
         } catch (error) {
             next(error)
         }

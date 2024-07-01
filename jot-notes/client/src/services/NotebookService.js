@@ -1,9 +1,20 @@
 import { AppState } from "../AppState.js"
+import { Jot } from "../models/Jot.js"
 import { Notebook } from "../models/Notebook.js"
 import { api } from "./AxiosService.js"
 
 
 class NotebookService {
+    async getNotebookJots(notebookId) {
+        const response = await api.get(`api/notebooks/${notebookId}/jots`)
+        const jots = response.data.map(jotdata => new Jot(jotdata))
+        AppState.jots = jots
+    }
+    async getNotebookById(notebookId) {
+        const response = await api.get(`api/notebooks/${notebookId}`)
+        const notebook = new Notebook(response.data)
+        AppState.activeNotebook = notebook
+    }
     async getPublicNotebooks() {
         const response = await api.get('api/notebooks')
         const book = response.data.map(bookdata => new Notebook(bookdata))
