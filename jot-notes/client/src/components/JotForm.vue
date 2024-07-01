@@ -25,7 +25,7 @@ try {
     // jotdata.value.creatorId = account.value.id
     const dateNow = Date()
     await jotService.createJot(jotdata.value, dateNow)
-    router.push({name: 'Jot', params: {jotId: AppState.activeJot.id}})
+    // router.push({name: 'Jot', params: {jotId: AppState.activeJot.id}})
 }
 catch (error){
   Pop.toast("Unable to create Jot at this time", 'error');

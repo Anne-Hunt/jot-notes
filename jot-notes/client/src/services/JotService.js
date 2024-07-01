@@ -29,8 +29,8 @@ class JotService {
         jotdata.editedAt = dateNow
         const response = await api.post('api/jots', jotdata)
         const jotresponse = new Jot(response.data)
-        // AppState.jots.push(jotresponse)
-        AppState.activeJot = jotresponse
+        AppState.jots.push(jotresponse)
+        // AppState.activeJot = jotresponse
     }
 
     async trashJot(jotId){

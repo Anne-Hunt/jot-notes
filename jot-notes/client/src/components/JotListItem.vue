@@ -9,7 +9,7 @@ defineProps({jot: Jot})
 
 <template>
 <div>
-    <RouterLink :to="{name: 'Jot', params: {profileId: `${jot.id}`}}">
+    <RouterLink :to="{name: 'Jot', params: {jotId: `${jot.id}`}}">
         <h3>
             <i v-if="jot.private == true" class="mdi mdi-lock"></i>
             {{ jot.name }}
