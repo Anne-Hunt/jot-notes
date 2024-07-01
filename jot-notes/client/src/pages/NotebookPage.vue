@@ -46,25 +46,25 @@ onMounted(()=>{
         <div class="col-9">
         <section class="row align-items-center">
             <div class="col-3 rounded-start">
-                <img class="object-fit-cover rounded-start" :src="notebook.coverImg" alt="">
+                <img class="object-fit-cover rounded-start" :src="notebook?.coverImg" alt="">
             </div>
             <div class="col-1"></div>
             <div class="col-8">
-                <h3 class="fontfix text-light text-truncate"><i v-if="notebook.private == true" class="mdi mdi-lock fontfix"></i>
-                    {{ notebook.name }}
+                <h3 class="fontfix text-light text-truncate"><i v-if="notebook?.private == true" class="mdi mdi-lock fontfix"></i>
+                    {{ notebook?.name }}
                 </h3>
                 </div>
             </section>
             <section class="row">
-                <div v-for="jot in jots" :key="jot.id">
+                <!-- <div v-for="jot in jots" :key="jot?.id">
                     <JotListItem></JotListItem>
-                </div>
+                </div> -->
 
             </section>
         </div>
         <div class="col-3">
-            <img class="profile border border-3 shadow" :src="notebook.creator.picture" alt="">
-            <h2>By {{ notebook.creator.name }}</h2>
+            <img class="profile border border-3 shadow" :src="notebook?.creator.picture" alt="">
+            <h2>By {{ notebook?.creator.name }}</h2>
         </div>
         </section>
 </template>

@@ -4,7 +4,7 @@ import { Forbidden } from "../utils/Errors.js";
 
 class JotService {
     async getJotsByNotebook(notebookId) {
-        const jots = await dbContext.Jot.find({ notebookId: notebookId }).populate('creator notebooks')
+        const jots = await dbContext.Jot.find({ notebookIds: notebookId }).populate('creator notebooks')
         if (!jots) throw new Error('Unable to find jots')
         return jots
     }

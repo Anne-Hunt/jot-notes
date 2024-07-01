@@ -1,6 +1,7 @@
 import { AppState } from "../AppState.js"
 import { Jot } from "../models/Jot.js"
 import { Notebook } from "../models/Notebook.js"
+import { logger } from "../utils/Logger.js"
 import { api } from "./AxiosService.js"
 
 
@@ -9,6 +10,7 @@ class NotebookService {
         const response = await api.get(`api/notebooks/${notebookId}/jots`)
         const jots = response.data.map(jotdata => new Jot(jotdata))
         AppState.jots = jots
+        logger.log(jots)
     }
     async getNotebookById(notebookId) {
         const response = await api.get(`api/notebooks/${notebookId}`)

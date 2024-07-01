@@ -4,10 +4,10 @@ import { Forbidden } from "../utils/Errors.js";
 
 class NotebookService {
 
-    async getNotebook(notebookId, accountId) {
+    async getNotebook(notebookId) {
         const notebook = await dbContext.Notebook.findById(notebookId)
         if (!notebook) throw new Error('Notebook not found')
-        if (notebook.private = true && notebook.creatorId != accountId) throw new Forbidden('You cannot access private jots that are not yours')
+        // if (notebook.private = true && notebook.creatorId != accountId) throw new Forbidden('You cannot access private jots that are not yours')
         notebook.populate('creator jots')
         return notebook
     }
