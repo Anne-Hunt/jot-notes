@@ -32,37 +32,24 @@ getContent())
 <section class="row pt-3">
   <div class="col">
     <h2>Public Notebooks</h2>
-    <div v-for="notebook in notebooks" :key="notebook.id">
-                        <NotebookListItem :notebook="notebook"></NotebookListItem>
-                        </div>
+    <div class="row">
+
+      <div class="col-md-6 col-12" v-for="notebook in notebooks" :key="notebook.id">
+        <Moleskine :notebook="notebook"></Moleskine>
+      </div>
+    </div>
   </div>
   <div class="col">
     <h2>Public Jots</h2>
-    <div v-for="jot in jots" :key="jot.id">
-                        <JotListItem :jot="jot"></JotListItem>
-                        </div>
-  </div>
+    <div class="row">
+      <div  class="col-md-6 col-12" v-for="jot in jots" :key="jot.id">
+        <Page :jot="jot"></Page>
+      </div>
+      </div>
+    </div>
 </section>
 </template>
 
 <style scoped lang="scss">
-.home {
-  display: grid;
-  height: 80vh;
-  place-content: center;
-  text-align: center;
-  user-select: none;
 
-  .home-card {
-    width: clamp(500px, 50vw, 100%);
-
-    >img {
-      height: 200px;
-      max-width: 200px;
-      width: 100%;
-      object-fit: contain;
-      object-position: center;
-    }
-  }
-}
 </style>

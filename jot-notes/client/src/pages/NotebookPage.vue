@@ -1,6 +1,6 @@
 <script setup>
 import { computed, onMounted } from 'vue';
-import JotListItem from '../components/JotListItem.vue';
+import Page from '../components/JotListItem.vue';
 import { AppState } from '../AppState.js';
 import Pop from '../utils/Pop.js';
 import { logger } from '../utils/Logger.js';
@@ -57,7 +57,7 @@ onMounted(()=>{
             </section>
             <section class="row">
                 <!-- <div v-for="jot in jots" :key="jot?.id">
-                    <JotListItem></JotListItem>
+                    <Page jot="jot"></Page>
                 </div> -->
 
             </section>
