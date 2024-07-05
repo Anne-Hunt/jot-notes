@@ -16,9 +16,8 @@ export class NotebookController extends BaseController {
     }
     async getNotebook(request, response, next) {
         try {
-            // const accountId = request.userInfo.id
-            const notebookId = request.params.notebookId
-            const notebook = await notebookService.getNotebook(notebookId)
+            const bookId = request.params.notebookId
+            const notebook = await notebookService.getNotebook(bookId)
             response.send(notebook)
         } catch (error) {
             next(error)

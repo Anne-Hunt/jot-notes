@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted } from 'vue';
+import { computed, onBeforeMount, onMounted } from 'vue';
 import Page from '../components/JotListItem.vue';
 import { AppState } from '../AppState.js';
 import Pop from '../utils/Pop.js';
@@ -13,8 +13,8 @@ const route = useRoute()
 
 async function setNotebook(){
 try {
-  const notebookId = route.params.notebookId
-  await notebookService.getNotebookById(notebookId)
+  const book = route.params.notebookId
+  await notebookService.getNotebookById(book)
 }
 catch (error){
   Pop.toast("Unable to get notebook", 'error');
@@ -42,7 +42,7 @@ onMounted(()=>{
 
 
 <template>
-    <section class="row">
+    <section class="row m-0 p-0">
         <div class="col-9">
         <section class="row align-items-center">
             <div class="col-3 rounded-start">
@@ -62,10 +62,10 @@ onMounted(()=>{
 
             </section>
         </div>
-        <div class="col-3">
-            <img class="profile border border-3 shadow" :src="notebook?.creator.picture" alt="">
-            <h2>By {{ notebook?.creator.name }}</h2>
-        </div>
+        <!-- <div class="col-3">
+            <img class="profile border border-3 shadow" :src="notebook?.creator?.picture" alt="">
+            <h2>By {{ notebook?.creator?.name }}</h2>
+        </div> -->
         </section>
 </template>
 
