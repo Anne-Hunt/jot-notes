@@ -86,7 +86,7 @@ onMounted(()=>{
 
 </section>
 <section class="row" v-else>
-<h2 class="fontfix rounded" :style="{backgroundColor: `${activeJot?.color}`}">{{ activeJot?.name }} | <i class="mdi mdi-lock fs-2"></i></h2>
+<h2 class="fontfix text-light rounded" :style="{backgroundColor: `${activeJot?.color}`}">{{ activeJot?.name }} | <i v-if="activeJot?.private == true" class="mdi mdi-lock fs-2"></i></h2>
 </section>
 
 </template>
