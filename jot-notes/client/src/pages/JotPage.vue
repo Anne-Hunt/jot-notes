@@ -76,19 +76,30 @@ onMounted(()=>{
 
 
 <template>
-<section class="row" v-if="activeJot?.creatorId == account.id">
-    <h1>Jot</h1>
-    <div v-if="activeJot?.creatorId == account.id">
+<section class="fontfix text-light rounded px-2 my-3" :style="{backgroundColor: `${activeJot?.color}`}">
+
+  <section class="row py-3 justify-content-between bg-dark " >
+    <div class="col-10">
+      <h1>Jot: "{{ activeJot?.name }}" <i v-if="activeJot?.private == true" class="mdi mdi-lock"></i><i class="mdi mdi-lock-open" v-else></i></h1>
+    </div>
+    <div class="col-1">
       <i class="mdi mdi-dots-horizontal fs-1" @click="edit()"></i>
     </div>
+  </section>
+  <section class="row mt-3">
+    <div class="col-md-6">
+      
+    </div>
+    <div class="col-md-6">
+      <div v-if="editor">{{ activeJot?.body }}</div>
+      <textarea name="body" :id="activeJot?.id" cols="30" rows="10" v-else v-model="jot.body"></textarea>
+    </div>
+  </section>
+  <section class="row">
+    <h2 >{{ activeJot?.name }} </h2>
+  </section>
+  
 </section>
-<section class="row" v-if="editor = true && activeJot?.creatorId == account.id">
-
-</section>
-<section class="row" v-else>
-<h2 class="fontfix text-light rounded" :style="{backgroundColor: `${activeJot?.color}`}">{{ activeJot?.name }} <i v-if="activeJot?.private == true" class="mdi mdi-lock fs-2"></i></h2>
-</section>
-
 </template>
 
 
