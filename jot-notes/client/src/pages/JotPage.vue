@@ -91,7 +91,7 @@ onMounted(()=>{
       
     </div>
     <div class="col-md-6">
-      <div v-if="editor">{{ activeJot?.body }}</div>
+      <div v-if="editor && account">{{ activeJot?.body }}</div>
       <textarea name="body" :id="activeJot?.id" cols="30" rows="10" v-else v-model="jot.body"></textarea>
     </div>
   </section>
