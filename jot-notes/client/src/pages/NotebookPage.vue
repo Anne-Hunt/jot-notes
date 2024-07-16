@@ -56,9 +56,9 @@ onMounted(()=>{
                 </div>
             </section>
             <section class="row">
-                <!-- <div v-for="jot in jots" :key="jot?.id">
-                    <Page jot="jot"></Page>
-                </div> -->
+                <div v-for="jot in jots" :key="jot?.id">
+                    <Page></Page>
+                </div>
 
             </section>
         </div>

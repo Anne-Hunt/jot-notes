@@ -20,7 +20,7 @@ const jot = ref({
   editedAt: Date()
 })
 
-let editor
+let editor = false
 
 async function setActiveJot(){
     try {
@@ -76,23 +76,22 @@ onMounted(()=>{
 
 
 <template>
-<section class="fontfix text-light rounded px-2 my-3" :style="{backgroundColor: `${activeJot?.color}`}">
+<section class="rounded px-2 my-3" :style="{backgroundColor: `${activeJot?.color}`}">
 
   <section class="row py-3 justify-content-between bg-dark " >
-    <div class="col-10">
+    <div class="col-10 text-light fontfix">
       <h1>Jot: "{{ activeJot?.name }}" <i v-if="activeJot?.private == true" class="mdi mdi-lock"></i><i class="mdi mdi-lock-open" v-else></i></h1>
     </div>
-    <div class="col-1">
+    <div class="col-1 text-light fontfix" v-if="account?.id == activeJot?.creatorId">
       <i class="mdi mdi-dots-horizontal fs-1" @click="edit()"></i>
     </div>
   </section>
-  <section class="row mt-3">
-    <div class="col-md-6">
-      
+  <section class="row mt-3 px-0 mx-0">
+    <div class="col-md-6 rounded bg-light border border-dark shadow" v-if="editor == false && !account">
+      {{ activeJot?.body }}
     </div>
-    <div class="col-md-6">
-      <div v-if="editor && account">{{ activeJot?.body }}</div>
-      <textarea name="body" :id="activeJot?.id" cols="30" rows="10" v-else v-model="jot.body"></textarea>
+    <div class="col-md-6"  v-else-if="editor == true && account">
+      <textarea class="rounded bg-light border border-dark" name="body" :id="activeJot?.id" cols="30" rows="10" v-model="jot.body"></textarea>
     </div>
   </section>
   <section class="row">
