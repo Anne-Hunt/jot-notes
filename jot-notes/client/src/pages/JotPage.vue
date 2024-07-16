@@ -20,6 +20,8 @@ const jot = ref({
   editedAt: Date()
 })
 
+// const editor = computed(()=> {if(AppState.account.id == AppState.activeJot.creatorId)return true})
+
 let editor = false
 
 async function setActiveJot(){

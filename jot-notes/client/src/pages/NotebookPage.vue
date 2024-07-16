@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onBeforeMount, onMounted } from 'vue';
+import { computed, onMounted } from 'vue';
 import Page from '../components/JotListItem.vue';
 import { AppState } from '../AppState.js';
 import Pop from '../utils/Pop.js';
