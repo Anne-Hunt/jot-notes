@@ -14,5 +14,6 @@ async function init() {
   root
     .use(router)
     .mount('#app')
+
 }
 init()

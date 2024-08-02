@@ -32,10 +32,10 @@ onMounted(()=>{
     <section class="row">
         <div class="col-12 about text-center">
             <div v-if="account">
-                <div class="row bg-info m-0 justify-content-center py-2 rounded-bottom shadow">
+                <div class="cover row bg-info m-0 justify-content-center py-2 rounded-bottom shadow">
                     <h1 class="text-light fontfix">Welcome back, {{ account.name }}</h1>
-                    <img class="rounded-circle border border-5 border-light p-0 shadow" :src="account.picture" alt="" />
-                    <i class="mdi mdi-dots-horizontal fs-1 btn text-light text-end fontfix" data-bs-toggle="modal"
+                    <img class="profileImg rounded-circle border border-5 border-light p-0 shadow" :src="account.picture" alt="" />
+                    <i class="mdi mdi-dots-horizontal fs-1 btn text-light text-end bottom-right fontfix" data-bs-toggle="modal"
                     data-bs-target="#modalId"></i>
                 </div>
                 <div class="row pt-3">
@@ -62,13 +62,27 @@ onMounted(()=>{
 </template>
 
 <style scoped lang="scss">
-img {
-  width: 100px;
+.cover{
+  height: 30dvh;
+  background-position: center;
+  background-size: cover;
+  position:relative;
+  text-align: center;
+//   background-filter: contrast(.8);
+}
+.profileImg{
   height: 100px;
+  width: 100px;
   object-fit: cover;
   object-position: center;
+  position:absolute;
+  bottom: -50px;
 }
-
+.bottom-right {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+}
 .fontfix{
   text-shadow: 1px 1px 4px black;
 }
