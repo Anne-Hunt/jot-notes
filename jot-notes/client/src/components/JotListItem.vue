@@ -11,16 +11,14 @@ defineProps({jot: Jot})
 <div class="rounded mb-1 shadow size" >
     <RouterLink :to="{name: 'Jot', params: {jotId: `${jot.id}`}}">
         <div class="row h-100 align-items-center">
-            <div class="col-1 rounded bg-dark p-0 m-0">
+            <div class="col-1 rounded bg-dark p-0 m-0 book">
                 <i class="mdi mdi-book fs-1" :style="{color: `${jot.color}`}"></i>
+                <i v-if="jot.private == true" class="mdi mdi-lock text-light center"></i>
             </div>
-            <div class="col-11">
-                <h3 class="text-dark">
+            <div class="col-11 p-0 m-0">
+                <span class="text-dark text-truncate fs-3">
                     {{ jot.name }}
-                </h3>
-                <div class="text-truncate book">
-                    <i v-if="jot.private == true" class="mdi mdi-lock text-dark bottom-right fontfix"></i>
-                </div>
+                </span>
             </div>
         </div>
     </RouterLink>
@@ -36,10 +34,11 @@ defineProps({jot: Jot})
 .book{
     position: relative;
 }
-.bottom-right {
+.center {
   position: absolute;
-  bottom: 8px;
-  right: 16px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .size{
     height: 10dvh;
