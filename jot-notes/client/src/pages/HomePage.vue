@@ -29,7 +29,7 @@ getContent())
   <section class="row">
 
   </section>
-<section class="row pt-3 pe-3">
+<section class="row pt-3 px-3">
   <div class="col-1"></div>
   <div class="col text-light text-center">
     <h2>Public Notebooks</h2>
@@ -42,7 +42,7 @@ getContent())
   </div>
   <div class="col text-light text-center">
     <h2>Public Jots</h2>
-    <div class="row">
+    <div class="row px-0">
       <div  class="col-md-6 col-12" v-for="jot in jots" :key="jot.id">
         <Page :jot="jot"></Page>
       </div>

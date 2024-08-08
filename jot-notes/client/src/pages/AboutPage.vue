@@ -3,8 +3,8 @@
 </script>
 
 <template>
-  <section class="row">
-    <div class="col">
+  <section class="row p-5">
+    <div class="col bg-white rounded opacity-75 p-3">
       <h1>What Jot Does</h1>
       <p>Jot is a note taking platform that allows you to access your notes from any browser. You can share your Jots as public or keep them private, edit them, and keep them in notebooks. Jot is free for all users and offers a efficient and effective interface for creating, editing, and accessing your notes.</p>
       <h2>How to get started?</h2>
