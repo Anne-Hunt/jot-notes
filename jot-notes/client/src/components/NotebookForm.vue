@@ -75,8 +75,11 @@ catch (error){
                         Private?
                     </label>
                 </div>
-                <div class="col-6">
+                <div class="col-6" v-if="notebookData.name.length > 1 && account && notebookData.color">
                     <button class="btn btn-warning text-end" type="submit" data-bs-dismiss="offcanvas" aria-label="Close">SUBMIT</button>
+                </div>
+                <div class="col-6" v-else>
+                    <button class="btn btn-warning text-end" type="submit" data-bs-dismiss="offcanvas" aria-label="Close" disabled>SUBMIT</button>
                 </div>
             </div>
         </form>

@@ -39,8 +39,9 @@ catch (error){
     <div class="container-fluid">
         <form @submit.prevent="createJot()">
             <div class="form-floating mb-2">
-                <textarea class="form-control" v-model="jotdata.name" placeholder="Jot Name" id="name"></textarea>
+                <textarea class="form-control" v-model="jotdata.name" placeholder="max 24 characters" id="name"></textarea>
                 <label for="name">Name</label>
+                <p><small>name length max 24 characters</small></p>
             </div>
             <!-- <div class="form-floating mb-2">
                 <textarea class="form-control" v-model="jotdata.body" placeholder="body" id="body"></textarea>
@@ -75,6 +76,9 @@ catch (error){
                     </label>
                 </div>
                 <div class="col-6">
+                    <button class="btn btn-warning text-end" type="submit" disabled>SUBMIT</button>
+                </div>
+                <div class="col-6" v-if="jotdata.name.length > 1 && account && jotdata.color">
                     <button class="btn btn-warning text-end" type="submit">SUBMIT</button>
                 </div>
             </div>
