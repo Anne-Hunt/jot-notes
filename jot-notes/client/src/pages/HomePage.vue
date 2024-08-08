@@ -30,7 +30,8 @@ getContent())
 
   </section>
 <section class="row pt-3 pe-3">
-  <div class="col">
+  <div class="col-1"></div>
+  <div class="col text-light text-center">
     <h2>Public Notebooks</h2>
     <div class="row">
 
@@ -39,7 +40,7 @@ getContent())
       </div>
     </div>
   </div>
-  <div class="col">
+  <div class="col text-light text-center">
     <h2>Public Jots</h2>
     <div class="row">
       <div  class="col-md-6 col-12" v-for="jot in jots" :key="jot.id">
@@ -47,6 +48,7 @@ getContent())
       </div>
       </div>
     </div>
+    <div class="col-1"></div>
 </section>
 </template>
 
