@@ -18,7 +18,7 @@ function toggleTheme() {
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-sm navbar-dark bg-primary px-5 shadow">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark px-5 shadow">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
         <i class="mdi mdi-pen fs-1 fontfix"></i>

@@ -35,7 +35,12 @@ catch (error){
     <div class="container-fluid">
 
         <form @submit.prevent="createNotebook()">
-            <div class="form-floating mb-2">
+            <div class="form-floating mb-2" v-if="notebookData.name.length > 24">
+                <textarea class="form-control border border-2 border-danger" v-model="notebookData.name" placeholder="Notebook Name" id="name"></textarea>
+                <label for="name">Name</label>
+                <p class="text-end"><small class="fst-italic text-danger">required; 24 characters max</small></p>
+            </div>
+            <div class="form-floating mb-2" v-else>
                 <textarea class="form-control" v-model="notebookData.name" placeholder="Notebook Name" id="name"></textarea>
                 <label for="name">Name</label>
                 <p class="text-end"><small class="fst-italic">required; 24 characters max</small></p>

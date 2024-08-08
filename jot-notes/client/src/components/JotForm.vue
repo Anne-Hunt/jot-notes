@@ -38,12 +38,12 @@ catch (error){
 <template>
     <div class="container-fluid">
         <form @submit.prevent="createJot()">
-            <div class="form-floating mb-2" v-if="jotdata.name.length > 24">
+            <div class="form-floating" v-if="jotdata.name.length > 24">
                 <textarea class="form-control border border-2 border-danger" v-model="jotdata.name" id="name"></textarea>
                 <label for="name">Name</label>
-                <p class="text-end"><small class="fst-italic mb-2">required; 24 characters max</small></p>
+                <p class="text-end"><small class="fst-italic mb-2 text-danger">required; 24 characters max</small></p>
             </div>
-            <div class="form-floating mb-2" v-else>
+            <div class="form-floating" v-else>
                 <textarea class="form-control" v-model="jotdata.name" id="name"></textarea>
                 <label for="name">Name</label>
                 <p class="text-end"><small class="fst-italic mb-2">required; 24 characters max</small></p>
