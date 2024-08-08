@@ -38,11 +38,12 @@ catch (error){
             <div class="form-floating mb-2">
                 <textarea class="form-control" v-model="notebookData.name" placeholder="Notebook Name" id="name"></textarea>
                 <label for="name">Name</label>
-                <p><small>name length max 24 characters</small></p>
+                <p class="text-end"><small class="fst-italic">required; 24 characters max</small></p>
             </div>
             <div class="form-floating mb-2">
                 <textarea class="form-control" v-model="notebookData.body" placeholder="body" id="body"></textarea>
                 <label for="body">Notebook Description</label>
+                <p class="text-end"><small class="fst-italic">required</small></p>
             </div>
             <div class="form-floating mb-2">
                 <textarea class="form-control" v-model="notebookData.coverImg" placeholder="URL for Cover Image" id="coverimg"></textarea>
@@ -51,8 +52,9 @@ catch (error){
             <div class="form-floating mb-2">
                 <textarea class="form-control" v-model="notebookData.tags" placeholder="Separate tags with commas" id="tags"></textarea>
                 <label for="tags">Tags</label>
+                <p class="text-end"><small class="fst-italic">separate with comma</small></p>
             </div>
-            <select class="form-select mb-2" v-model="notebookData.color" aria-label="Default select example">
+            <select class="form-select" v-model="notebookData.color" aria-label="Default select example">
                 <option selected>Select a Color</option>
                 <option value="#85144b">Maroon</option>
                 <option value="#FF4136">Red</option>
@@ -69,6 +71,7 @@ catch (error){
                 <option value="#B10DC9">Purple</option>
                 <option value="#F012BE">Fuschia</option>
             </select>
+            <p class="text-end"><small class="fst-italic mb-2">required</small></p>
             <div class="row align-content-center justify-content-evenly p-2">
                 <div class="col-6 form-check mb-2">
                     <input class="form-check-input" v-model="notebookData.private" type="checkbox" value="true" id="privatecheck">

@@ -38,10 +38,15 @@ catch (error){
 <template>
     <div class="container-fluid">
         <form @submit.prevent="createJot()">
-            <div class="form-floating mb-2">
-                <textarea class="form-control" v-model="jotdata.name" placeholder="max 24 characters" id="name"></textarea>
+            <div class="form-floating mb-2" v-if="jotdata.name.length > 24">
+                <textarea class="form-control border border-2 border-danger" v-model="jotdata.name" id="name"></textarea>
                 <label for="name">Name</label>
-                <p><small>name length max 24 characters</small></p>
+                <p class="text-end"><small class="fst-italic mb-2">required; 24 characters max</small></p>
+            </div>
+            <div class="form-floating mb-2" v-else>
+                <textarea class="form-control" v-model="jotdata.name" id="name"></textarea>
+                <label for="name">Name</label>
+                <p class="text-end"><small class="fst-italic mb-2">required; 24 characters max</small></p>
             </div>
             <!-- <div class="form-floating mb-2">
                 <textarea class="form-control" v-model="jotdata.body" placeholder="body" id="body"></textarea>
@@ -50,8 +55,9 @@ catch (error){
             <div class="form-floating mb-2">
                 <textarea class="form-control" v-model="jotdata.tags" placeholder="Separate tags with commas" id="tags"></textarea>
                 <label for="tags">Tags</label>
+                <p class="text-end"><small class="fst-italic">separate with comma</small></p>
             </div>
-            <select v-model="jotdata.color" class="form-select mb-2" aria-label="Default select example">
+            <select v-model="jotdata.color" class="form-select" aria-label="Default select example">
                 <option selected>Select a Color</option>
                 <option value="#85144b">Maroon</option>
                 <option value="#FF4136">Red</option>
@@ -68,6 +74,7 @@ catch (error){
                 <option value="#B10DC9">Purple</option>
                 <option value="#F012BE">Fuschia</option>
             </select>
+            <p class="text-end"><small class="fst-italic mb-2">required</small></p>
             <div class="row align-items-center justify-content-evenly p-2">
                 <div class="col-6 form-check mb-2">
                     <input class="form-check-input" v-model="jotdata.private" type="checkbox" value="true" id="privatecheck">
