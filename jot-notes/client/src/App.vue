@@ -9,7 +9,7 @@ import Navbar from './components/Navbar.vue'
   <header>
     <Navbar />
   </header>
-  <main class="container">
+  <main class="container woody">
     <router-view />
   </main>
 </template>
@@ -47,5 +47,12 @@ footer {
   display: grid;
   place-content: center;
   height: 32px;
+}
+
+.woody{
+  background-color: rgb(134, 83, 47);
+  background-image: url("src/assets/img/purty-wood.png");
+  background-position: center;
+  background-repeat: repeat;
 }
 </style>

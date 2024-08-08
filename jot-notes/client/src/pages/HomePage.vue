@@ -25,7 +25,7 @@ onMounted(()=>
 getContent())
 </script>
 
-<template>
+<template> 
   <section class="row">
 
   </section>
