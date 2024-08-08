@@ -8,22 +8,22 @@ defineProps({notebook: Notebook})
 
 
 <template>
-    <div class="rounded-end size mb-2 p-0 border border-dark shadow bg-white">
+    <div class="rounded-end size mb-2 p-0 border border-dark shadow bg-white texture">
         <RouterLink :to="{name: 'Notebook', params: {notebookId: `${notebook.id}`}}">
-    <div class="top" :style="{backgroundColor: `${notebook.color}`}">
+    <div class="top texture" :style="{backgroundColor: `${notebook.color}`}">
     </div>
     <div class="spine p-0 m-0"></div>
             <div class="row m-0 p-0 align-items-center">
-                <div class="row p-0 m-0 bg-light">
+                <div class="row p-0 m-0 bg-light texture">
                     <p class="text-dark text-uppercase text-truncate">
                         {{ notebook.name }}
                         <i v-if="notebook.private == true" class="mdi mdi-lock fontfix"></i>
                     </p>
                 </div>
             </div>
-            <div class="row bg-warning p-0 m-0 stripe shadow"></div>
-            <div class="bottom shadow" :style="{backgroundColor: `${notebook.color}`}"></div>
-            <div class="bg-page pages shadow"></div>
+            <div class="row bg-warning p-0 m-0 stripe shadow texture"></div>
+            <div class="bottom shadow texture" :style="{backgroundColor: `${notebook.color}`}"></div>
+            <div class="bg-page pages shadow texture"></div>
             <div class="band shadow"></div>
         </RouterLink>
 </div>
@@ -74,5 +74,10 @@ defineProps({notebook: Notebook})
 
 .fontfix{
   text-shadow: 1px 1px 4px black;
+}
+
+.texture{
+    background-image: url("src/assets/img/subtle-dots.png");
+    font-family: "Covered By Your Grace", "Reenie Beanie", sans-serif;
 }
 </style>

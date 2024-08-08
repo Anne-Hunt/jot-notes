@@ -9,7 +9,7 @@ import Navbar from './components/Navbar.vue'
   <header>
     <Navbar />
   </header>
-  <main class="container woody">
+  <main class="container-fluid woody">
     <router-view />
   </main>
 </template>
