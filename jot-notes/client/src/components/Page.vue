@@ -9,7 +9,7 @@ defineProps({jot: Jot})
 
 <template>
         <RouterLink :to="{name: 'Jot', params: {jotId: `${jot.id}`}}">
-        <div class="rounded-end p-2 shadow size bg-page mb-2">
+        <div class="rounded-end p-2 shadow size bg-white mb-2">
             <p class="pb-0 text-truncate" :style="{color: `${jot.color}`}">{{ jot.name }}
                 <i v-if="jot.private == true" class="mdi mdi-lock fontfix"></i>
             </p>
@@ -25,8 +25,9 @@ defineProps({jot: Jot})
 }
 
 .size{
-    width: 175px;
+    width: 165px;
     height: 29dvh;
+    background-image: url("src/assets/img/light-paper-fibers.png");
 }
 
 .body{

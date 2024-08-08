@@ -29,7 +29,7 @@ getContent())
   <section class="row">
 
   </section>
-<section class="row pt-3">
+<section class="row pt-3 pe-3">
   <div class="col">
     <h2>Public Notebooks</h2>
     <div class="row">
