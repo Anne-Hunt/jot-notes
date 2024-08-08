@@ -38,6 +38,7 @@ catch (error){
             <div class="form-floating mb-2">
                 <textarea class="form-control" v-model="notebookData.name" placeholder="Notebook Name" id="name"></textarea>
                 <label for="name">Name</label>
+                <p><small>name length max 24 characters</small></p>
             </div>
             <div class="form-floating mb-2">
                 <textarea class="form-control" v-model="notebookData.body" placeholder="body" id="body"></textarea>

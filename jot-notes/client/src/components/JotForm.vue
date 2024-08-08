@@ -75,11 +75,11 @@ catch (error){
                         Private?
                     </label>
                 </div>
-                <div class="col-6">
-                    <button class="btn btn-warning text-end" type="submit" disabled>SUBMIT</button>
-                </div>
                 <div class="col-6" v-if="jotdata.name.length > 1 && account && jotdata.color">
                     <button class="btn btn-warning text-end" type="submit">SUBMIT</button>
+                </div>
+                <div class="col-6" v-else>
+                    <button class="btn btn-warning text-end" type="submit" disabled>SUBMIT</button>
                 </div>
             </div>
         </form>
