@@ -8,7 +8,7 @@ defineProps({notebook: Notebook})
 
 
 <template>
-    <div class="rounded-end size mb-2 p-0 border border-dark shadow">
+    <div class="rounded-end size mb-2 p-0 border border-dark shadow bg-white">
         <RouterLink :to="{name: 'Notebook', params: {notebookId: `${notebook.id}`}}">
     <div class="top" :style="{backgroundColor: `${notebook.color}`}">
     </div>
