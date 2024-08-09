@@ -32,7 +32,7 @@ onMounted(()=>{
     <section class="row">
         <div class="col-12 about text-center">
             <div v-if="account">
-                <div class="cover row bg-info m-0 justify-content-center py-2 rounded-bottom shadow">
+                <div class="cover row bg-dark m-0 justify-content-center py-2 rounded-bottom shadow border-bottom border-start border-end border-light">
                     <h1 class="text-light fontfix">Welcome back, {{ account.name }}</h1>
                     <img class="profileImg rounded-circle border border-5 border-light p-0 shadow" :src="account.picture" alt="" />
                     <i class="mdi mdi-dots-horizontal fs-1 btn text-light text-end bottom-right fontfix" data-bs-toggle="modal"
@@ -40,13 +40,13 @@ onMounted(()=>{
                 </div>
                 <div class="row pt-3">
                     <div class="col-6">
-                        <h2>Jots</h2>
+                        <h2 class="text-white">Jots</h2>
                         <div v-for="jot in jots" :key="jot.id">
                         <JotListItem :jot="jot"></JotListItem>
                         </div>
                     </div>
                     <div class="col-6">
-                        <h2>Notebooks</h2>
+                        <h2 class="text-white">Notebooks</h2>
                         <div v-for="notebook in notebooks" :key="notebook.id">
                         <NotebookListItem :notebook="notebook"></NotebookListItem>
                         </div>
@@ -64,8 +64,9 @@ onMounted(()=>{
 <style scoped lang="scss">
 .cover{
   height: 30dvh;
+  background-image: url("src/assets/img/purty-wood.png");
   background-position: center;
-  background-size: cover;
+  background-repeat: repeat;
   position:relative;
   text-align: center;
 //   background-filter: contrast(.8);

@@ -7,7 +7,7 @@ import { logger } from '../utils/Logger.js';
 import { useRoute } from 'vue-router';
 import { notebookService } from '../services/NotebookService.js';
 
-const jots = computed(()=> AppState.jots)
+const jots = computed(()=> AppState.notebookJotList)
 const notebook = computed(()=> AppState.activeNotebook)
 const route = useRoute()
 
@@ -22,21 +22,21 @@ catch (error){
 }
 }
 
-async function getJots(){
-    try {
-  const notebookId = route.params.notebookId
-  await notebookService.getNotebookJots(notebookId)
-}
-catch (error){
-  Pop.toast("Unable to get notebook", 'error');
-  logger.log('Unable to get notebook', error)
-}
-}
+// async function getJots(){
+//     try {
+//   const notebookId = route.params.notebookId
+//   await notebookService.getNotebookJots(notebookId)
+// }
+// catch (error){
+//   Pop.toast("Unable to get notebook", 'error');
+//   logger.log('Unable to get notebook', error)
+// }
+// }
 
 
 onMounted(()=>{
     setNotebook()
-    getJots()
+    // getJots()
 })
 </script>
 

@@ -16,6 +16,7 @@ class NotebookService {
         const response = await api.get(`api/notebooks/${notebookId}`)
         const notebook = new Notebook(response.data)
         AppState.activeNotebook = notebook
+        AppState.notebookJotList = notebook.jots
     }
     async getPublicNotebooks() {
         const response = await api.get('api/notebooks')

@@ -23,7 +23,7 @@ defineProps({notebook: Notebook})
             </div>
             <div class="row bg-warning p-0 m-0 stripe shadow texture"></div>
             <div class="bottom shadow texture" :style="{backgroundColor: `${notebook.color}`}"></div>
-            <div class="bg-page pages shadow texture"></div>
+            <div class="bg-white pages shadow texture"></div>
             <div class="band shadow"></div>
         </RouterLink>
 </div>
