@@ -1,6 +1,7 @@
 import { jotService } from "../services/JotService.js";
 import { notebookService } from "../services/NotebookService.js";
 import BaseController from "../utils/BaseController.js";
+import { logger } from "../utils/Logger.js";
 
 
 export class NotebookController extends BaseController {
@@ -18,6 +19,7 @@ export class NotebookController extends BaseController {
         try {
             const bookId = request.params.notebookId
             const notebook = await notebookService.getNotebook(bookId)
+            logger.log('notebook', notebook)
             response.send(notebook)
         } catch (error) {
             next(error)
