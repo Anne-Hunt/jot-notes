@@ -20,6 +20,7 @@ class NotebookService {
     }
     async getPublicNotebooks() {
         const response = await api.get('api/notebooks')
+        logger.log('notebooks public', response.data)
         const book = response.data.map(bookdata => new Notebook(bookdata))
         AppState.notebooks = book
       }
