@@ -13,8 +13,10 @@ const route = useRoute()
 
 async function setNotebook(){
 try {
-  const book = route.params.notebookId
-  await notebookService.getNotebookById(book)
+//   const book = route.params.notebookId
+//   await notebookService.getNotebookById(book)
+const jotbook = AppState.notebooks.find(book => book.id == route.params.notebookId)
+AppState.activeNotebook = jotbook
 }
 catch (error){
   Pop.toast("Unable to get notebook", 'error');
