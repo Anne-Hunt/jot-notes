@@ -59,7 +59,7 @@ onMounted(()=>{
             </section>
             <section class="row">
                 <div v-for="jot in jots" :key="jot?.id">
-                    <Page></Page>
+                    <Page :jot="jot"></Page>
                 </div>
 
             </section>
