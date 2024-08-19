@@ -10,6 +10,7 @@ import { notebookService } from '../services/NotebookService.js';
 const jots = computed(()=> AppState.notebookJotList)
 const notebook = computed(()=> AppState.activeNotebook)
 const route = useRoute()
+const image = computed(()=>`url(${AppState.activeNotebook?.coverImg})`)
 
 async function setNotebook(){
 try {
@@ -46,10 +47,10 @@ onMounted(()=>{
 <template>
     <section class="row m-0 p-0">
         <div class="col-9">
-        <section class="row align-items-center">
-            <div class="col-3 rounded-start">
+        <section class="cover row align-items-center">
+            <!-- <div class="cover rounded-start">
                 <img class="object-fit-cover rounded-start" :src="notebook?.coverImg" alt="">
-            </div>
+            </div> -->
             <div class="col-1"></div>
             <div class="col-8">
                 <h3 class="fontfix text-light text-truncate"><i v-if="notebook?.private == true" class="mdi mdi-lock fontfix"></i>
@@ -78,5 +79,12 @@ onMounted(()=>{
     width: 100px;
     object-fit: cover;
     object-position: center;
+}
+
+.cover{
+    background-image: v-bind(image);
+    height: 20dvh;
+    background-position: center;
+    background-size: cover;
 }
 </style>
