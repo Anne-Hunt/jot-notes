@@ -7,7 +7,7 @@ import { logger } from '../utils/Logger.js';
 import { useRoute } from 'vue-router';
 import { notebookService } from '../services/NotebookService.js';
 
-const jots = computed(()=> AppState.notebookJotList)
+const jots = computed(()=> AppState.activeNotebook.jots)
 const notebook = computed(()=> AppState.activeNotebook)
 const route = useRoute()
 const image = computed(()=>`url(${AppState.activeNotebook?.coverImg})`)
@@ -45,17 +45,17 @@ onMounted(()=>{
 
 
 <template>
-    <section class="row m-0 p-0">
-        <div class="col-9">
-        <section class="cover row align-items-center">
+    <section class="row m-0 p-0 justify-content-center">
+        <div class="col-10">
+        <section class="cover row align-items-center text-center">
             <!-- <div class="cover rounded-start">
                 <img class="object-fit-cover rounded-start" :src="notebook?.coverImg" alt="">
             </div> -->
+            <h3 class="fontfix text-light text-truncate"><i v-if="notebook?.private == true" class="mdi mdi-lock fontfix"></i>
+                {{ notebook?.name }}
+            </h3>
             <div class="col-1"></div>
             <div class="col-8">
-                <h3 class="fontfix text-light text-truncate"><i v-if="notebook?.private == true" class="mdi mdi-lock fontfix"></i>
-                    {{ notebook?.name }}
-                </h3>
                 </div>
             </section>
             <section class="row">
@@ -86,5 +86,9 @@ onMounted(()=>{
     height: 20dvh;
     background-position: center;
     background-size: cover;
+    filter: contrast(.8);
+}
+.fontfix{
+    text-shadow: 1px 1px 4px black;
 }
 </style>

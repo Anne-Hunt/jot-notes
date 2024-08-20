@@ -18,7 +18,7 @@ export class NotebookController extends BaseController {
     async getNotebook(request, response, next) {
         try {
             const bookId = request.params.notebookId
-            const notebook = await notebookService.getNotebook(request.params.notebookId)
+            const notebook = await notebookService.getNotebook(bookId)
             logger.log('notebook', notebook)
             response.send(notebook)
         } catch (error) {
