@@ -1,7 +1,7 @@
 import mongoose, { Schema, VirtualType } from "mongoose";
 export const NotebookSchema = new Schema({
-    id: { type: String },
-    _id: { type: Schema.ObjectId },
+    // id: { type: String },
+    // _id: { type: Schema.ObjectId },
     name: { type: String, required: true, minLength: 3, maxLength: 50 },
     body: { type: String, required: true, minLength: 15, maxLength: 100000 },
     coverImg: { type: String },

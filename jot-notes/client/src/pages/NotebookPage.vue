@@ -7,17 +7,17 @@ import { logger } from '../utils/Logger.js';
 import { useRoute } from 'vue-router';
 import { notebookService } from '../services/NotebookService.js';
 
-const jots = computed(()=> AppState.activeNotebook.jots)
+// const jots = computed(()=> AppState.activeNotebook.jots)
 const notebook = computed(()=> AppState.activeNotebook)
 const route = useRoute()
 const image = computed(()=>`url(${AppState.activeNotebook?.coverImg})`)
 
 async function setNotebook(){
 try {
-//   const book = route.params.notebookId
-//   await notebookService.getNotebookById(book)
-const jotbook = AppState.notebooks.find(book => book.id == route.params.notebookId)
-AppState.activeNotebook = jotbook
+  const book = route.params.notebookId
+  await notebookService.getNotebookById(book)
+// const jotbook = AppState.notebooks.find(book => book.id == route.params.notebookId)
+// AppState.activeNotebook = jotbook
 }
 catch (error){
   Pop.toast("Unable to get notebook", 'error');
@@ -59,9 +59,9 @@ onMounted(()=>{
                 </div>
             </section>
             <section class="row">
-                <div v-for="jot in jots" :key="jot?.id">
+                <!-- <div v-for="jot in jots" :key="jot?.id">
                     <Page :jot="jot"></Page>
-                </div>
+                </div> -->
 
             </section>
         </div>
