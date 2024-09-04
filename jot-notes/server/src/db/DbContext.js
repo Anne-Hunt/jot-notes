@@ -7,7 +7,7 @@ class DbContext {
   Account = mongoose.model('Account', AccountSchema);
 
   Jot = mongoose.model('Jot', JotSchema);
-  Notebook = mongoose.model('Notebook', NotebookSchema);
+  Notebook = mongoose.model('Notebook', NotebookSchema, 'notebooks');
 
 }
 
