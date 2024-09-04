@@ -12,7 +12,7 @@ JOT is a note taking application to help users track their ideas or take notes o
 
 ## SKILLS
 
-Javascript, HTML, CSS, Bootstrap 5, MVC design pattern, local storage, 
+Javascript, HTML, CSS, Bootstrap 5, MVC design pattern, local storage
 
 ## LANGUAGES
 
