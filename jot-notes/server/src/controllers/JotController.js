@@ -40,7 +40,9 @@ export class JotController extends BaseController {
     async updateJot(request, response, next) {
         try {
             const jotId = request.params.jotId
-            const jot = await jotService.updateJot(request.body, jotId)
+            // const userId = request.userInfo.id
+            const jotData = request.body
+            const jot = await jotService.updateJot(jotData, jotId)
             response.send(jot)
         } catch (error) {
             next(error)

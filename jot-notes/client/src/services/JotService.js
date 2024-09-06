@@ -14,13 +14,13 @@ class JotService {
       const jotresponse = response.data.map(jotdata => new Jot(jotdata))
       AppState.jots = jotresponse
     }
-    async editUserJot(jotdata, dateNow) {
-        jotdata.editedAt = dateNow
-        const response = await api.put('api/jots', jotdata)
+    async editUserJot(jotId, jotdata) {
+        const response = await api.put(`api/jots/${jotId}`, jotdata)
         const jotresponse = new Jot(response.data)
         const index = AppState.jots.findIndex(jot => jotresponse.id = jot.id)
         AppState.jots.splice(index, 1)
         AppState.jots.push(jotresponse)
+        AppState.activeJot = jotresponse
     }
 
     async createJot(jotdata, dateNow){

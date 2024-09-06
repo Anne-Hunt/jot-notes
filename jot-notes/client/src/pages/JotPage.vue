@@ -11,26 +11,27 @@ const activeJot = computed(()=> AppState.activeJot)
 const account = computed(()=> AppState.account)
 const route = useRoute()
 
-const jot = ref({
-  name: activeJot.value?.name,
-  body: activeJot.value?.body,
-  color: activeJot.value?.color,
-  tags: activeJot.value?.tags,
-  private: activeJot.value?.private
-  // editedAt: new Date().toLocaleDateString
-})
+// const jot = ref({
+//   name: activeJot.value?.name,
+//   body: activeJot.value?.body,
+//   color: activeJot.value?.color,
+//   tags: activeJot.value?.tags,
+//   private: activeJot.value?.private,
+//   editedAt: new Date().toLocaleDateString
+// })
 
 const formData = ref({
-  name: activeJot.value.name || '',
+  name: activeJot.value?.name || '',
   body: activeJot.value?.body || '',
   color: activeJot.value?.color || '',
   tags: activeJot.value?.tags || '',
-  private: activeJot.value?.private || ''
+  private: activeJot.value?.private || '',
+  editedAt: new Date().toLocaleDateString
 })
 
 // let editor = computed(()=> {if(AppState.account.id == AppState.activeJot.creatorId)return true})
 
-let edit = false
+const edit = ref(false)
 
 async function setActiveJot(){
     try {
@@ -47,8 +48,9 @@ async function setActiveJot(){
 async function updateJot(){
   try {
     const jotId = route.params.jotId
+    formData.value.editedAt = new Date().toLocaleDateString
     await jotService.editUserJot(jotId, formData.value)
-    // edit = false
+    openEdit()
   }
   catch (error){
     Pop.toast("Unable to set update Jot", 'error');
@@ -56,8 +58,8 @@ async function updateJot(){
   }
 }
 
-function openEdit(x){
-  edit = x
+function openEdit(){
+  edit.value = !edit.value
   logger.log(edit)
 }
 // createJot
@@ -95,7 +97,7 @@ onMounted(()=>{
       <h1>Jot: "{{ activeJot?.name }}" <i v-if="activeJot?.private == true" class="mdi mdi-lock"></i><i class="mdi mdi-lock-open" v-else></i></h1>
     </div>
     <div class="col-1 text-light fontfix" v-if="account?.id == activeJot?.creatorId">
-      <i class="mdi mdi-dots-horizontal fs-1" type="button" @click="openEdit(true)"></i>
+      <i class="mdi mdi-dots-horizontal fs-1" type="button" @click="openEdit()"></i>
     </div>
   </section>
   <section v-if="edit == true" class="row px-0 m-0 py-3">
@@ -109,7 +111,7 @@ onMounted(()=>{
 
   <section v-if="edit == true" class="row mt-3 px-0 mx-0">
     <div class="col-12 fill font mb-3 fs-5" >
-      <textarea class="rounded bg-light border border-dark fill font" name="body" cols="30" rows="10" v-model="formData.body" ></textarea>
+      <textarea class="rounded bg-light border border-dark fill font w-100" name="body" cols="30" rows="10" v-model="formData.body" ></textarea>
       <button class="btn btn-dark" @click="updateJot()">SUBMIT</button>
     </div>
   </section>

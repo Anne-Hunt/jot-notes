@@ -34,10 +34,10 @@ class JotService {
         if (!jots) throw new Error('Cannot find public jots')
         return jots
     }
-    async updateJot(accountId, jotdata, jotId) {
+    async updateJot(jotdata, jotId) {
         const jotupdate = await dbContext.Jot.findById(jotId)
         if (!jotupdate) throw new Error('Did not find jot to update')
-        if (jotupdate.creatorId != accountId) throw new Error('You cannot updated what is not yours')
+        // if (jotupdate.creatorId != accountId) throw new Error('You cannot updated what is not yours')
         jotupdate.name = jotdata.name ?? jotupdate.name
         jotupdate.body = jotdata.body ?? jotupdate.body
         jotupdate.tags = jotdata.tags ?? jotupdate.tags
