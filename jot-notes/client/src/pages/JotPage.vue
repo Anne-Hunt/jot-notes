@@ -5,11 +5,13 @@ import Pop from '../utils/Pop.js';
 import { logger } from '../utils/Logger.js';
 import { useRoute } from 'vue-router';
 import { jotService } from '../services/JotService.js';
+import { accountService } from '../services/AccountService.js';
 
 
 const activeJot = computed(()=> AppState.activeJot)
 const account = computed(()=> AppState.account)
 const route = useRoute()
+const userBooks = computed(()=> AppState.notebooks)
 
 // const jot = ref({
 //   name: activeJot.value?.name,
@@ -24,8 +26,9 @@ const formData = ref({
   name: activeJot.value?.name || '',
   body: activeJot.value?.body || '',
   color: activeJot.value?.color || '',
-  tags: activeJot.value?.tags || '',
+  tags: activeJot.value?.tags || [],
   private: activeJot.value?.private || '',
+  notebookIds: activeJot.value?.notebookIds || [],
   editedAt: new Date().toLocaleDateString
 })
 
@@ -49,15 +52,27 @@ async function updateJot(){
   try {
     const jotId = route.params.jotId
     formData.value.editedAt = new Date().toLocaleDateString
+    if(activeJot.value.notebookIds != formData.value.notebookIds){
+      formData.value.notebookIds.push(activeJot.value.notebookIds)
+    }
     await jotService.editUserJot(jotId, formData.value)
     openEdit()
   }
   catch (error){
-    Pop.toast("Unable to set update Jot", 'error');
-    logger.log("unable to set update jot", error)
+    Pop.toast("Unable to get update Jot", 'error');
+    logger.log("unable to get update jot", error)
   }
 }
 
+async function getNotebooks(){
+  try {
+    await accountService.getAccountNotebooks()
+  }
+  catch (error){
+    Pop.toast("Unable to get Notebooks for user", 'error');
+    logger.log("unable to get notebooks", error)
+  }
+} 
 function openEdit(){
   edit.value = !edit.value
   logger.log(edit)
@@ -84,6 +99,7 @@ function openEdit(){
 // autoSaveOff
 onMounted(()=>{
     setActiveJot()
+    getNotebooks()
 })
 
 </script>
@@ -143,6 +159,12 @@ onMounted(()=>{
             <p class="text-end"><small class="fst-italic">separate with comma</small></p>
           </div>
         </div>
+        <div class="class">
+          <label for="notebooks">Add to Notebook</label>
+          <select multiple aria-label="select multiple notebooks" class="form-select border-dark" name="notebookList" id="notebookList">
+            <option v-for="userbook in userBooks" :key="userbook.id" :value="`${userbook.id}`">{{ userbook.name }}</option>
+          </select>
+        </div>
         <div class="col">
           <div class="form-check mb-2 pt-4">
             <input class="form-check-input" v-model="formData.private" type="checkbox" value="true" id="privatecheck">
@@ -154,7 +176,6 @@ onMounted(()=>{
       </div>
     </div>
     <div class="mb-3">
-
       <button class="btn btn-dark" @click="updateJot()">SUBMIT</button>
     </div>
   </section>
