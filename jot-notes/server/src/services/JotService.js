@@ -10,8 +10,8 @@ class JotService {
     }
     async getJot(jotId) {
         const jot = await dbContext.Jot.findById(jotId)
-        if (!jot) throw new Error('Unable to find jot')
         jot.populate('creator notebooks')
+        if (!jot) throw new Error('Unable to find jot')
         return jot
     }
     async createJot(jotdata) {
