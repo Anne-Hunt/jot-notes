@@ -100,8 +100,9 @@ onMounted(()=>{
       <i class="mdi mdi-dots-horizontal fs-1" type="button" @click="openEdit()"></i>
     </div>
   </section>
-  <section v-if="edit == true" class="row px-0 m-0 py-3">
-    <input type="text" v-model="formData.name" class="rounded p-2">
+  <section v-if="edit == true" class="row px-2 m-0 py-3">
+    <input type="text" v-model="formData.name" class="form-control border-dark p-2">
+    <p class="text-end"><small class="fst-italic mb-2 text-dark">required; 24 characters max</small></p>
     <!-- <p>by {{ activeJot?.creator.name }}</p> -->
   </section>
   <section v-else class="row px-0 m-0 py-3">
@@ -110,8 +111,50 @@ onMounted(()=>{
   </section>
 
   <section v-if="edit == true" class="row mt-3 px-0 mx-0">
-    <div class="col-12 fill font mb-3 fs-5" >
-      <textarea class="rounded bg-light border border-dark fill font w-100" name="body" cols="30" rows="10" v-model="formData.body" ></textarea>
+    <div class="col-12 fill font mb-3" >
+      <textarea class="rounded bg-light border border-dark form-control fill font w-100 fs-5" name="body" v-model="formData.body" ></textarea>
+    </div>
+    <div class="col-12">
+      <div class="row">
+        <div class="col">
+          <label for="color">Change Color</label>
+          <select v-model="formData.color" class="form-select border-dark" aria-label="Default select example">
+            <option selected>Select a Color</option>
+            <option value="#85144b">Maroon</option>
+            <option value="#FF4136">Red</option>
+            <option value="#FF851B">Orange</option>
+            <option value="#FFDC00">Yellow</option>
+            <option value="#01FF70">Lime</option>
+            <option value="#2ECC40">Green</option>
+            <option value="#3D9970">Olive</option>
+            <option value="#39CCCC">Teal</option>
+            <option value="#7FDBFF">Aqua</option>
+            <option value="#0074D9">Blue</option>
+            <option value="#001f3f">Navy</option>
+            <option value="#4b0082">Indigo</option>
+            <option value="#B10DC9">Purple</option>
+            <option value="#F012BE">Fuschia</option>
+          </select>
+        </div>
+        <div class="col">
+          <div class="form mb-2">
+            <label for="tags">Tags</label>
+            <input class="form-control border-dark" v-model="formData.tags" id="tags">
+            <p class="text-end"><small class="fst-italic">separate with comma</small></p>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-check mb-2 pt-4">
+            <input class="form-check-input" v-model="formData.private" type="checkbox" value="true" id="privatecheck">
+            <label class="form-check-label" for="privatecheck">
+              Private?
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+
       <button class="btn btn-dark" @click="updateJot()">SUBMIT</button>
     </div>
   </section>
@@ -132,7 +175,7 @@ onMounted(()=>{
   text-shadow: 1px 1px 4px black;
 }
 .fill{
-  height: 60dvh;
+  height: 50dvh;
 }
 .font{
     font-family: "Covered By Your Grace", "Reenie Beanie", sans-serif;
