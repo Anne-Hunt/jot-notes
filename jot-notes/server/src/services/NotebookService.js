@@ -5,8 +5,7 @@ import { Forbidden } from "../utils/Errors.js";
 class NotebookService {
 
     async getNotebook(notebookId) {
-        const notebook = await dbContext.Notebook.findById(notebookId)
-        // .populate('creator jots')
+        const notebook = await dbContext.Notebook.findById(notebookId).populate('creator jots')
         if (!notebook) throw new Error('Notebook not found')
         return notebook
     }

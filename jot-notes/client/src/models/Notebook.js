@@ -6,7 +6,7 @@ export class Notebook {
     //** @param {{id, name, body, tags, color}} data */
 
     constructor(data) {
-        this.id = generateId()
+        this.id = data.id
         this.name = data.name
         this.body = data.body || ''
         this.coverImg = data.coverImg
