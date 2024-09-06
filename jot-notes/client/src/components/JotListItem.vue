@@ -8,15 +8,15 @@ defineProps({jot: Jot})
 
 
 <template>
-<div class="rounded mb-1 shadow size bg-white px-2 mx-0 my-2" >
+<div class="rounded mb-1 shadow size bg-light px-2 mx-0 my-2" >
     <RouterLink :to="{name: 'Jot', params: {jotId: `${jot.id}`}}">
-        <div class="row h-100 align-items-center">
-            <div class="col-1 rounded p-0 m-0 book">
+        <div class="row h-100 align-items-center p-0 m-0">
+            <div class="col-1 rounded px-1 m-0 book text-center">
                 <i class="mdi mdi-book fs-1" :style="{color: `${jot.color}`}"></i>
-                <i v-if="jot.private == true" class="mdi mdi-lock text-light center"></i>
+                <i v-if="jot.private == true" class="mdi mdi-lock text-black center"></i>
             </div>
             <div class="col-11 p-0 m-0">
-                <span class="text-dark text-truncate fs-3">
+                <span class="text-dark text-truncate fs-3 font">
                     {{ jot.name }}
                 </span>
             </div>
@@ -42,5 +42,8 @@ defineProps({jot: Jot})
 }
 .size{
     height: 10dvh;
+}
+.font{
+    font-family: "Covered By Your Grace", "Reenie Beanie", sans-serif;
 }
 </style>
