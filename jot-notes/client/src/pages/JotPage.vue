@@ -153,7 +153,7 @@ onMounted(()=>{
         </div>
       </div>
     </div>
-    <div>
+    <div class="mb-3">
 
       <button class="btn btn-dark" @click="updateJot()">SUBMIT</button>
     </div>
