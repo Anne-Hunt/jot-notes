@@ -1,6 +1,6 @@
 <script setup>
 import { computed, onMounted } from 'vue';
-import Page from '../components/JotListItem.vue';
+import JotListItem from '../components/JotListItem.vue';
 import { AppState } from '../AppState.js';
 import Pop from '../utils/Pop.js';
 import { logger } from '../utils/Logger.js';
@@ -48,19 +48,16 @@ onMounted(()=>{
     <section class="row m-0 p-0 justify-content-center">
         <div class="col-10">
         <section class="cover row align-items-center text-center">
-            <!-- <div class="cover rounded-start">
-                <img class="object-fit-cover rounded-start" :src="notebook?.coverImg" alt="">
-            </div> -->
-            <h3 class="fontfix text-light text-truncate"><i v-if="notebook?.private == true" class="mdi mdi-lock fontfix"></i>
+            <h1 class="fontfix font text-light text-truncate"><i v-if="notebook?.private == true" class="mdi mdi-lock fontfix"></i>
                 {{ notebook?.name }}
-            </h3>
+            </h1>
             <div class="col-1"></div>
             <div class="col-8">
                 </div>
             </section>
             <section class="row">
                 <div v-for="jot in jots" :key="jot?.id">
-                    <Page :jot="jot"></Page>
+                    <JotListItem :jot="jot"></JotListItem>
                 </div>
 
             </section>
@@ -95,5 +92,9 @@ onMounted(()=>{
 }
 .fontfix{
     text-shadow: 1px 1px 4px black;
+}
+
+.font{
+    font-family: "Covered By Your Grace", "Reenie Beanie", sans-serif;
 }
 </style>

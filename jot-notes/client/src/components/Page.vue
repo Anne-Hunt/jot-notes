@@ -1,6 +1,9 @@
 <script setup>
+import { computed } from 'vue';
 import { Jot } from '../models/Jot.js';
+import { AppState } from '../AppState.js';
 
+const account = computed(()=> AppState.account)
 
 defineProps({jot: Jot})
 
@@ -8,14 +11,17 @@ defineProps({jot: Jot})
 
 
 <template>
-        <RouterLink :to="{name: 'Jot', params: {jotId: `${jot.id}`}}">
-        <div class="rounded-end p-2 shadow size bg-white mb-2 font">
+        <div v-if="jot.private == true && jot.creatorId != account.id" class="">
+
+</div>
+<div v-else class="rounded-end p-2 shadow size bg-white mb-2 font">
+            <RouterLink :to="{name: 'Jot', params: {jotId: `${jot.id}`}}">
             <p class="pb-0 text-truncate text-uppercase" :style="{color: `${jot.color}`}">{{ jot.name }}
                 <i v-if="jot.private == true" class="mdi mdi-lock fontfix"></i>
             </p>
             <p class="body text-dark text-wrap text-truncate text-start">{{ jot.body }}</p>
-        </div>
         </RouterLink>
+        </div>
 </template>
 
 

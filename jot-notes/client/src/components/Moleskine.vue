@@ -1,6 +1,9 @@
 <script setup>
+import { computed } from 'vue';
 import { Notebook } from '../models/Notebook.js';
+import { AppState } from '../AppState.js';
 
+const account = computed(()=> AppState.account)
 
 defineProps({notebook: Notebook})
 
@@ -8,7 +11,10 @@ defineProps({notebook: Notebook})
 
 
 <template>
-    <div class="rounded-end size mb-2 p-0 border border-dark shadow bg-white texture">
+        <div v-if="notebook.private == true && notebook.creatorId != account.id" class="">
+
+</div>
+    <div v-else class="rounded-end size mb-2 p-0 border border-dark shadow bg-white texture">
         <RouterLink :to="{name: 'Notebook', params: {notebookId: `${notebook?.id}`}}">
     <div class="top texture" :style="{backgroundColor: `${notebook.color}`}">
     </div>
