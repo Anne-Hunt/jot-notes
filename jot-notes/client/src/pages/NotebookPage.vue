@@ -7,9 +7,8 @@ import { logger } from '../utils/Logger.js';
 import { useRoute } from 'vue-router';
 import { notebookService } from '../services/NotebookService.js';
 
-// const jots = computed(()=> AppState.activeNotebook.jots)
+const jots = computed(()=> AppState.notebookJotList)
 const notebook = computed(()=> AppState.activeNotebook)
-const jots = computed(()=> AppState.activeNotebook.jots)
 const route = useRoute()
 const image = computed(()=>`url(${AppState.activeNotebook?.coverImg})`)
 
@@ -40,7 +39,7 @@ catch (error){
 
 onMounted(()=>{
     setNotebook()
-    // getJots()
+    getJots()
 })
 </script>
 

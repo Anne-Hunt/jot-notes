@@ -9,7 +9,7 @@ class NotebookService {
     async getNotebookJots(notebookId) {
         const response = await api.get(`api/notebooks/${notebookId}/jots`)
         const jots = response.data.map(jotdata => new Jot(jotdata))
-        AppState.jots = jots
+        AppState.notebookJotList = jots
         logger.log(jots)
     }
     async getNotebookById(notebookId) {
