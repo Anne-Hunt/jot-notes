@@ -65,10 +65,15 @@ onMounted(()=>{
 
             </section>
         </div>
-        <!-- <div class="col-3">
-            <img class="profile border border-3 shadow" :src="notebook?.creator?.picture" alt="">
-            <h2>By {{ notebook?.creator?.name }}</h2>
-        </div> -->
+        <div class="col-3 px-0 m-0 py-3">
+            <div class="row p-0 mx-0 mb-3 justify-content-center">
+                <img class="profile border border-3 shadow rounded-circle p-0 m-0" :src="notebook?.creator?.picture" alt="">
+            </div>
+            <div class="row p-0 m-0 text-center">
+
+                <h2>by {{ notebook?.creator?.name }}</h2>
+            </div>
+        </div>
         </section>
 </template>
 

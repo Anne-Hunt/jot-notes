@@ -8,10 +8,10 @@ defineProps({jot: Jot})
 
 
 <template>
-<div class="rounded mb-1 shadow size" >
+<div class="rounded mb-1 shadow size bg-white px-2 mx-0 my-2" >
     <RouterLink :to="{name: 'Jot', params: {jotId: `${jot.id}`}}">
         <div class="row h-100 align-items-center">
-            <div class="col-1 rounded bg-dark p-0 m-0 book">
+            <div class="col-1 rounded p-0 m-0 book">
                 <i class="mdi mdi-book fs-1" :style="{color: `${jot.color}`}"></i>
                 <i v-if="jot.private == true" class="mdi mdi-lock text-light center"></i>
             </div>
