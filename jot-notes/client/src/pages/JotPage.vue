@@ -16,18 +16,27 @@ const jot = ref({
   body: activeJot.value?.body,
   color: activeJot.value?.color,
   tags: activeJot.value?.tags,
-  private: activeJot.value?.private,
-  editedAt: Date()
+  private: activeJot.value?.private
+  // editedAt: new Date().toLocaleDateString
 })
 
-// const editor = computed(()=> {if(AppState.account.id == AppState.activeJot.creatorId)return true})
+const formData = ref({
+  name: activeJot.value.name || '',
+  body: activeJot.value?.body || '',
+  color: activeJot.value?.color || '',
+  tags: activeJot.value?.tags || '',
+  private: activeJot.value?.private || ''
+})
 
-let editor = false
+// let editor = computed(()=> {if(AppState.account.id == AppState.activeJot.creatorId)return true})
+
+let edit = false
 
 async function setActiveJot(){
     try {
       const jotId = route.params.jotId
       await jotService.setActiveJot(jotId)
+      logger.log(AppState.activeJot)
     }
     catch (error){
       Pop.toast("Unable to set active Jot", 'error');
@@ -38,7 +47,8 @@ async function setActiveJot(){
 async function updateJot(){
   try {
     const jotId = route.params.jotId
-    await jotService.editUserJot(jotId, jot.value)
+    await jotService.editUserJot(jotId, formData.value)
+    // edit = false
   }
   catch (error){
     Pop.toast("Unable to set update Jot", 'error');
@@ -46,8 +56,9 @@ async function updateJot(){
   }
 }
 
-function edit(){
-  editor = false
+function openEdit(x){
+  edit = x
+  logger.log(edit)
 }
 // createJot
 // updateJot
@@ -71,7 +82,6 @@ function edit(){
 // autoSaveOff
 onMounted(()=>{
     setActiveJot()
-    edit()
 })
 
 </script>
@@ -85,19 +95,29 @@ onMounted(()=>{
       <h1>Jot: "{{ activeJot?.name }}" <i v-if="activeJot?.private == true" class="mdi mdi-lock"></i><i class="mdi mdi-lock-open" v-else></i></h1>
     </div>
     <div class="col-1 text-light fontfix" v-if="account?.id == activeJot?.creatorId">
-      <i class="mdi mdi-dots-horizontal fs-1" @click="edit()"></i>
+      <i class="mdi mdi-dots-horizontal fs-1" type="button" @click="openEdit(true)"></i>
     </div>
   </section>
-  <section class="row mt-3 px-0 mx-0">
-    <div class="col-md-6 rounded bg-light border border-dark shadow" v-if="editor == false && !account">
+  <section v-if="edit == true" class="row px-0 m-0 py-3">
+    <input type="text" v-model="formData.name" class="rounded p-2">
+    <!-- <p>by {{ activeJot?.creator.name }}</p> -->
+  </section>
+  <section v-else class="row px-0 m-0 py-3">
+    <h2 >{{ activeJot?.name }} </h2>
+    <!-- <p>by {{ activeJot?.creator.name }}</p> -->
+  </section>
+
+  <section v-if="edit == true" class="row mt-3 px-0 mx-0">
+    <div class="col-12 fill font mb-3 fs-5" >
+      <textarea class="rounded bg-light border border-dark fill font" name="body" cols="30" rows="10" v-model="formData.body" ></textarea>
+      <button class="btn btn-dark" @click="updateJot()">SUBMIT</button>
+    </div>
+  </section>
+
+  <section v-else class="row mt-3 px-0 mx-0">
+    <div class="col-12 rounded bg-light fs-5 shadow mb-3 fill font" >
       {{ activeJot?.body }}
     </div>
-    <div class="col-md-6"  v-else-if="editor == true && account">
-      <textarea class="rounded bg-light border border-dark" name="body" :id="activeJot?.id" cols="30" rows="10" v-model="jot.body"></textarea>
-    </div>
-  </section>
-  <section class="row">
-    <h2 >{{ activeJot?.name }} </h2>
   </section>
   
 </section>
@@ -108,5 +128,11 @@ onMounted(()=>{
 
 .fontfix{
   text-shadow: 1px 1px 4px black;
+}
+.fill{
+  height: 60dvh;
+}
+.font{
+    font-family: "Covered By Your Grace", "Reenie Beanie", sans-serif;
 }
 </style>

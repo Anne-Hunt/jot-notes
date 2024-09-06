@@ -12,8 +12,8 @@ defineProps({notebook: Notebook})
     <div class="rounded size mb-1 shadow" :style="{backgroundColor: `${notebook.color}`}">
 
         <RouterLink :to="{name: 'Notebook', params: {notebookId: `${notebook.id}`}}">
-            <div class="row align-items-center">
-                <div class="col-3 rounded-start">
+            <div class="row align-items-center p-o m-0">
+                <div class="col-3 rounded-start p-0 m-0 d-flex justify-content-start">
                     <img class="object-fit-cover rounded-start" :src="notebook.coverImg" alt="">
                 </div>
                 <div class="col-1"></div>
@@ -34,8 +34,8 @@ defineProps({notebook: Notebook})
 img{
     object-fit: cover;
     object-position: center;
-    max-height: 10dvh;
-    max-width: 100px;
+    height: 10dvh;
+    width: 100px;
 }
 
 .size{
