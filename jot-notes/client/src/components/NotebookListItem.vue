@@ -18,7 +18,7 @@ defineProps({notebook: Notebook})
                 </div>
                 <div class="col-1"></div>
                 <div class="col-8">
-                    <h3 class="fontfix text-light text-truncate"><i v-if="notebook.private == true" class="mdi mdi-lock fontfix"></i>
+                    <h3 class="fontfix text-light text-truncate font"><i v-if="notebook.private == true" class="mdi mdi-lock fontfix"></i>
                         {{ notebook.name }}
                     </h3>
                 </div>
@@ -45,4 +45,8 @@ img{
 .fontfix{
   text-shadow: 1px 1px 4px black;
 }
+.font{
+    font-family: "Covered By Your Grace", "Reenie Beanie", sans-serif;
+}
+
 </style>

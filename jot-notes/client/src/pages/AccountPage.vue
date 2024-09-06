@@ -31,21 +31,21 @@ onMounted(()=>{
 <template>
     <section class="row">
         <div class="col-12 about text-center">
-            <div v-if="account">
+            <div v-if="account" class="mb-5">
                 <div class="cover row bg-dark m-0 justify-content-center py-2 rounded-bottom shadow border-bottom border-start border-end border-light">
                     <h1 class="text-light fontfix">Welcome back, {{ account.name }}</h1>
-                    <img class="profileImg rounded-circle border border-5 border-light p-0 shadow" :src="account.picture" alt="" />
+                    <img class="profileImg rounded-circle border border-5 border-light p-0 shadow mb-3" :src="account.picture" alt="" />
                     <i class="mdi mdi-dots-horizontal fs-1 btn text-light text-end bottom-right fontfix" data-bs-toggle="modal"
                     data-bs-target="#modalId"></i>
                 </div>
-                <div class="row pt-3">
-                    <div class="col-6">
+                <div class="row pt-3 mt-4">
+                    <div class="col-md-6 col-12">
                         <h2 class="text-white">Jots</h2>
                         <div v-for="jot in jots" :key="jot.id">
                         <JotListItem :jot="jot"></JotListItem>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-md-6 col-12">
                         <h2 class="text-white">Notebooks</h2>
                         <div v-for="notebook in notebooks" :key="notebook.id">
                         <NotebookListItem :notebook="notebook"></NotebookListItem>
