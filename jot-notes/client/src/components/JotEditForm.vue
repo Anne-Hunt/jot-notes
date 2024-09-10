@@ -3,20 +3,25 @@ import { computed, ref } from 'vue';
 import Pop from '../utils/Pop.js';
 import { logger } from '../utils/Logger.js';
 import { jotService } from '../services/JotService.js';
+// eslint-disable-next-line vue/no-dupe-keys
 import { Jot } from '../models/Jot.js';
 import { AppState } from '../AppState.js';
+import { useRoute } from 'vue-router';
 
 const jot = defineProps({Jot})
 const activeJot = computed(()=> AppState.activeJot)
 const userBooks = computed(()=> AppState.notebooks)
+const route = useRoute()
+const edit = ref(false) 
 
-let jotdata = ref({
-    name: '',
-    body: '',
-    color: '',
-    tags: [],
-    private: false,
-    creatorId: ''
+const formData = ref({
+  name: activeJot.value?.name || '',
+  body: activeJot.value?.body || '',
+  color: activeJot.value?.color || '',
+  tags: activeJot.value?.tags || [],
+  private: activeJot.value?.private || '',
+  notebookIds: activeJot.value?.notebookIds || [],
+  editedAt: new Date().toLocaleDateString
 })
 
 async function updateJot(){
@@ -38,6 +43,12 @@ async function updateJot(){
     logger.log("unable to get update jot", error)
   }
 }
+
+function openEdit(){
+  edit.value = !edit.value
+  logger.log(edit)
+}
+
 </script>
 
 

@@ -12,27 +12,17 @@ import JotEditForm from '../components/JotEditForm.vue';
 const activeJot = computed(()=> AppState.activeJot)
 const account = computed(()=> AppState.account)
 const route = useRoute()
-const userBooks = computed(()=> AppState.notebooks)
+// const userBooks = computed(()=> AppState.notebooks)
 
-const jot = ref({
-  name: activeJot.value?.name,
-  body: activeJot.value?.body,
-  color: activeJot.value?.color,
-  tags: activeJot.value?.tags,
-  private: activeJot.value?.private,
-  notebookIds: activeJot.value?.notebookIds,
-  editedAt: new Date().toLocaleDateString
-})
-
-const formData = ref({
-  name: activeJot.value?.name || '',
-  body: activeJot.value?.body || '',
-  color: activeJot.value?.color || '',
-  tags: activeJot.value?.tags || [],
-  private: activeJot.value?.private || '',
-  notebookIds: activeJot.value?.notebookIds || [],
-  editedAt: new Date().toLocaleDateString
-})
+// const jot = ref({
+//   name: activeJot.value?.name,
+//   body: activeJot.value?.body,
+//   color: activeJot.value?.color,
+//   tags: activeJot.value?.tags,
+//   private: activeJot.value?.private,
+//   notebookIds: activeJot.value?.notebookIds,
+//   editedAt: new Date().toLocaleDateString
+// })
 
 // let editor = computed(()=> {if(AppState.account.id == AppState.activeJot.creatorId)return true})
 
@@ -102,13 +92,13 @@ onMounted(()=>{
       <i class="mdi mdi-dots-horizontal fs-1" type="button" @click="openEdit()"></i>
     </div>
   </section>
-  <section v-if="edit == true" class="row px-2 m-0 py-3">
-    <input type="text" v-model.lazy="formData.name" class="form-control border-dark p-2" maxlength="24">
+  <!-- <section v-if="edit == true" class="row px-2 m-0 py-3">
+    <input type="text" v-model.lazy=".name" class="form-control border-dark p-2" maxlength="24">
     <p class="text-end"><small class="fst-italic mb-2 text-dark">required; 24 characters max</small></p>
   </section>
   <section v-else class="row px-0 m-0 py-3">
     <h2 >{{ activeJot?.name }} </h2>
-  </section>
+  </section> -->
 
   <JotEditForm v-if="edit == true"/>
 
