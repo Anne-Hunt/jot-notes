@@ -12,7 +12,7 @@ export class Jot {
         this.private = data.private
         this.creatorId = data.creatorId
         this.creator = data.creator
-        this.notebookId = data.notebookId
+        this.notebookIds = data.notebookIds
         this.notebook = data.notebook
         this.createdAt = data.createdAt == undefined ? new Date() : new Date(data.createdAt)
         this.editedAt = data.editedAt == undefined ? new Date() : new Date(data.editedAt)
