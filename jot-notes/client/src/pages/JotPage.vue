@@ -117,7 +117,7 @@ onMounted(()=>{
     </div>
   </section>
   <section v-if="edit == true" class="row px-2 m-0 py-3">
-    <input type="text" v-model="formData.name" class="form-control border-dark p-2">
+    <input type="text" v-model="formData.name" class="form-control border-dark p-2" maxlength="24">
     <p class="text-end"><small class="fst-italic mb-2 text-dark">required; 24 characters max</small></p>
     <!-- <p>by {{ activeJot?.creator.name }}</p> -->
   </section>
@@ -161,8 +161,8 @@ onMounted(()=>{
         </div>
         <div class="class">
           <label for="notebooks">Add to Notebook</label>
-          <select multiple aria-label="select multiple notebooks" class="form-select border-dark" name="notebookList" id="notebookList">
-            <option v-for="userbook in userBooks" :key="userbook.id" :value="`${userbook.id}`">{{ userbook.name }}</option>
+          <select multiple aria-label="select multiple notebooks" class="form-select border-dark" name="notebookList" id="notebookList" v-model="formData.notebookIds">
+            <option v-for="userbook in userBooks" :key="userbook.id" :value="userbook.id">{{ userbook.name }}</option>
           </select>
         </div>
         <div class="col">
