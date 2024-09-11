@@ -55,10 +55,16 @@ function openEdit(){
 <template>
         <form @submit.prevent="updateJot()">
             <section class="row mt-3 px-0 mx-0">
-                <div class="col-12">
-                    <label for="name">Name</label>
+                <div class="col-12 mb-3">
+                    <div class="row justify-content-between ">
+                        <div class="col-3">
+                                    <label for="name">
+                                    Name
+                                </label>
+                                </div>
+                                <div class="col-4 text-end"><small class="fst-italic mb-2 text-dark">required; 24 characters max</small></div>
+                            </div>
                     <input type="text" id="name" v-model="formData.name" class="form-control border-dark p-2" maxlength="24">
-                    <p class="text-end"><small class="fst-italic mb-2 text-dark">required; 24 characters max</small></p>
                 </div>
     <div class="col-12 fill font mb-3" >
       <textarea class="rounded bg-light border border-dark form-control fill font w-100" name="body" v-model="formData.body" ></textarea>
@@ -87,9 +93,15 @@ function openEdit(){
         </div>
         <div class="col">
           <div class="form mb-2">
-            <label for="tags">Tags</label>
+            <div class="row justify-content-between">
+                        <div class="col-2">
+                                    <label for="tags">
+                                    Tags
+                                </label>
+                                </div>
+                                <div class="col-10 text-end"><small class="fst-italic mb-2 text-dark">separate with commas</small></div>
+                            </div>
             <input class="form-control border-dark" v-model="formData.tags" id="tags">
-            <p class="text-end"><small class="fst-italic">separate with comma</small></p>
           </div>
         </div>
         <div class="class">

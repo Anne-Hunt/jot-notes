@@ -93,12 +93,10 @@ onMounted(()=>{
       <i class="mdi mdi-dots-horizontal fs-1" type="button" @click="openEdit()"></i>
     </div>
   </section>
-  <!-- <section v-if="edit == true" class="row px-2 m-0 py-3">
 
-  </section>
-  <section class="row px-0 m-0 py-3">
+  <section v-if="edit == false" class="row px-0 m-0 py-3">
     <h2 >{{ activeJot?.name }} </h2>
-  </section> -->
+  </section>
 
   <JotEditForm v-if="edit == true" :jot="Jot"/>
 
