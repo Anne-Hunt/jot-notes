@@ -94,10 +94,9 @@ onMounted(()=>{
     </div>
   </section>
   <!-- <section v-if="edit == true" class="row px-2 m-0 py-3">
-    <input type="text" v-model.lazy=".name" class="form-control border-dark p-2" maxlength="24">
-    <p class="text-end"><small class="fst-italic mb-2 text-dark">required; 24 characters max</small></p>
+
   </section>
-  <section v-else class="row px-0 m-0 py-3">
+  <section class="row px-0 m-0 py-3">
     <h2 >{{ activeJot?.name }} </h2>
   </section> -->
 

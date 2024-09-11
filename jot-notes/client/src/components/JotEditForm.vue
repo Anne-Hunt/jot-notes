@@ -55,8 +55,13 @@ function openEdit(){
 <template>
         <form @submit.prevent="updateJot()">
             <section class="row mt-3 px-0 mx-0">
+                <div class="col-12">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" v-model="formData.name" class="form-control border-dark p-2" maxlength="24">
+                    <p class="text-end"><small class="fst-italic mb-2 text-dark">required; 24 characters max</small></p>
+                </div>
     <div class="col-12 fill font mb-3" >
-      <textarea class="rounded bg-light border border-dark form-control fill font w-100 fs-5" name="body" v-model="formData.body" ></textarea>
+      <textarea class="rounded bg-light border border-dark form-control fill font w-100" name="body" v-model="formData.body" ></textarea>
     </div>
     <div class="col-12">
       <div class="row">
@@ -112,5 +117,7 @@ function openEdit(){
 
 
 <style lang="scss" scoped>
-
+.fill{
+  height: 40dvh;
+}
 </style>
