@@ -54,7 +54,7 @@ function openEdit(){
 
 <template>
         <form @submit.prevent="updateJot()">
-            <section v-if="edit == true" class="row mt-3 px-0 mx-0">
+            <section class="row mt-3 px-0 mx-0">
     <div class="col-12 fill font mb-3" >
       <textarea class="rounded bg-light border border-dark form-control fill font w-100 fs-5" name="body" v-model="formData.body" ></textarea>
     </div>

@@ -7,6 +7,7 @@ import { useRoute } from 'vue-router';
 import { jotService } from '../services/JotService.js';
 import { accountService } from '../services/AccountService.js';
 import JotEditForm from '../components/JotEditForm.vue';
+import { Jot } from '../models/Jot.js';
 
 
 const activeJot = computed(()=> AppState.activeJot)
@@ -100,7 +101,7 @@ onMounted(()=>{
     <h2 >{{ activeJot?.name }} </h2>
   </section> -->
 
-  <JotEditForm v-if="edit == true"/>
+  <JotEditForm v-if="edit == true" :jot="Jot"/>
 
   <section v-else class="row mt-3 px-0 mx-0">
     <div class="col-12 rounded bg-light fs-5 shadow mb-3 fill font" >
