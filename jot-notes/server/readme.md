@@ -41,4 +41,4 @@ Application may:
 
 ## FIGMA/UML
 
-[FIGMA diagram - depreciated, created for the original local storage assignment](https://www.figma.com/design/FLNUDGwvaxzOFZbseDZlyM/Jot.-(Depreciated)?node-id=0-1) and [prototype](https://www.figma.com/proto/m7U44jDMTPtDqkla1FUTiY/Tower?type=design&node-id=4-2&t=gjWOWkLsnXpGJBBS-0&scaling=min-zoom&page-id=0:1&starting-point-node-id=4:2)
+[FIGMA diagram - depreciated, created for the original local storage assignment](https://www.figma.com/design/FLNUDGwvaxzOFZbseDZlyM/Jot.-(Depreciated)?node-id=0-1)
