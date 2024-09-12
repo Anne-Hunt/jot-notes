@@ -1,156 +1,44 @@
-# Auth0 Server Setup
+# JOT NOTES
 
-This template is designed to help kickstart a project that utilizes <a href="https://auth0.com/" target="_blank">Auth0.</a> The bulk of the structure has been setup and requires a few pieces of configuration.
+created by Anne Hunt
 
-The first thing you will need to provide is in the `.env` file. You will need to supply the port, Auth0 credentials, and mongoDb connectionstring. These environment variables are used throughout the template, so be sure to add them in when moving into production as well.
+Live Link: [JOT](https://jot-notes.annehunt.dev)
 
-**_.env_**
+Completed 2024
 
-```
-NODE_ENV=dev
-PORT=
-CONNECTION_STRING=
-AUTH_DOMAIN=
-AUTH_AUDIENCE=
-AUTH_CLIENT_ID=
-```
+## DESCRIPTION
 
-### MVC - Controllers
+Jot Notes is a full stack web application that utilizes a front end with Vue.js and Javascript and a backend written in Express/Node.js and MongoDB for the database. It also uses Auth0 for authorization, allowing users to create accounts and add content. The application is designed to allow users to create Jots, or notes, and sort them into Notebooks (even multiple notebooks per jot!). Users can edit their Jots, Notebooks, and read the public Jots and Notebooks of others. They can choose whether or not their own content is public or private.
 
-This template will automatically register all of the controllers found in the controllers folder of the server. This opinionated workflow should help provide a structure on how to build your api. Generally speaking every controller method should start with a `try catch block` and utilize the default error handler setup in Startup.js This means if a request ever fails the controller should call the next function with the error provided.
+## SKILLS
 
-### MVC - Services
+Javascript, Express Node.js, MongoDB, Vue.js 3, Vue Router, Bootstrap 5, HTML, CSS, MVC, many-to-many data relationships, conditional formatting, RESTful API
 
-Services are responsible for implementing and enforcing your business rules. Be sure to use them wisely and do not put your business logic in controllers. Services should be usable by both controllers and sockets and potentally other services. Never directly access the `DbContext` outside of a service.
+## LANGUAGES
 
-### MVC - (Models, Collections & DbContext)
+Javascript, HTML, CSS
 
-Models are defined as mongoose schemas and then imported into a central location called the DbContext. All access to the database should be limited to the DbContext. `Collections.js` is a file purely designed to avoid the common problem of magic strings. This means when you register your models and have dependencies or relationships between one or more models you should import from Collections so you know the naming is always the same.
+## REQUIREMENTS
 
-### Working with Auth0
+Application must:
 
-This library provides easily configured middleware that will validate user auth tokens, roles, permissions and provides a simple approach to get userInfo associted with a user account. Each middleware will call next with an error on any failure so be sure to setup a default error handler. Also note that we extend the express request object with
+- allow users to login, logout, and create accounts
+- allow users to view, edit, and creat their own notebooks and jots
+- allow public jots and notebooks to be viewed by the anyone who accesses the page
+- allow users to remove or delete jots and notebooks
+- display word count for jots and jot count for notebooks
 
-- req.user: `{ UserIdentity }`
-- req.userInfo: `{ UserInfo }`
+## STRETCH GOALS
 
-### Login Userflow (required)
+Application may:
 
-In your auth0 dashboard you will want to create a custom userflow for login called `ExtendUserInfo`
+- allow users to follow other users and see updated or edited content since their last sign-in
+- have several options for light/dark modes
+- feature an entirely private option for users
+- include an automatic save switch for users who wish to save every 3 minutes
+- allow users to see public jots or notebooks by individual matching tags
+- feature a search function
 
-```javascript
-/**
-* Handler that will be called during the execution of a PostLogin flow.
-*
-* @param {Event} event - Details about the user and the context in which they are logging in.
-* @param {PostLoginAPI} api - Interface whose methods can be used to change the behavior of the login.
-*/
-exports.onExecutePostLogin = async (event, api) => {
-  if (!event.user.app_metadata.id) {
-    const id = generateId()
-    api.user.setAppMetadata('id', id)
-    api.idToken.setCustomClaim('id', id)
-    api.accessToken.setCustomClaim('id', id)
-  }
+## FIGMA/UML
 
-  extendTokens(event, api)
-};
-
-function extendTokens(event, api) {
-  const { identifier } = event.resource_server
-  const app_metadata = event.user.app_metadata
-  for (const key in app_metadata) {
-    const prop = `${identifier}/${key}`
-    const value = app_metadata[key];
-    api.idToken.setCustomClaim(prop, value);
-    api.accessToken.setCustomClaim(prop, value);
-  }
-}
-
-function generateId() {
-  let timestamp = (new Date().getTime() / 1000 | 0).toString(16);
-  return timestamp + 'xxxxxxxxxxxxxxxx'.replace(/[x]/g, () => (
-    Math.random() * 16 | 0).toString(16)).toLowerCase();
-}
-```
-
-Example of how to use and configure auth0Provider, You can configure the auth0Provider anywhere in your application and then import it and use the middleware anywhere
-
-```javascript
-import { auth0Provider } from "@bcw/auth0-server";
-
-auth0Provider.configure({
-  domain: process.env.AUTH_DOMAIN,
-  clientId: process.env.AUTH_CLIENT_ID,
-  audience: process.env.AUTH_AUDIENCE
-});
-
-// validates a request has a Bearer auth token in req.headers.authentication
-app.use("/authenticated", auth0Provider.isAuthenticated, (req, res, next) => {
-  res.send({ userIdentity: req.user });
-});
-
-// validates the request token and extracts the userInfo saved in auth0
-app.use("/user-profile", getAuthorizedUserInfo, (req, res, next) => {
-  res.send({ userIdentity: req.user, userInfo: req.userInfo });
-});
-
-// validates the request token, extracts the userIdentity and userInfo
-// fails if role is not found in the token
-// Enable RBAC or Extended Rules
-app.use(
-  "/admins-only",
-  auth0Provider.hasRoles("admin"),
-  (req, res, next) => {}
-);
-
-// validates the request token, extracts the userIdentity and userInfo
-// fails if any permission is not found in the token
-// Enable RBAC or Extended Rules
-app.use(
-  "/messages",
-  auth0Provider.hasPermissions(["read:messages", "write:messages"]),
-  (req, res, next) => {}
-);
-
-//recommended default error handler
-app.use((error, req, res, next) => {
-  if (error.status == 500 || !error.status) {
-    error.message = console.error(error); // should write to external
-  }
-  error = error || {
-    status: 400,
-    message: "An unexpected error occured please try again later"
-  };
-  res.status(error.status).send({ ...error, url: req.url });
-});
-```
-
-Using chained methods with express.Router()
-
-```javascript
-express
-  .Router()
-  .get("", this.getAll)
-  .use(AuthorizationService.isAuthorized)
-  // everything below this point requires authorization
-  .get("/:id", this.getById);
-  .put("/:id", this.updateById);
-  .use(AuthorizationService.hasPermission("delete:blog"))
-  // requires permission to reach this point
-  .delete("/:id", this.deleteById);
-```
-
-## Legal Overview
-
-The content under the CodeWorks®, LLC Organization and all of the individual repos are solely intended for use by CodeWorks Instruction to deliver Educational content to CodeWorks Students.
-
----
-
-## Copyright
-
-© CodeWorks® LLC, 2021. Unauthorized use and/or duplication of this material without express and written permission from CodeWorks, LLC is strictly prohibited.
-
-
-<img src="https://bcw.blob.core.windows.net/public/img/7815839041305055" width="125">
-
+[FIGMA diagram - depreciated, created for the original local storage assignment](https://www.figma.com/design/FLNUDGwvaxzOFZbseDZlyM/Jot.-(Depreciated)?node-id=0-1) and [prototype](https://www.figma.com/proto/m7U44jDMTPtDqkla1FUTiY/Tower?type=design&node-id=4-2&t=gjWOWkLsnXpGJBBS-0&scaling=min-zoom&page-id=0:1&starting-point-node-id=4:2)
