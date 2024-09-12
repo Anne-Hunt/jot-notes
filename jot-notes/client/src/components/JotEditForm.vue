@@ -62,7 +62,7 @@ function openEdit(){
                                     Name
                                 </label>
                                 </div>
-                                <div class="col-4 text-end"><small class="fst-italic mb-2 text-dark">required; 24 characters max</small></div>
+                                <div class="col-4 text-end"><small class="fst-italic mb-2">required; 24 characters max</small></div>
                             </div>
                     <input type="text" id="name" v-model="formData.name" class="form-control border-dark p-2" maxlength="24">
                 </div>
@@ -99,7 +99,7 @@ function openEdit(){
                                     Tags
                                 </label>
                                 </div>
-                                <div class="col-10 text-end"><small class="fst-italic mb-2 text-dark">separate with commas</small></div>
+                                <div class="col-10 text-end"><small class="fst-italic mb-2">separate with commas</small></div>
                             </div>
             <input class="form-control border-dark" v-model="formData.tags" id="tags">
           </div>
@@ -110,18 +110,20 @@ function openEdit(){
             <option v-for="userbook in userBooks" :key="userbook.id" :value="userbook.id">{{ userbook.name }}</option>
           </select>
         </div>
-        <div class="col">
-          <div class="form-check mb-2 pt-4">
-            <input class="form-check-input" v-model="formData.private" type="checkbox" value="true" id="privatecheck">
-            <label class="form-check-label" for="privatecheck">
-              Private?
-            </label>
-          </div>
+        <div class="row m-1 py-2 align-items-center justify-content-between">
+            <div class="col-4">
+                <div class="form-check">
+                    <input class="form-check-input" v-model="formData.private" type="checkbox" value="true" id="privatecheck">
+                    <label class="form-check-label" for="privatecheck">
+                        Private?
+                    </label>
+                </div>
+            </div>
+            <div class="col-4 text-end">
+                <button class="btn btn-dark" @click="updateJot()">SUBMIT</button>
+            </div>
         </div>
       </div>
-    </div>
-    <div class="mb-3">
-      <button class="btn btn-dark" @click="updateJot()">SUBMIT</button>
     </div>
   </section>
         </form>
@@ -131,5 +133,12 @@ function openEdit(){
 <style lang="scss" scoped>
 .fill{
   height: 40dvh;
+}
+label{
+    color: white;
+    font-weight: bold;
+}
+small{
+    color: white;
 }
 </style>

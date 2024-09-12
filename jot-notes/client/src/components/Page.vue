@@ -31,7 +31,7 @@ defineProps({jot: Jot})
 }
 
 .size{
-    width: 165px;
+    max-width: 175px;
     height: 29.5dvh;
     background-image: url("src/assets/img/light-paper-fibers.png");
 }
